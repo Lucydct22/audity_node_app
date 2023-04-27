@@ -1,0 +1,33 @@
+{
+  "name": "audity_node_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucydct22/audity_node_app.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Iuliia Shikhanova Lucia del Cacho Joe Joy Alt Javier Pascual David T. Pizarro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lucydct22/audity_node_app/issues"
+  },
+  "homepage": "https://github.com/Lucydct22/audity_node_app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-jwt": "^8.4.1",
+    "helmet": "^6.1.5",
+    "jwks-rsa": "^3.0.1",
+    "mongoose": "^7.0.5",
+    "nodemon": "^2.0.22"
+  }
+}
