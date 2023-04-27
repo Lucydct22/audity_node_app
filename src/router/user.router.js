@@ -3,6 +3,6 @@ const User = require('../controllers/user.controller')
 const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
-api.get('/init-get-user', md_auth.checkJwt, User.initGetUser)
+api.post('/register-login-user', md_auth.checkJwt, User.registerLoginUser)
 
 module.exports = api;
