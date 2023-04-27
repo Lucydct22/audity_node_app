@@ -10,7 +10,7 @@ const userRoutes = require('./router/user.router')
 
 app.use(express.json())
 app.use(cors({
-	origin: ['http://localhost:3000', 'https://audity.dtpf.es']
+	origin: ['http://localhost:5100', 'https://audity.dtpf.es']
 }))
 app.use(helmet())
 app.use(`/api/${config.app.API_VERSION}`, userRoutes)
