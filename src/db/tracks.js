@@ -17,9 +17,7 @@ function getBaseTracks() {
       album: "1",
       rating: 5,
       popularity: 5,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       _id: new ObjectId(),
@@ -36,9 +34,7 @@ function getBaseTracks() {
       album: "2",
       rating: 5,
       popularity: 5,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -55,9 +51,7 @@ function getBaseTracks() {
       album: "3",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -74,9 +68,7 @@ function getBaseTracks() {
       album: "5",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -93,9 +85,7 @@ function getBaseTracks() {
       album: "5",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -112,9 +102,7 @@ function getBaseTracks() {
       album: "6",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -131,9 +119,7 @@ function getBaseTracks() {
       album: "7",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -150,9 +136,7 @@ function getBaseTracks() {
       album: "8",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -169,9 +153,7 @@ function getBaseTracks() {
       album: "9",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -188,9 +170,7 @@ function getBaseTracks() {
       album: "10",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -207,9 +187,7 @@ function getBaseTracks() {
       album: "11",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -226,9 +204,7 @@ function getBaseTracks() {
       album: "12",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -245,9 +221,7 @@ function getBaseTracks() {
       album: "13",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -264,9 +238,7 @@ function getBaseTracks() {
       album: "14",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -283,9 +255,7 @@ function getBaseTracks() {
       album: "15",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -302,9 +272,7 @@ function getBaseTracks() {
       album: "16",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -321,9 +289,7 @@ function getBaseTracks() {
       album: "17",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -340,9 +306,7 @@ function getBaseTracks() {
       album: "18",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -359,9 +323,7 @@ function getBaseTracks() {
       album: "19",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     },
     {
       id: new ObjectId(),
@@ -378,9 +340,7 @@ function getBaseTracks() {
       album: "20",
       rating: 5,
       popularity: 500,
-      duration: 240,
-      createdAt: "2023-03-14T09:17:23.739+00:00",
-      updatedAt: "2023-03-14T09:17:23.739+00:00"
+      duration: 240
     }
   ]
 }
