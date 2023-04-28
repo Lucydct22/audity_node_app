@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 const PlaylistSchema = new Schema({
 	name: String,
   userId: String,
-	collaborative: Boolean, //
+	//collaborative: Boolean, //
 	description: String,
 	cover: String, //
 	thumbnail: String, //
@@ -11,7 +11,7 @@ const PlaylistSchema = new Schema({
 	totalTracks: Number,
 	followers: Number, //
 	rating: Number,
-	likedBy: [{
+	/*likedBy: [{
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}],
@@ -24,7 +24,7 @@ const PlaylistSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}]
-
+*/
 }, {
 	timestamps: true
 }
