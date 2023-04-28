@@ -7,6 +7,7 @@ const errorMiddleware = require('./middlewares/error.middleware')
 
 // Routes
 const userRoutes = require('./router/user.router')
+const genreRoutes = require('./router/genre.router')
 
 app.use(express.json())
 app.use(cors({
@@ -14,6 +15,7 @@ app.use(cors({
 }))
 app.use(helmet())
 app.use(`/api/${config.app.API_VERSION}`, userRoutes)
+app.use(`/api/${config.app.API_VERSION}`, genreRoutes)
 app.use(errorMiddleware)
 
 module.exports = app;
