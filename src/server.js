@@ -30,6 +30,10 @@ app.use(helmet({
     },
   },
 }))
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "cross-origin")
+  next()
+})
 app.use(`/api/${config.app.API_VERSION}`, userRoutes)
 app.use(`/api/${config.app.API_VERSION}`, genreRoutes)
 app.use(errorMiddleware)
