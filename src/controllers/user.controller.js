@@ -30,6 +30,21 @@ async function registerLoginUser(req, res) {
 	}
 }
 
+async function updateUserSettings(req, res) {
+	const { userId } = req.body
+	try {
+		const userToUpdated = await User.findOneAndUpdate({ userId: userId.toString() }).lean().exec()
+		const userUpdated = await userToUpdated.save()
+
+		
+    return res.status(200).send({ status: 200, user: userUpdated })
+	
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
-	registerLoginUser
+	registerLoginUser,
+	updateUserSettings
 }
