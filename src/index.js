@@ -1,18 +1,17 @@
 const mongoose = require('mongoose')
 const server = require("./server");
 const config = require('./config/config');
-const seed = require('./db/seed');
-//const tracksTest = require('./db/tracksTest');
-const Tracks = require('./models/track.model')
+const seeder = require('./db_seeder/seeder');
 
 try {
   mongoose.connect(config.db.MONGO_URL);
-
   server.listen(config.app.PORT, async () => {
-    // Tracks.insertMany(tracksTest)
-    // await seedTracks()
-    // await seed.seedGenre()
-    // await seed.seedArtist()
+    // await seeder.seedUsers()
+    // await seeder.seedGenres()
+    // await seeder.seedArtists()
+    // await seeder.seedTracks()
+    // await seeder.seedAlbums()
+    // await seeder.seedPlaylists()
     console.log(`Running on ${config.db.URL}...`);
   });
 } catch (error) {

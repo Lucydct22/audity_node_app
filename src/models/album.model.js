@@ -5,6 +5,14 @@ const AlbumSchema = new Schema({
 	year: Number,
 	totalTracks: Number,
   thumbnail: String,
+	tracks: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Track'
+	}],
+	artists: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Artist'
+	}],
 	likedBy: [{
 		type: Schema.Types.ObjectId,
 		ref: 'User'
