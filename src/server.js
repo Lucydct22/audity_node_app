@@ -22,9 +22,13 @@ app.use(helmet({
         "https://lh3.googleusercontent.com",
       ],
       objectSrc: ["'none'"],
-      scriptSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://www.googletagmanager.com", "https: 'unsafe-inline'"],
       styleSrc: ["'self'", "https: 'unsafe-inline'"],
-      connectSrc: ["'self'", "https://dev-yxiaxoiu73blg7k8.us.auth0.com/oauth/token"],
+      connectSrc: [
+				"'self'", 
+				"https://dev-yxiaxoiu73blg7k8.us.auth0.com/oauth/token",
+				"https://region1.google-analytics.com"
+				],
       "img-src": ["'self'", "https: data:"],
       upgradeInsecureRequests: [],
     },
