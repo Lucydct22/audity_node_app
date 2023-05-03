@@ -3,14 +3,14 @@ const cloudinaryConfig = require('../config/config').cloudinary
 
 cloudinary.config(cloudinaryConfig)
 
-const uploadImage = async (imagePath) => {
+const uploadImage = async (imagePath, folder, width = 300, height = 300) => {
   const imageUploaded = await cloudinary.uploader.upload(imagePath,
     {
       resource_type: 'image',
-      folder: 'profilePictures/',
+      folder: folder,
       gravity: 'east',
-      height: 300,
-      width: 300,
+      height: width,
+      width: height,
       crop: 'scale',
       overwrite: true
     })
