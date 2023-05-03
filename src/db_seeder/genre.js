@@ -4,78 +4,78 @@ function getBaseGenre() {
   return [
      {
       _id: new ObjectId(),
-      name: "blues",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/0a59eded5365fc8def2a1f55f561d539'
+      name: "Blues",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104756/genreImages/iodlqztvsn9gxjwvn181.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "rock",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/cc70a35f2818e37c0920f4b5d3358b14'
+      name: "Rock",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104829/genreImages/ljccj5vjajuozfmmxf9q.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "pop",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/8ebaef2cb613291cebf43942e060cfb9'
+      name: "Funk",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104887/genreImages/qtueupi8w4twtw6dzpl5.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "soul",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/707df6429f05ea8a973630dda985c008'
+      name: "Folk",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104938/genreImages/lbfukw2akrcs8bbrnhve.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "funk",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/be4a452db812655c10016518adcf97a8'
+      name: "Tango",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105159/genreImages/qkvxgaphoam81fjajhsp.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "folk",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/fbc8ad1599369736972f526a380c83a7'
+      name: "Indie",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105186/genreImages/efpnwedzox1taoyzayid.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "tango",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/f10c1a34c845d1b0dc13f00884ef5cf2'
+      name: "Metal",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105214/genreImages/pf8onnp3gq3nbdjhnnam.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "indie",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/a0cd2981131067b9fdd6ddf29e2be888'
+      name: "Classic",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105358/genreImages/r7ufgbdcbi7e9cphbgcx.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "metal",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/9432f15b0b3fab8f15681d6618d539e2'
+      name: "Country",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683106578/genreImages/eg49amdqx78eyxn6aqfa.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "classical",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/9993834c6f3dc3eb0bb86f846f17605d'
+      name: "Electronic",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683106652/genreImages/ijapo4kol6eyssrowmbd.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "country",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/2e96c276477d23f29f5d5c1a47ff26af'
+      name: "Lounge",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107113/genreImages/eokwlnl3iujnvwletxmc.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "electronic",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/e9e22f978580dec225c990d3422e0ea7'
+      name: "Grunge",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107224/genreImages/giwoscy6pb5s1t1zuj7t.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "lounge",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/9993834c6f3dc3eb0bb86f846f17605d'
+      name: "Pop",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107251/genreImages/pa4yurzrrw4zifgss0hz.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "grunge",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/d7b6cd1c1d377c572217fcb427d017b8'
+      name: "Soul",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107284/genreImages/jl7plejurirbzsk5c170.jpg'
     },
     {
       _id: new ObjectId(),
-      name: "jazz",
-      thumbnail: 'https://asset.cloudinary.com/di3kpwpjx/226cab11ace10db72af23478490920ec'
+      name: "Jazz",
+      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107310/genreImages/xoninmwbynxbptrufrwb.jpg'
     }
   ]
 }

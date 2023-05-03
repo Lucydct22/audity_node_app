@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Lucydct22/audity_node_app#readme",
   "dependencies": {
+    "auth0": "^3.3.0",
     "bson": "^5.2.0",
     "cloudinary": "^1.36.3",
     "cors": "^2.8.5",
