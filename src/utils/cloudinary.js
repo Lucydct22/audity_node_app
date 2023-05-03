@@ -9,8 +9,8 @@ const uploadImage = async (imagePath, folder, width = 300, height = 300) => {
       resource_type: 'image',
       folder: folder,
       gravity: 'east',
-      height: width,
-      width: height,
+      height: height,
+      width: width,
       crop: 'scale',
       overwrite: true
     })
