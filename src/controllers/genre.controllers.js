@@ -33,10 +33,62 @@ async function getGenres(req, res) {
 	}
 }
 
+async function getGenreById(req, res) {
+	const { id } = req.params
+	try {
+		const genreStored = await Genre.findById({ _id: id }).lean().exec()
+
+		if (!genreStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, genre: genreStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function deleteGenre(req, res) {
+	const { id } = req.params
+
+	try {
+		const genreToDelete = await Genre.findOneAndDelete({ _id: id }).lean().exec()
+
+		if (!genreToDelete) {
+			return res.status(400).send({ status: 400, error: 'Genre not found' })
+		}
+
+		return res.status(200).send({ status: 200, genre: genreToDelete })
+
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function updateGenre(req, res) {
+	const { id } = req.params
+	const { name } = req.body 
+
+	try {
+		const genreToUpdate = await Genre.findOneAndUpdate({ _id: id }, { name }).lean().exec()
+
+		if (!genreToUpdate) {
+			return res.status(400).send({ status: 400, error: 'Genre not found' })
+		}
+
+		return res.status(200).send({ status: 200, genre: genreToUpdate })
+
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+
+
+}
+
 module.exports = {
 	getGenres,
-	//getGenreById,
+	getGenreById,
 	postGenre,
-	//putGenre,
-	//deleteGenre
+	deleteGenre,
+	updateGenre
+	
 }
