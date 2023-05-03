@@ -12,6 +12,7 @@ function getBaseUser() {
       dateOfBirth: '1988-05-01T09:08:38.935+00:00',
       country:'Spain',
       language: 'es',
+      role: 'user'
     },
     {
       _id: new ObjectId(),
@@ -22,7 +23,8 @@ function getBaseUser() {
       email: 'joe@joe.com',
       dateOfBirth: '1998-05-01T09:08:38.935+00:00',
       country:'Holland',
-      language: 'es',
+      language: 'en',
+      role: 'admin'
     }
   ]
 }
