@@ -7,7 +7,7 @@ async function postGenre(req, res) {
 	const genre = new Genre({ name })
 
 	try {
-		const imageUploaded = await uploadImage(req.files.image.tempFilePath, 'genreImages')
+		const imageUploaded = await uploadImage(req.files.image.tempFilePath, 'genreImages', 264, 134)
 		genre.thumbnail = imageUploaded.url
 		const genreSaved = await genre.save()
 		if (!genreSaved) {
