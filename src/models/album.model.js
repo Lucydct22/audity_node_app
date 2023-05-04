@@ -4,7 +4,7 @@ const AlbumSchema = new Schema({
 	name: String,
 	year: Number,
 	totalTracks: Number,
-  thumbnail: String,
+  imageUrl: String,
 	tracks: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Track'

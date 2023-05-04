@@ -6,7 +6,7 @@ const ArtistSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Genre'
 	}],
-  photoUrl: String,
+  imageUrl: String,
                                               
 }, {
   timestamps: true
