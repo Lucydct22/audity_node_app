@@ -33,8 +33,21 @@ async function getArtists(req, res) {
 	}
 }
 
-module.exports = {
-	getArtists,
+async function getArtistById(req, res) {
+	const { artistId } = req.params
+	try {
+		const artistStored = await Artist.findOne({ _id: artistId }).lean().exec()
+		if (!artistStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, artist: artistStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
 
+module.exports = {
   postArtist,
+	getArtists,
+	getArtistById
 }
