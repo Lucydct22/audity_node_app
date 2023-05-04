@@ -13,8 +13,10 @@ async function registerLoginUser(req, res) {
 				lastname: user.family_name || '',
 				nickname: user.nickname || '',
 				email: user.email,
-				language: user.locale || 'en',
-				role: 'user'
+				language: user.locale || 'English',
+				country: user.country || 'Spain',
+				role: 'user',
+				picture: user.picture
 			})
 
 			try {
@@ -37,13 +39,13 @@ async function registerLoginUser(req, res) {
 async function updateUserSettings(req, res) {
 	const { userId } = req.params
 	//const data = req.body
-	const { nickname, dateOfBirth, country, language } = req.body
+	const { nickname, dateOfBirth, country } = req.body
 
 	try {
 		const userToUpdated = await User.findOneAndUpdate(
 			{ _id: userId.toString() },
 			//data, 
-			{ nickname, dateOfBirth, country, language },
+			{ nickname, dateOfBirth, country },
 			{ returnOriginal: false }
 		).lean().exec()
 
@@ -51,13 +53,59 @@ async function updateUserSettings(req, res) {
 			return res.status(400).send({ status: 400 })
 		}
 		return res.status(200).send(
-			{ status: 200, user: userToUpdated }
+			{ status: 200 }
 		)
 
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	}
 }
+
+async function updateUserLanguage(req, res) {
+	const user = req.auth
+	//const data = req.body
+	const { language } = req.body
+	console.log(user.payload.sub);
+
+	try {
+		const userToUpdated = await User.findOneAndUpdate(
+			{ userId: user.payload.sub.toString() },
+			//data, 
+			{ language }
+		).lean().exec()
+
+		if (!userToUpdated) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200 })
+
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+
+/*async function updateUserCountry(req, res) {
+	const user = req.auth
+	//const data = req.body
+	const { language } = req.body
+
+	try {
+		const userToUpdated = await User.findOneAndUpdate(
+			{ userId: user.sub.toString() },
+			//data, 
+			{ language }
+		).lean().exec()
+
+		if (!userToUpdated) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200 })
+
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}*/
 
 async function deleteUser(req, res) {
 	const { userId } = req.params
@@ -90,5 +138,7 @@ async function deleteUser(req, res) {
 module.exports = {
 	registerLoginUser,
 	updateUserSettings,
-	deleteUser
+	updateUserLanguage,
+	deleteUser,
+
 }
