@@ -5,4 +5,10 @@ const api = express.Router()
 
 api.get('/albums', album.getAlbums)
 
+api.post('/albums', md_auth.ensureAuth, album.createAlbum)
+
+api.get('/albums/all', album.getAllAlbums)
+
+api.post('/albums/like', md_auth.ensureAuth, album.likeAlbum)
+
 module.exports = api;
