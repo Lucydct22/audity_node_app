@@ -1,5 +1,5 @@
 const User = require('../models/user.model')
-const ManagementClient = require('auth0').ManagementClient
+// const ManagementClient = require('auth0').ManagementClient
 
 async function registerLoginUser(req, res) {
 	const { user } = req.body

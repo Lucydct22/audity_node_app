@@ -3,6 +3,6 @@ const Playlist = require('../controllers/playlist.controllers')
 const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
-api.get('/playlists', md_auth.checkJwt, Playlist.getPlaylists)
+api.get('/playlists', Playlist.getPlaylists)
 
 module.exports = api;

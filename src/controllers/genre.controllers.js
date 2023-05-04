@@ -1,13 +1,14 @@
 const fs = require('fs-extra')
 const Genre = require('../models/genre.model')
 const { uploadImage } = require('../utils/cloudinary')
+const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postGenre(req, res) {
 	const { name } = req.body
 	const genre = new Genre({ name })
 
 	try {
-		const imageUploaded = await uploadImage(req.files.image.tempFilePath, 'genreImages', 264, 134)
+		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/genreImage`, 264, 134)
 		genre.thumbnail = imageUploaded.url
 		const genreSaved = await genre.save()
 		if (!genreSaved) {
