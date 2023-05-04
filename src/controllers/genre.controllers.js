@@ -57,7 +57,7 @@ async function deleteGenre(req, res) {
 			return res.status(400).send({ status: 400, error: 'Genre not found' })
 		}
 
-		return res.status(200).send({ status: 200, genre: genreToDelete })
+		return res.status(200).send({ status: 200, message: "The genre was deleted" })
 
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
@@ -69,7 +69,7 @@ async function updateGenre(req, res) {
 	const { name } = req.body 
 
 	try {
-		const genreToUpdate = await Genre.findOneAndUpdate({ _id: id }, { name }).lean().exec()
+		const genreToUpdate = await Genre.findByIdAndUpdate({ _id: id }, { name }).lean().exec()
 
 		if (!genreToUpdate) {
 			return res.status(400).send({ status: 400, error: 'Genre not found' })
@@ -80,8 +80,6 @@ async function updateGenre(req, res) {
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	}
-
-
 }
 
 module.exports = {
