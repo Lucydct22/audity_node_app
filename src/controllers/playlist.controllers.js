@@ -48,10 +48,10 @@ async function deletePlaylist(req, res) {
 
 async function updatePlaylist(req, res) {
 	const { id } = req.params
-	const {name, description} = req.body 
+	const { name, description } = req.body
 
 	try {
-		const playlistToUpdate = await Playlist.findByIdAndUpdate({ _id: id }, {name, description}).lean().exec()
+		const playlistToUpdate = await Playlist.findByIdAndUpdate({ _id: id }, { name, description }).lean().exec()
 
 		if (!playlistToUpdate) {
 			return res.status(400).send({ status: 400, error: 'Playlist not found' })
