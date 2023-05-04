@@ -13,6 +13,19 @@ async function getAlbums(req, res) {
 	}
 }
 
+async function getAlbumById(req, res) {
+	const { albumId } = req.params
+	try {
+		const albumStored = await Album.findOne({ _id: albumId }).lean().exec()
+		if (!albumStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, album: albumStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 async function createAlbum(req, res) {
 const { name, year, totalTracks, thumbnail } = req.body
 try {
@@ -59,6 +72,7 @@ module.exports = {
 getAlbums,
 createAlbum,
 getAllAlbums,
-likeAlbum
+likeAlbum,
+	getAlbumById
 }
 
