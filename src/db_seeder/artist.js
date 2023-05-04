@@ -15,7 +15,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb842fae710a21f648e26dd910",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683109497/artistImages/zgx5mfvpsdhtzf3glvok.jpg",
     },
     {
       _id: new ObjectId(),
@@ -26,7 +26,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb9fb2b5ff325f43536a2a4ae2",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683111158/artistImages/siwvay0mxpwbovffuieb.jpg",
     },
     {
       _id: new ObjectId(),
@@ -37,7 +37,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb8d683372296589f7c718dea6",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683111487/artistImages/oc5kg1jbgb1j0cdgop7k.jpg",
     },
     {
       _id: new ObjectId(),
@@ -48,7 +48,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5ebda71714b11b7c451281e54ca",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683112532/artistImages/pau39ndxxz6znx99dbm8.jpg",
     },
     {
       _id: new ObjectId(),
@@ -59,7 +59,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb9acc7db8348539634e585144",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113260/artistImages/dggeggczyzqwxgbunsgh.jpg",
     },
     {
       _id: new ObjectId(),
@@ -70,7 +70,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb19cd7b26fa38886bd6355b3c",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113154/artistImages/etefxypcsermydn6mf91.jpg",
     },
     {
       _id: new ObjectId(),
@@ -81,7 +81,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb470a02669d59859a21676ed0",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113394/artistImages/wbt7sh2p9su68egufa0z.jpg",
     },
     {
       _id: new ObjectId(),
@@ -92,7 +92,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/d3e1ce67d48fa05431bdd2b0f14ffc294960f0bf",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113611/artistImages/lqkxqie1baq8e4ij0wze.jpg",
     },
     {
       _id: new ObjectId(),
@@ -103,7 +103,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb014c22b80be73cee9c7835b1",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113703/artistImages/lqvoa5giqtqpkdcihccw.jpg",
     },
     {
       _id: new ObjectId(),
@@ -114,7 +114,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5ebf913a1de42e743a6f462dfe1",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113975/artistImages/e9e8mjxuewfsshwrnvng.jpg",
     },
     {
       _id: new ObjectId(),
@@ -125,7 +125,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb6dca4eb1f2347310b27c3000",
+      photoUrl: "https://res.cloudinary.com/di3kpwpjx/image/upload/v1683112840/artistImages/vwhbks0xp5f9c4zy6ph5.jpg",
     },
     {
       _id: new ObjectId(),
@@ -136,7 +136,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb5c1a2d5e3c93fe46ff18878d",
+      photoUrl: "https://res.cloudinary.com/di3kpwpjx/image/upload/v1683113021/artistImages/w8ro8mp507h9kctlwe6j.jpg",
     },
     {
       _id: new ObjectId(),
@@ -147,7 +147,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb8d4c9938258d04640bf9f091",
+      photoUrl: "https://res.cloudinary.com/di3kpwpjx/image/upload/v1683113134/artistImages/ulqiflrql3bnmhqqafqe.jpg",
     },
     {
       _id: new ObjectId(),
@@ -158,7 +158,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5ebb7ed50718dfd36111ab26f40",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113353/artistImages/oi8cj17nb24lckycxdvr.jpg",
     },
     {
       _id: new ObjectId(),
@@ -169,7 +169,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5ebbeffebd066171f03029a3c2a",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113649/artistImages/fylx7finevr7ildmvvd9.jpg",
     },
     {
       _id: new ObjectId(),
@@ -180,7 +180,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb5c33b372d2ef6275ed536450",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113889/artistImages/xcfb5poadpou4qrf5y9c.jpg",
     },
     {
       _id: new ObjectId(),
@@ -191,7 +191,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb559babce20a71e8210990c29",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114101/artistImages/rscycvaods5oyqxfnlgf.jpg",
     },
     {
       _id: new ObjectId(),
@@ -202,7 +202,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5ebd093354b1da8c7c55c4cee9f",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114294/artistImages/ooqdzlw4jc1bexrvvlaz.jpg",
     },
     {
       _id: new ObjectId(),
@@ -213,7 +213,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5ebf6b060d446495921bd200593",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114405/artistImages/qrox8bqrhwaqty06dura.jpg",
     },
     {
       _id: new ObjectId(),
@@ -224,7 +224,7 @@ async function getBaseArtist() {
         genre[2].toString(),
         genre[3].toString()
       ],
-      photoUrl: "https://i.scdn.co/image/ab6761610000e5eb31b2c3d4c8866b38310591be",
+      photoUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114507/artistImages/iukci6wobkcudqxoqzjk.jpg",
     }
   ]
 }

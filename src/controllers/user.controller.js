@@ -1,25 +1,29 @@
 const User = require('../models/user.model')
+// const ManagementClient = require('auth0').ManagementClient
 
 async function registerLoginUser(req, res) {
-	const { userId } = req.body
+	const { user } = req.body
 	try {
-		const userStored = await User.findOne({ userId: userId.toString() }).lean().exec()
+		const userStored = await User.findOne({ userId: user.sub.toString() }).lean().exec()
 
 		if (!userStored) {
-			const userAuth0 = req.auth
-			const user = new User({
-				userId: userId,
-				name: userAuth0.given_name || userAuth0.nickname,
-				lastname: userAuth0.family_name || '',
-				nickname: userAuth0.nickname || '',
-				email: userAuth0.email,
-				language: userAuth0.locale || 'en'
+			const newUser = new User({
+				userId: user.sub,
+				name: user.given_name || user.nickname,
+				lastname: user.family_name || '',
+				nickname: user.nickname || '',
+				email: user.email,
+				language: user.locale || 'en',
+				role: 'user'
 			})
 
 			try {
-				const userSaved = await user.save()
+				const userSaved = await newUser.save()
 				return res.status(200).send({ status: 200, user: userSaved })
 			} catch (err) {
+				if (err.code === 11000) {
+					return res.status(501).send({ status: 501, err: err, message: 'El email ya existe' })
+				}
 				return res.status(500).send({ status: 500, error: err })
 			}
 		} else {
@@ -31,14 +35,53 @@ async function registerLoginUser(req, res) {
 }
 
 async function updateUserSettings(req, res) {
-	const { userId } = req.body
-	try {
-		const userToUpdated = await User.findOneAndUpdate({ userId: userId.toString() }).lean().exec()
-		const userUpdated = await userToUpdated.save()
+	const { userId } = req.params
+	//const data = req.body
+	const { nickname, dateOfBirth, country, language } = req.body
 
-		
-    return res.status(200).send({ status: 200, user: userUpdated })
-	
+	try {
+		const userToUpdated = await User.findOneAndUpdate(
+			{ _id: userId.toString() },
+			//data, 
+			{ nickname, dateOfBirth, country, language },
+			{ returnOriginal: false }
+		).lean().exec()
+
+		if (!userToUpdated) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send(
+			{ status: 200, user: userToUpdated }
+		)
+
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function deleteUser(req, res) {
+	const { userId } = req.params
+	//const { user_id } = req.auth0
+
+	try {
+		const userToDelete = await User.findOneAndDelete(
+			{ _id: userId.toString() }
+		).lean().exec()
+
+		if (!userToDelete) {
+			return res.status(400).send({ status: 400, error: 'User not found' })
+		}
+
+		/*const auth0 = new ManagementClient({
+      domain: process.env.AUTH0_DOMAIN,
+      clientId: process.env.DEVELOPMENT_AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      scope: 'delete:users',
+    });
+    await auth0.deleteUser({ user_id: user_id });*/
+
+		return res.status(200).send({ status: 200, user: userToDelete })
+
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	}
@@ -46,5 +89,6 @@ async function updateUserSettings(req, res) {
 
 module.exports = {
 	registerLoginUser,
-	updateUserSettings
+	updateUserSettings,
+	deleteUser
 }
