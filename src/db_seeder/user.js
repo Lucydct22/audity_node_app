@@ -12,7 +12,8 @@ function getBaseUser() {
       dateOfBirth: '1988-05-01T09:08:38.935+00:00',
       country:'Spain',
       language: 'es',
-      role: 'user'
+      role: 'user',
+      picture: 'https://asset.cloudinary.com/di3kpwpjx/afea925c259ff45aba14471736c34838'
     },
     {
       _id: new ObjectId(),
@@ -24,7 +25,8 @@ function getBaseUser() {
       dateOfBirth: '1998-05-01T09:08:38.935+00:00',
       country:'Holland',
       language: 'en',
-      role: 'admin'
+      role: 'admin',
+      picture: 'pictureUrl.jpg'
     }
   ]
 }
