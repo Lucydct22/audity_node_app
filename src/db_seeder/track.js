@@ -220,12 +220,12 @@ async function getBaseTrack() {
     },
     {
       id: new ObjectId(),
-      name: "Better",
+      name: "Arcangel BZRP",
       artist: [
         artist[12].toString()
       ],
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586627/tracks-dev/A8_MUSIC_PRODUCTIONS_-_Better_umwfkh.mp3",
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586622/tracks-thumbnails-dev/A8_vxgyaf.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683280290/development/trackAudio/Arcangel%20Bzrp.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683280289/development/trackImage/bhwzdk9uftvpxyt5mjmt.jpg",
       genre: genre[12].toString(),
       likedBy: [
         user[0].toString(),
@@ -233,16 +233,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 225
     },
     {
       id: new ObjectId(),
-      name: "My Love",
+      name: "Quevedo BZRP",
       artist: [
         artist[13].toString()
       ],
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586724/tracks-dev/MODUS_-_My_Love_z7tzk1.mp3",
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586719/tracks-thumbnails-dev/My_love_wqjuiz.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683280375/development/trackAudio/Quevedo%20Bzrp%20.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683280373/development/trackImage/gpt4fkqmsp6jovbfzepu.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -250,16 +250,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 219
     },
     {
       id: new ObjectId(),
-      name: "Bebe go",
+      name: "One Kiss",
       artist: [
         artist[14].toString()
       ],
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586823/tracks-dev/P_Steve_Officiel_-_Bebe_go_r0hlbl.mp3",
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586816/tracks-thumbnails-dev/bebe_go_zdfn6e.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683280650/development/trackAudio/One_Kiss.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683280649/development/trackImage/uk2daykhkro3ytycv7l9.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -267,16 +267,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 214
     },
     {
       id: new ObjectId(),
-      name: "Reflections (feat. Mathias Hagen)",
+      name: "Summer",
       artist: [
         artist[5].toString()
       ],
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587062/tracks-dev/Kevin_S._-_Reflections__feat._Mathias_Hagen__lypkgw.mp3",
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587058/tracks-thumbnails-dev/Reflections_qvdzan.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683282153/development/trackAudio/Summer.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683282152/development/trackImage/wuf58cuwbkui5rmlgmqp.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -284,16 +284,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 233
     },
     {
       id: new ObjectId(),
-      name: "Un Ratito Nama (Prod: Duran The Coach)",
+      name: "Pepas",
       artist: [
         artist[6].toString()
       ],
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587219/tracks-dev/Lessky_-_Un_Ratito_Nama__Prod__Duran_The_Coach__npuws5.mp3",
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587222/tracks-thumbnails-dev/Un_ratito_m2aeq0.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683282539/development/trackAudio/Pepas.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683282537/development/trackImage/gfsgk2parclocpelzpzf.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -301,16 +301,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 288
     },
     {
       id: new ObjectId(),
-      name: "Sax Is My Cardio",
+      name: "El incomprendido",
       artist: [
         artist[7].toString()
       ],
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587961/tracks-dev/Kuzinmuzin_-_Sax_Is_My_Cardio_fqmvwb.mp3",
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587960/tracks-thumbnails-dev/Sax_kgjfn8.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683282639/development/trackAudio/El%20Incomprendido.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683282636/development/trackImage/n4xrjitvuz651urrgvej.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -318,16 +318,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 267
     },
     {
       id: new ObjectId(),
-      name: "Chill Lofi Hip Hop Type Beat",
+      name: "Faded",
       artist: [
         artist[8].toString()
       ],
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644653754/tracks-dev/PeryCreep_-_Chill_Lofi_Hip_Hop_Type_Beat_l2k8zv.mp3",
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644653692/tracks-thumbnails-dev/Chill_Lofi_Hip_Hop_Type_Beat_ltpm24.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683282951/development/trackAudio/Faded.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683282949/development/trackImage/vik0kfqept37zngkdgrt.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -335,16 +335,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 207
     },
     {
       id: new ObjectId(),
-      name: "Monday 8am",
+      name: "The Spectre",
       artist: [
         artist[9].toString()
       ],
-      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644602996/tracks-thumbnails-dev/Monday_8am_amfdta.jpg",
-      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644602494/tracks-dev/D_JAY_KOI_-_We_got_the_vibes___Feat_Fil_Straughan__uz9qw7.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683283142/development/trackImage/desofbqtvrugsbkjj4pi.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683283144/development/trackAudio/The%20Spectre.mp3.mp3",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -352,7 +352,177 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 207
+    },
+    {
+      id: new ObjectId(),
+      name: "He's a Pirate",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683283371/development/trackImage/l4sptpmfoc17dboceynj.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683283373/development/trackAudio/Hes%20A%20Pirate.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 420
+    },
+    {
+      id: new ObjectId(),
+      name: "The Business",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683283551/development/trackImage/jko4ayqmbj8phzamq3yh.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683283553/development/trackAudio/The%20Business.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 191
+    },
+    {
+      id: new ObjectId(),
+      name: "Popular Monster",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683283715/development/trackImage/kphfwsyma9vxzwon9gfl.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683283716/development/trackAudio/Popular%20Monster.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 232
+    },
+    {
+      id: new ObjectId(),
+      name: "Watch The World Burn",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683283861/development/trackImage/h3kn80nldqsfrc38oqrx.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683283863/development/trackAudio/Watch%20The%20World%20Burn.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 204
+    },
+    {
+      id: new ObjectId(),
+      name: "Fast Lane",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683283954/development/trackImage/itvptkzthnwd10vostyr.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683283955/development/trackAudio/Fast%20Lane.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 249
+    },
+    {
+      id: new ObjectId(),
+      name: "Lose Yourself",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683284034/development/trackImage/fx6xegewzrcsspskkpgw.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683284035/development/trackAudio/Lose%20Yourself.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 323
+    },
+    {
+      id: new ObjectId(),
+      name: "La Jumpa",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683284436/development/trackImage/dm8gphcvjqouoigsaksz.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683284438/development/trackAudio/La%20Jumpa.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 255
+    },
+    {
+      id: new ObjectId(),
+      name: "Si Se Da",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683284653/development/trackImage/f9wm6flgnpuncxttjrd1.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683284613/development/trackAudio/Si%20Se%20Da.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 335
+    },
+    {
+      id: new ObjectId(),
+      name: "Playa Del Inglés",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683284873/development/trackImage/cqtfs12tjd5gwt6isd4y.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683284854/development/trackAudio/Playa%20Del%20Ingl%C3%83%C2%A9s.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 237
+    },
+    {
+      id: new ObjectId(),
+      name: "Vista Al Mar",
+      artist: [
+        artist[9].toString()
+      ],
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683284799/development/trackImage/iwm0b0mpuk959sqbmqsy.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683284801/development/trackAudio/Vista%20Al%20Mar.mp3.mp3",
+      genre: genre[0].toString(),
+      likedBy: [
+        user[0].toString(),
+        user[1].toString()
+      ],
+      rating: 5,
+      popularity: 500,
+      duration: 180
     }
   ]
 }
