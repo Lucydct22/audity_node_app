@@ -84,17 +84,16 @@ async function updateUserLanguage(req, res) {
 	}
 }
 
-
-/*async function updateUserCountry(req, res) {
+async function updateUserCountry(req, res) {
 	const user = req.auth
-	//const data = req.body
-	const { language } = req.body
+	const { country } = req.body
+	
+	console.log(user.payload.sub);
 
 	try {
 		const userToUpdated = await User.findOneAndUpdate(
-			{ userId: user.sub.toString() },
-			//data, 
-			{ language }
+			{ userId: user.payload.sub.toString() },
+			{ country }
 		).lean().exec()
 
 		if (!userToUpdated) {
@@ -105,7 +104,10 @@ async function updateUserLanguage(req, res) {
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	}
-}*/
+}
+
+
+
 
 async function deleteUser(req, res) {
 	const { userId } = req.params
@@ -139,6 +141,7 @@ module.exports = {
 	registerLoginUser,
 	updateUserSettings,
 	updateUserLanguage,
+	updateUserCountry,
 	deleteUser,
 
 }
