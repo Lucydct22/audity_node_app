@@ -271,7 +271,7 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Reflections (feat. Mathias Hagen)",
       artist: [
-        artist[15].toString()
+        artist[14].toString()
       ],
       audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587062/tracks-dev/Kevin_S._-_Reflections__feat._Mathias_Hagen__lypkgw.mp3",
       imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587058/tracks-thumbnails-dev/Reflections_qvdzan.jpg",
@@ -288,7 +288,7 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Un Ratito Nama (Prod: Duran The Coach)",
       artist: [
-        artist[16].toString()
+        artist[14].toString()
       ],
       audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587219/tracks-dev/Lessky_-_Un_Ratito_Nama__Prod__Duran_The_Coach__npuws5.mp3",
       imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587222/tracks-thumbnails-dev/Un_ratito_m2aeq0.jpg",
@@ -305,7 +305,7 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Sax Is My Cardio",
       artist: [
-        artist[17].toString()
+        artist[14].toString()
       ],
       audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587961/tracks-dev/Kuzinmuzin_-_Sax_Is_My_Cardio_fqmvwb.mp3",
       imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587960/tracks-thumbnails-dev/Sax_kgjfn8.jpg",
@@ -322,7 +322,7 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Chill Lofi Hip Hop Type Beat",
       artist: [
-        artist[18].toString()
+        artist[14].toString()
       ],
       audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644653754/tracks-dev/PeryCreep_-_Chill_Lofi_Hip_Hop_Type_Beat_l2k8zv.mp3",
       imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644653692/tracks-thumbnails-dev/Chill_Lofi_Hip_Hop_Type_Beat_ltpm24.jpg",
@@ -339,7 +339,7 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Monday 8am",
       artist: [
-        artist[19].toString()
+        artist[14].toString()
       ],
       imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644602996/tracks-thumbnails-dev/Monday_8am_amfdta.jpg",
       audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644602494/tracks-dev/D_JAY_KOI_-_We_got_the_vibes___Feat_Fil_Straughan__uz9qw7.mp3",

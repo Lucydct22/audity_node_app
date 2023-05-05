@@ -420,7 +420,7 @@ async function getBaseAlbum() {
       name: "KARIMO II",
       imageUrl: "https://i.scdn.co/image/ab67616d0000b273aa311f30a24a7002e089c379",
       artists: [
-        artist[15].toString()
+        artist[14].toString()
       ],
       tracks: [
         track[0].toString(),
@@ -446,7 +446,7 @@ async function getBaseAlbum() {
       name: "Midnight FM",
       imageUrl: "https://i.scdn.co/image/ab67616d0000b273d62e4c88ec0df746317863af",
       artists: [
-        artist[16].toString()
+        artist[14].toString()
       ],
       tracks: [
         track[0].toString(),
@@ -472,7 +472,7 @@ async function getBaseAlbum() {
       name: "Jag såg en kvinna",
       imageUrl: "https://i.scdn.co/image/ab67616d0000b273897c8155c64e1436daf8a466",
       artists: [
-        artist[17].toString()
+        artist[14].toString()
       ],
       tracks: [
         track[0].toString(),
@@ -498,7 +498,7 @@ async function getBaseAlbum() {
       name: "Alltid varit här",
       imageUrl: "https://i.scdn.co/image/ab67616d0000b273940bcb3763667fa773d46a29",
       artists: [
-        artist[18].toString()
+        artist[14].toString()
       ],
       tracks: [
         track[0].toString(),
@@ -524,7 +524,7 @@ async function getBaseAlbum() {
       name: "38",
       imageUrl: "https://i.scdn.co/image/ab67616d0000b273a009515d20b39aa065540314",
       artists: [
-        artist[19].toString()
+        artist[14].toString()
       ],
       tracks: [
         track[0].toString(),

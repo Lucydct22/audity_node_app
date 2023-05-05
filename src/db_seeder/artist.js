@@ -93,7 +93,7 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Farruko",
       genres: [
-        genre[18].toString()
+        genre[17].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215770/development/artistImage/oludu7fs3fraoipff0ad.jpg",
     },
