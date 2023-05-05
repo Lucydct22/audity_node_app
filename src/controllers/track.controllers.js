@@ -11,8 +11,8 @@ async function postTrack(req, res) {
     artist,
     audioUrl: '',
     imageUrl: '',
-    genre,
     album,
+    genre,
     duration
   })
 
