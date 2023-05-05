@@ -6,8 +6,8 @@ const TrackSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Artist'
 	}],
-  url: String,
-  thumbnail: String,
+  imageUrl: String,
+  audioUrl: String,
   genre: {
 		type: Schema.Types.ObjectId,
 		ref: 'Genre'

@@ -1,14 +1,15 @@
-const fs = require('fs-extra')
 const Artist = require('../models/artist.model')
+const fs = require('fs-extra')
 const { uploadImage } = require('../utils/cloudinary')
+const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postArtist(req, res) {
 	const { name, genres } = req.body
 	const artist = new Artist({ name, genres })
 
 	try {
-		const imageUploaded = await uploadImage(req.files.image.tempFilePath, 'artistImages', 250, 250)
-		artist.photoUrl = imageUploaded.url
+		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/artistImage`, 250, 250)
+		artist.imageUrl = imageUploaded.url
 		const artistSaved = await artist.save()
 		if (!artistSaved) {
 			return res.status(400).send({ status: 400 })

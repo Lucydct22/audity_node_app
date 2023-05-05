@@ -12,13 +12,13 @@ async function getBaseTrack() {
   return [
     {
       _id: new ObjectId(),
-      name: "Better of alone",
+      name: "Despecha",
       artist: [
         artist[0].toString(),
         artist[5].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583924/tracks-dev/Rxbyn_-_better_off_alone_fvhwp8.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/better_off_alone_gfmcby.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683275967/development/trackAudio/Despecha.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683275965/development/trackImage/pnlc2usm9bn3hkws8asi.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -26,16 +26,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 5,
-      duration: 240
+      duration: 158
     },
     {
       _id: new ObjectId(),
-      name: "Alone",
+      name: "Besos moja2",
       artist: [
         artist[1].toString()
       ],
-      url: "http://res.cloudinary.com/dmkdsujzh/video/upload/v1644583929/tracks-dev/Color_Out_-_Alone_aw3gmk.mp3",
-      thumbnail: "http://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/alone_rfib7a.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683276312/development/trackAudio/Besos%20Moja%202.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683276310/development/trackImage/zus7ix6gbwmzdpu4frlg.jpg",
       genre: genre[1].toString(),
       likedBy: [
         user[0].toString(),
@@ -43,34 +43,36 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 5,
-      duration: 240
+      duration: 229
     },
     {
       id: new ObjectId(),
-      name: "Mahidevran - Maze of sorrow",
+      name: "Se preparó",
       artist: [
         artist[2].toString(),
         artist[7].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583928/tracks-dev/Mahidevran_Rock_Band_-_Mahidevran_-_Maze_of_sorrow_ips3zs.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/Maze_of_sorrow_r1crlr.jpg",
-      genre: genre[2].toString(),
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683276542/development/trackAudio/Se%20Prepar%C3%83%C2%B3.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683276540/development/trackImage/jhkhbdlipyqljyxa3w4b.jpg",
+      genre: [
+        genre[2].toString(),
+      ],
       likedBy: [
         user[0].toString(),
         user[1].toString()
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 188
     },
     {
       id: new ObjectId(),
-      name: "Aurora",
+      name: "Taki Taki",
       artist: [
         artist[3].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583928/tracks-dev/Smoking_With_Poets_-_to__Aurora_t2qnaw.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/aurora_omys8y.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683276717/development/trackAudio/Taki%20Taki.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683276716/development/trackImage/dv4mhpgy1ufe8rhnyvsd.jpg",
       genre: genre[3].toString(),
       likedBy: [
         user[0].toString(),
@@ -78,16 +80,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 231
     },
     {
       id: new ObjectId(),
-      name: "Sensitive",
+      name: "I'm Good",
       artist: [
         artist[4].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583922/tracks-dev/Infraction_-_Sensitive_vsu6qr.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583756/tracks-thumbnails-dev/Sensitive_unevif.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683276874/development/trackAudio/Im_Good.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683276872/development/trackImage/g2xnp01j7nsi54mzmnms.jpg",
       genre: genre[4].toString(),
       likedBy: [
         user[0].toString(),
@@ -95,16 +97,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 176
     },
     {
       id: new ObjectId(),
-      name: "Tantalizing Youth",
+      name: "Titanium",
       artist: [
         artist[5].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644583924/tracks-dev/Social_Square_-_Tantalizing_Youth_eykq87.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644583757/tracks-thumbnails-dev/Tantalizing_Youth_bfshzo.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683276946/development/trackAudio/Titanium.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683276945/development/trackImage/jxutfdfungg0dzxnss2q.jpg",
       genre: genre[5].toString(),
       likedBy: [
         user[0].toString(),
@@ -112,16 +114,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 245
     },
     {
       id: new ObjectId(),
-      name: "Igor Pumphonia - Point Of Light",
+      name: "Flowers",
       artist: [
         artist[6].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644584871/tracks-dev/Igor_Pumphonia_-_Igor_Pumphonia_-_Point_Of_Light_kjgbyz.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644584802/tracks-thumbnails-dev/Igor_Pumphonia_-_Point_Of_Light_urg7nn.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683277096/development/trackAudio/Flowers.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683277111/development/trackImage/jqwbdqsuerfn7xykpe70.jpg",
       genre: genre[6].toString(),
       likedBy: [
         user[0].toString(),
@@ -129,16 +131,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 194
     },
     {
       id: new ObjectId(),
-      name: "Marsupial",
+      name: "Party in the USA",
       artist: [
         artist[7].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644584996/tracks-dev/Laurence_DaNova_-_Marsupial_1_bxvpkj.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644585151/tracks-thumbnails-dev/Lurence_Danova_oeew0j.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683277202/development/trackAudio/Party%20In%20The%20USA.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683277201/development/trackImage/kiibhztfqoglzbkgwpgq.jpg",
       genre: genre[7].toString(),
       likedBy: [
         user[0].toString(),
@@ -146,16 +148,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 207
     },
     {
       id: new ObjectId(),
-      name: "Chasing Tomorrow (feat. Jade Gritty)",
+      name: "TQG",
       artist: [
         artist[8].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644585238/tracks-dev/Tab_-_Chasing_Tomorrow__feat._Jade_Gritty__leh4r1.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644585210/tracks-thumbnails-dev/TAB_fxakq3.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683277342/development/trackAudio/TQG.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683277340/development/trackImage/dkt8dx7hkwjfesin9lhx.jpg",
       genre: genre[8].toString(),
       likedBy: [
         user[0].toString(),
@@ -163,16 +165,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 197
     },
     {
       id: new ObjectId(),
-      name: "Healin My Blues",
+      name: "Provenza",
       artist: [
         artist[9].toString()
       ],
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644427496/tracks-thumbnails/thumbnail-1644427496210_qqpy4a.jpg",
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644523019/tracks/track-1644523017728_qb6wq4.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683277418/development/trackImage/njyzbua8jhlxfrpa9vn9.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683277421/development/trackAudio/Provenza.mp3.mp3",
       genre: genre[9].toString(),
       likedBy: [
         user[0].toString(),
@@ -180,16 +182,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 210
     },
     {
       id: new ObjectId(),
-      name: "Head Over Heels (Friend Group Remix)",
+      name: "Shakira BZRP",
       artist: [
         artist[10].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644585554/tracks-dev/The_Devil_Music_Co._-_Head_Over_Heels__Friend_Group_Remix__buotnt.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644585551/tracks-thumbnails-dev/Head_Over_Heels_Friend_Group_Remix_c9uatt.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683277604/development/trackAudio/Shakira%20Bzrp.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683277602/development/trackImage/zghkplhkuuazhv6mjnc1.jpg",
       genre: genre[10].toString(),
       likedBy: [
         user[0].toString(),
@@ -197,16 +199,16 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 217
     },
     {
       id: new ObjectId(),
-      name: "Under Water",
+      name: "Hips Don't Lie",
       artist: [
         artist[11].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586422/tracks-dev/The.madpix.project_-_Under_Water_2_gyvrkl.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586423/tracks-thumbnails-dev/Under_Water_yoirsy.jpg",
+      audioUrl: "http://res.cloudinary.com/di3kpwpjx/video/upload/v1683277980/development/trackAudio/Hips%20Don%27t%20Lie.mp3.mp3",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683277978/development/trackImage/tk5se6o8licjqmmapzaa.jpg",
       genre: genre[11].toString(),
       likedBy: [
         user[0].toString(),
@@ -214,7 +216,7 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 218
     },
     {
       id: new ObjectId(),
@@ -222,8 +224,8 @@ async function getBaseTrack() {
       artist: [
         artist[12].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586627/tracks-dev/A8_MUSIC_PRODUCTIONS_-_Better_umwfkh.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586622/tracks-thumbnails-dev/A8_vxgyaf.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586627/tracks-dev/A8_MUSIC_PRODUCTIONS_-_Better_umwfkh.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586622/tracks-thumbnails-dev/A8_vxgyaf.jpg",
       genre: genre[12].toString(),
       likedBy: [
         user[0].toString(),
@@ -239,8 +241,8 @@ async function getBaseTrack() {
       artist: [
         artist[13].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586724/tracks-dev/MODUS_-_My_Love_z7tzk1.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586719/tracks-thumbnails-dev/My_love_wqjuiz.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586724/tracks-dev/MODUS_-_My_Love_z7tzk1.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586719/tracks-thumbnails-dev/My_love_wqjuiz.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -256,8 +258,8 @@ async function getBaseTrack() {
       artist: [
         artist[14].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586823/tracks-dev/P_Steve_Officiel_-_Bebe_go_r0hlbl.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586816/tracks-thumbnails-dev/bebe_go_zdfn6e.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644586823/tracks-dev/P_Steve_Officiel_-_Bebe_go_r0hlbl.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644586816/tracks-thumbnails-dev/bebe_go_zdfn6e.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -271,10 +273,10 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Reflections (feat. Mathias Hagen)",
       artist: [
-        artist[15].toString()
+        artist[5].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587062/tracks-dev/Kevin_S._-_Reflections__feat._Mathias_Hagen__lypkgw.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587058/tracks-thumbnails-dev/Reflections_qvdzan.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587062/tracks-dev/Kevin_S._-_Reflections__feat._Mathias_Hagen__lypkgw.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587058/tracks-thumbnails-dev/Reflections_qvdzan.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -288,10 +290,10 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Un Ratito Nama (Prod: Duran The Coach)",
       artist: [
-        artist[16].toString()
+        artist[6].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587219/tracks-dev/Lessky_-_Un_Ratito_Nama__Prod__Duran_The_Coach__npuws5.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587222/tracks-thumbnails-dev/Un_ratito_m2aeq0.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587219/tracks-dev/Lessky_-_Un_Ratito_Nama__Prod__Duran_The_Coach__npuws5.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587222/tracks-thumbnails-dev/Un_ratito_m2aeq0.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -305,10 +307,10 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Sax Is My Cardio",
       artist: [
-        artist[17].toString()
+        artist[7].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587961/tracks-dev/Kuzinmuzin_-_Sax_Is_My_Cardio_fqmvwb.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587960/tracks-thumbnails-dev/Sax_kgjfn8.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644587961/tracks-dev/Kuzinmuzin_-_Sax_Is_My_Cardio_fqmvwb.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644587960/tracks-thumbnails-dev/Sax_kgjfn8.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -322,10 +324,10 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Chill Lofi Hip Hop Type Beat",
       artist: [
-        artist[18].toString()
+        artist[8].toString()
       ],
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644653754/tracks-dev/PeryCreep_-_Chill_Lofi_Hip_Hop_Type_Beat_l2k8zv.mp3",
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644653692/tracks-thumbnails-dev/Chill_Lofi_Hip_Hop_Type_Beat_ltpm24.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644653754/tracks-dev/PeryCreep_-_Chill_Lofi_Hip_Hop_Type_Beat_l2k8zv.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644653692/tracks-thumbnails-dev/Chill_Lofi_Hip_Hop_Type_Beat_ltpm24.jpg",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),
@@ -339,10 +341,10 @@ async function getBaseTrack() {
       id: new ObjectId(),
       name: "Monday 8am",
       artist: [
-        artist[19].toString()
+        artist[9].toString()
       ],
-      thumbnail: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644602996/tracks-thumbnails-dev/Monday_8am_amfdta.jpg",
-      url: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644602494/tracks-dev/D_JAY_KOI_-_We_got_the_vibes___Feat_Fil_Straughan__uz9qw7.mp3",
+      imageUrl: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644602996/tracks-thumbnails-dev/Monday_8am_amfdta.jpg",
+      audioUrl: "https://res.cloudinary.com/dmkdsujzh/video/upload/v1644602494/tracks-dev/D_JAY_KOI_-_We_got_the_vibes___Feat_Fil_Straughan__uz9qw7.mp3",
       genre: genre[0].toString(),
       likedBy: [
         user[0].toString(),

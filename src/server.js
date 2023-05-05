@@ -22,7 +22,7 @@ app.use(
   fileUpload({
     useTempFiles: true,
     tempFileDir: './uploads',
-    limits: { fileSize: 10000000 }, // 10MB max file(s) size
+    limits: { fileSize: 15000000 }, // 15MB max file(s) size
     abortOnLimit: true // default: false (if true, files will not be uploaded and an error event will be emitted)
   })
 )

@@ -7,7 +7,7 @@ const PlaylistSchema = new Schema({
 	},
 	name: String,
 	description: String,
-	cover: String,
+	imageUrl: String,
 	publicAccessible: Boolean, //
 	totalTracks: Number,
 	followers: Number, //

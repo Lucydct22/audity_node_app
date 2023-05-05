@@ -5,77 +5,92 @@ function getBaseGenre() {
      {
       _id: new ObjectId(),
       name: "Blues",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104756/genreImages/iodlqztvsn9gxjwvn181.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212593/development/genreImage/nxpucpt0kndghjyihntq.webp'
     },
     {
       _id: new ObjectId(),
       name: "Rock",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104829/genreImages/ljccj5vjajuozfmmxf9q.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212651/development/genreImage/qqesppk1ukln1gub8sz0.webp'
     },
     {
       _id: new ObjectId(),
       name: "Funk",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104887/genreImages/qtueupi8w4twtw6dzpl5.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212797/development/genreImage/rjyj9bvspu4wwsvzkux7.webp'
     },
     {
       _id: new ObjectId(),
       name: "Folk",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683104938/genreImages/lbfukw2akrcs8bbrnhve.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212824/development/genreImage/hzpa8q619nj7vy4ci6zz.webp'
     },
     {
       _id: new ObjectId(),
       name: "Tango",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105159/genreImages/qkvxgaphoam81fjajhsp.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212874/development/genreImage/wwushlkqtojzn5r81vau.webp'
     },
     {
       _id: new ObjectId(),
       name: "Indie",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105186/genreImages/efpnwedzox1taoyzayid.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212898/development/genreImage/etocf9hq8h2rmjh5nrpj.webp'
     },
     {
       _id: new ObjectId(),
       name: "Metal",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105214/genreImages/pf8onnp3gq3nbdjhnnam.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212929/development/genreImage/kwea1aggvizi0eipg670.webp'
     },
     {
       _id: new ObjectId(),
       name: "Classic",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683105358/genreImages/r7ufgbdcbi7e9cphbgcx.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683212961/development/genreImage/pttyeh8o1dctq21yiu21.webp'
     },
     {
       _id: new ObjectId(),
       name: "Country",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683106578/genreImages/eg49amdqx78eyxn6aqfa.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213000/development/genreImage/idqvkny3bzk9k5zapz0a.webp'
     },
     {
       _id: new ObjectId(),
       name: "Electronic",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683106652/genreImages/ijapo4kol6eyssrowmbd.jpg'
+      nimageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213094/development/genreImage/fifasnf3enxwfhw8hppn.webp'
     },
     {
       _id: new ObjectId(),
       name: "Lounge",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107113/genreImages/eokwlnl3iujnvwletxmc.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213489/development/genreImage/k9q3jtkc86oj2j99greb.webp'
     },
     {
       _id: new ObjectId(),
       name: "Grunge",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107224/genreImages/giwoscy6pb5s1t1zuj7t.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213515/development/genreImage/ejptgi7nhahgerhsddwq.webp'
     },
     {
       _id: new ObjectId(),
       name: "Pop",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107251/genreImages/pa4yurzrrw4zifgss0hz.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213561/development/genreImage/ppdlyd4718ihvl98fehs.webp'
     },
     {
       _id: new ObjectId(),
       name: "Soul",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107284/genreImages/jl7plejurirbzsk5c170.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213584/development/genreImage/dp8ln9gr7ficki20eej6.webp'
     },
     {
       _id: new ObjectId(),
       name: "Jazz",
-      thumbnail: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683107310/genreImages/xoninmwbynxbptrufrwb.jpg'
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213617/development/genreImage/qeqbssax132l233i580e.webp'
+    },
+    {
+      _id: new ObjectId(),
+      name: "Urbano latino",
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213644/development/genreImage/sqbbphkc6kxndaxzgcxe.webp'
+    },
+    {
+      _id: new ObjectId(),
+      name: "HipHop",
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213674/development/genreImage/dbxwueper1ki6quvfg7c.webp'
+    },
+    {
+      _id: new ObjectId(),
+      name: "Reggae",
+      imageUrl: 'http://res.cloudinary.com/di3kpwpjx/image/upload/v1683213696/development/genreImage/x63svjbumnc5stvu4eto.webp'
     }
   ]
 }

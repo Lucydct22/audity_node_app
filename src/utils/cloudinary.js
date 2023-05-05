@@ -16,10 +16,14 @@ const uploadImage = async (imagePath, folder, width = 300, height = 300) => {
     })
   return imageUploaded
 }
-const uploadAudioFile = async (audioFile, name) => {
-  const audioFileUploaded = await cloudinary.uploader.upload(audioFile,
-    { resource_type: 'video', public_id: name, folder: 'audioFiles/', overwrite: true })
-  return audioFileUploaded
+const uploadAudio = async (audioFile, name, folder) => {
+  const audioUploaded = await cloudinary.uploader.upload(audioFile,
+    { resource_type: 'video',
+    public_id: name,
+    folder: folder,
+    overwrite: true
+  })
+  return audioUploaded
 }
 
-module.exports = { cloudinary, uploadImage, uploadAudioFile }
+module.exports = { cloudinary, uploadImage, uploadAudio }

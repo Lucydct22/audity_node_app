@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 const GenreSchema = new Schema({
 	name: String,
 	popularity: Number,
-	thumbnail: String
+	imageUrl: String
 }, {
 	timestamps: true
 })
