@@ -18,8 +18,8 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Ozuna",
       genres: [
-        genre[16].toString(),
-        genre[17].toString()
+        genre[6].toString(),
+        genre[7].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215304/development/artistImage/svstexrwlebgnizopk7b.jpg",
     },
@@ -44,7 +44,7 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Karol G",
       genres: [
-        genre[16].toString()
+        genre[6].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215484/development/artistImage/z5a9s2rmx2f5zli7a5on.jpg",
     },
@@ -60,8 +60,8 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Bizarrap",
       genres: [
-        genre[16].toString(),
-        genre[17].toString()
+        genre[6].toString(),
+        genre[7].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215580/development/artistImage/tv52kxck3qltro3dyrs8.jpg",
     },
@@ -69,7 +69,7 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Arcangel",
       genres: [
-        genre[16].toString()
+        genre[6].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215613/development/artistImage/ns5ydaphv7mdhajbadbx.jpg",
     },
@@ -77,7 +77,7 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Quevedo",
       genres: [
-        genre[16].toString()
+        genre[6].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215641/development/artistImage/imueid8yufvzvnb0dznf.jpg",
     },
@@ -93,7 +93,7 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Farruko",
       genres: [
-        genre[18].toString()
+        genre[8].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215770/development/artistImage/oludu7fs3fraoipff0ad.jpg",
     },
@@ -127,7 +127,7 @@ async function getBaseArtist() {
       _id: new ObjectId(),
       name: "Eminem",
       genres: [
-        genre[17].toString()
+        genre[7].toString()
       ],
       imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215928/development/artistImage/o5jl5wqkg9lovjdq6mat.jpg",
     }
