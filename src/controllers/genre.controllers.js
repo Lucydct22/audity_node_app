@@ -1,5 +1,5 @@
-const fs = require('fs-extra')
 const Genre = require('../models/genre.model')
+const fs = require('fs-extra')
 const { uploadImage } = require('../utils/cloudinary')
 const cloudinaryConfig = require('../config/config').cloudinary
 
@@ -9,7 +9,7 @@ async function postGenre(req, res) {
 
 	try {
 		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/genreImage`, 264, 134)
-		genre.thumbnail = imageUploaded.url
+		genre.imageUrl = imageUploaded.url
 		const genreSaved = await genre.save()
 		if (!genreSaved) {
 			return res.status(400).send({ status: 400 })
@@ -91,5 +91,4 @@ module.exports = {
 	postGenre,
 	deleteGenre,
 	updateGenre
-	
 }
