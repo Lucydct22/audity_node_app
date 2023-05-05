@@ -8,223 +8,128 @@ async function getBaseArtist() {
   return [
     {
       _id: new ObjectId(),
-      name: "Kim Cesarion",
+      name: "Rosalia",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[13].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683109497/artistImages/zgx5mfvpsdhtzf3glvok.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215154/development/artistImage/xhnvgbikj2nyz4cwvyok.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "C.Gambino",
+      name: "Ozuna",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[16].toString(),
+        genre[17].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683111158/artistImages/siwvay0mxpwbovffuieb.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215304/development/artistImage/svstexrwlebgnizopk7b.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Nicky Romero",
+      name: "David Guetta",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[6].toString(),
+        genre[10].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683111487/artistImages/oc5kg1jbgb1j0cdgop7k.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215362/development/artistImage/vilzwn0g37fkb4hu2w7b.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Denz",
+      name: "Miley Cyrus",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[13].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683112532/artistImages/pau39ndxxz6znx99dbm8.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215421/development/artistImage/xnn3ns2cf7sov1ciqfko.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Jesper Swärd",
+      name: "Karol G",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[16].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113260/artistImages/dggeggczyzqwxgbunsgh.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215484/development/artistImage/z5a9s2rmx2f5zli7a5on.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Axel Boman",
+      name: "Shakira",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[13].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113154/artistImages/etefxypcsermydn6mf91.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215520/development/artistImage/wr3od9hxuhvkq9brqngn.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Rasmus Hultgren",
+      name: "Bizarrap",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[16].toString(),
+        genre[17].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113394/artistImages/wbt7sh2p9su68egufa0z.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215580/development/artistImage/tv52kxck3qltro3dyrs8.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Dimitri Vangelis & Wyman",
+      name: "Arcangel",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[16].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113611/artistImages/lqkxqie1baq8e4ij0wze.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215613/development/artistImage/ns5ydaphv7mdhajbadbx.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Hemliga Klubben",
+      name: "Quevedo",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[16].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113703/artistImages/lqvoa5giqtqpkdcihccw.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215641/development/artistImage/imueid8yufvzvnb0dznf.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Steph K",
+      name: "Calvin Harris",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[14].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113975/artistImages/e9e8mjxuewfsshwrnvng.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215712/development/artistImage/fkwohkqoxlo3jp4za33o.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Romeo",
+      name: "Farruko",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[18].toString()
       ],
-      imageUrl: "https://res.cloudinary.com/di3kpwpjx/image/upload/v1683112840/artistImages/vwhbks0xp5f9c4zy6ph5.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215770/development/artistImage/oludu7fs3fraoipff0ad.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "SINAN",
+      name: "Alan Walker",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[10].toString(),
+        genre[13].toString()
       ],
-      imageUrl: "https://res.cloudinary.com/di3kpwpjx/image/upload/v1683113021/artistImages/w8ro8mp507h9kctlwe6j.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215819/development/artistImage/iadw0nyv8sqx6qvi5hv3.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Chapee",
+      name: "Tiesto",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[10].toString(),
+        genre[14].toString()
       ],
-      imageUrl: "https://res.cloudinary.com/di3kpwpjx/image/upload/v1683113134/artistImages/ulqiflrql3bnmhqqafqe.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215856/development/artistImage/qwjcczzzpnmet9srdhcf.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Les Big Byrd",
+      name: "Falling in Reverse",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[2].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113353/artistImages/oi8cj17nb24lckycxdvr.jpg",
+      imageUrl: "hhttp://res.cloudinary.com/di3kpwpjx/image/upload/v1683215897/development/artistImage/cjzjzsw8uumx1qc1oofk.jpg",
     },
     {
       _id: new ObjectId(),
-      name: "Kalash",
+      name: "Eminem",
       genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
+        genre[17].toString()
       ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113649/artistImages/fylx7finevr7ildmvvd9.jpg",
-    },
-    {
-      _id: new ObjectId(),
-      name: "Karim Alger",
-      genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
-      ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683113889/artistImages/xcfb5poadpou4qrf5y9c.jpg",
-    },
-    {
-      _id: new ObjectId(),
-      name: "Prof. Stranger",
-      genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
-      ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114101/artistImages/rscycvaods5oyqxfnlgf.jpg",
-    },
-    {
-      _id: new ObjectId(),
-      name: "Ken Ring",
-      genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
-      ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114294/artistImages/ooqdzlw4jc1bexrvvlaz.jpg",
-    },
-    {
-      _id: new ObjectId(),
-      name: "Arre",
-      genres: [
-        "644b8376bb0a28e2c1eeb1a7",
-        "644b8376bb0a28e2c1eeb1a7",
-        genre[2].toString(),
-        genre[3].toString()
-      ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114405/artistImages/qrox8bqrhwaqty06dura.jpg",
-    },
-    {
-      _id: new ObjectId(),
-      name: "Rozh",
-      genres: [
-        genre[0].toString(),
-        genre[1].toString(),
-        genre[2].toString(),
-        genre[3].toString()
-      ],
-      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683114507/artistImages/iukci6wobkcudqxoqzjk.jpg",
+      imageUrl: "http://res.cloudinary.com/di3kpwpjx/image/upload/v1683215928/development/artistImage/o5jl5wqkg9lovjdq6mat.jpg",
     }
   ]
 }
