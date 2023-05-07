@@ -52,12 +52,16 @@ async function getTracks(req, res) {
 async function getTrackById(req, res) {
   const { trackId } = req.params
   try {
-    const tracksStored = await Track.findOne({ _id: trackId }).lean().exec()
+    const tracksStored =
+      await Track.findOne({ _id: trackId })
+        .populate('genre')
+        .populate('artist')
+        .populate('likedBy').exec()
 
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
-    return res.status(200).send({ status: 200, tracks: tracksStored })
+    return res.status(200).send({ status: 200, track: tracksStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
   }
@@ -67,7 +71,4 @@ module.exports = {
   postTrack,
   getTrackById,
   getTracks,
-  //getGenreById,
-  //putGenre,
-  //deleteGenre
 }
