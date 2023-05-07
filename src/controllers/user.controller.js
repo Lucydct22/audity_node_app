@@ -13,6 +13,7 @@ async function registerLoginUser(req, res) {
 				lastname: user.family_name || '',
 				nickname: user.nickname || '',
 				email: user.email,
+				dateOfBirth: user.dateOfBirth || '',
 				language: user.locale || 'English',
 				country: user.country || 'Spain',
 				role: 'user',
@@ -37,24 +38,19 @@ async function registerLoginUser(req, res) {
 }
 
 async function updateUserSettings(req, res) {
-	const { userId } = req.params
-	//const data = req.body
-	const { nickname, dateOfBirth, country } = req.body
+	const user = req.auth
+	const { name, lastname, nickname, dateOfBirth } = req.body
 
 	try {
 		const userToUpdated = await User.findOneAndUpdate(
-			{ _id: userId.toString() },
-			//data, 
-			{ nickname, dateOfBirth, country },
-			{ returnOriginal: false }
+			{ userId: user.payload.sub.toString() },
+			{ name, lastname, nickname, dateOfBirth }
 		).lean().exec()
 
 		if (!userToUpdated) {
 			return res.status(400).send({ status: 400 })
 		}
-		return res.status(200).send(
-			{ status: 200 }
-		)
+		return res.status(200).send({ status: 200 })
 
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
@@ -63,14 +59,11 @@ async function updateUserSettings(req, res) {
 
 async function updateUserLanguage(req, res) {
 	const user = req.auth
-	//const data = req.body
 	const { language } = req.body
-	console.log(user.payload.sub);
 
 	try {
 		const userToUpdated = await User.findOneAndUpdate(
 			{ userId: user.payload.sub.toString() },
-			//data, 
 			{ language }
 		).lean().exec()
 
@@ -110,7 +103,7 @@ async function updateUserCountry(req, res) {
 
 
 async function deleteUser(req, res) {
-	const { userId } = req.params
+	const { userId } = req.auth
 	//const { user_id } = req.auth0
 
 	try {
