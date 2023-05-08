@@ -9,10 +9,10 @@ const TrackSchema = new Schema({
 	}],
 	imageUrl: String,
 	audioUrl: String,
-	genre: {
+	genres: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Genre'
-	},
+	}],
 	likedBy: [{
 		type: Schema.Types.ObjectId,
 		ref: 'User'
