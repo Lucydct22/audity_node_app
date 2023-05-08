@@ -4,7 +4,7 @@ const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
 api.get('/tracks', getTracks)
-api.get('/get-track-by-id/:trackId', getTrackById)
+api.get('/track/:trackId', getTrackById)
 api.post('/track', md_auth.checkJwt, postTrack)
 
 // api.get('/track/:id', md_auth.checkJwt, getTrackesById)
