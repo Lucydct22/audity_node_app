@@ -4,6 +4,7 @@ const GenreSchema = new Schema({
 	name: String,
 	popularity: Number,
 	imageUrl: String,
+	imagePublicId: String,
 	tracks: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Track'

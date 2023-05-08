@@ -16,18 +16,21 @@ async function postTrack(req, res) {
     genre,
     duration
   })
+  if (!req.files?.image || !req.files?.audio) {
+    return res.status(400).send({ status: 400 })
+  }
 
   try {
     const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/trackImage`, 250, 250)
     track.imageUrl = imageUploaded.url
-    if (req.files?.audio) {
-      const audioUploaded = await uploadAudio(req.files.audio.tempFilePath, req.files?.audio.name, `${cloudinaryConfig.folder}/trackAudio`)
-      track.audioUrl = audioUploaded.url
-    }
+    track.imagePublicId = imageUploaded.public_id
+    const audioUploaded = await uploadAudio(req.files.audio.tempFilePath, `${cloudinaryConfig.folder}/trackAudio`)
+    track.audioUrl = audioUploaded.url
+    track.audioPublicId = audioUploaded.public_id
 
     const trackSaved = await track.save()
     if (!trackSaved) {
-      return res.status(400).send({ status: 400 })
+      return res.status(404).send({ status: 404 })
     }
     await fs.unlink(req.files.image.tempFilePath)
     await fs.unlink(req.files.audio.tempFilePath)
@@ -83,7 +86,7 @@ async function searchTrack(req, res) {
       return res.status(400).send({ status: 400 })
     }
     let tracksArray = []
-    tracks.forEach(track => tracksArray.push({ _id: track._id, name: track.name}));
+    tracks.forEach(track => tracksArray.push({ _id: track._id, name: track.name }));
     console.log(tracks[0].name)
     return res.status(200).send({ status: 200, tracks: tracksArray })
   } catch (err) {

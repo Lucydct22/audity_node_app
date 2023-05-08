@@ -9,6 +9,8 @@ const TrackSchema = new Schema({
 	}],
 	imageUrl: String,
 	audioUrl: String,
+	imagePublicId: String,
+	audioPublicId: String,
 	genres: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Genre'
@@ -34,19 +36,7 @@ const TrackSchema = new Schema({
 }
 )
 
-// TrackSchema.createIndex({ name: 'text' });
-TrackSchema.index({
-	name: "text",
-	keywords: "text",
-	about: "text"
-},
-	{
-		weights: {
-			name: 10,
-			keywords: 5
-		},
-		name: "TextIndex"
-	});
+TrackSchema.index({ name: 'text' });
 const TrackModel = model('Track', TrackSchema)
 
 module.exports = TrackModel
