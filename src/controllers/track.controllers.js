@@ -2,6 +2,7 @@ const Track = require('../models/track.model')
 const fs = require('fs-extra')
 const { uploadImage } = require('../utils/cloudinary')
 const { uploadAudio } = require('../utils/cloudinary')
+const { Artist } = require('../models')
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postTrack(req, res) {
@@ -67,8 +68,32 @@ async function getTrackById(req, res) {
   }
 }
 
+async function searchTrack(req, res) {
+  const { query } = req.params
+  try {
+    const tracks = await Track.find(
+      { $text: { $search: query } },
+      { score: { $meta: 'textScore' } }
+    ).lean().exec();
+    const artists = await Artist.find(
+      { $text: { $search: query } },
+      { score: { $meta: 'textScore' } },
+    ).lean().exec()
+    if (!tracks) {
+      return res.status(400).send({ status: 400 })
+    }
+    let tracksArray = []
+    tracks.forEach(track => tracksArray.push({ _id: track._id, name: track.name}));
+    console.log(tracks[0].name)
+    return res.status(200).send({ status: 200, tracks: tracksArray })
+  } catch (err) {
+    return res.status(500).send({ status: 500, error: err })
+  }
+}
+
 module.exports = {
   postTrack,
   getTrackById,
   getTracks,
+  searchTrack
 }

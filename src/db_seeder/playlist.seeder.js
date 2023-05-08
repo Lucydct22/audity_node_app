@@ -8,10 +8,7 @@ async function getBasePlaylist() {
   const genre = genres.map((genre) => genre._id);
   const artists = await db.Artist.find().lean()
   const artist = artists.map((artist) => artist._id);
-  const tracks = await db.Track.find().lean()
-  const track = tracks.map((track) => track._id);
-
-  return [
+  const playlists = [
     {
       _id: new ObjectId(),
       userId: user[0].toString(),
@@ -24,18 +21,6 @@ async function getBasePlaylist() {
       rating: 5,
       likedBy: [
         user[0].toString()
-      ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
       ],
       followedBy: [
         user[0].toString(),
@@ -62,18 +47,6 @@ async function getBasePlaylist() {
       rating: 5,
       likedBy: [
         user[0].toString()
-      ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
       ],
       followedBy: [
         user[0].toString(),
@@ -102,18 +75,6 @@ async function getBasePlaylist() {
       likedBy: [
         user[0].toString()
       ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
-      ],
       followedBy: [
         user[0].toString(),
         user[1].toString(),
@@ -139,18 +100,6 @@ async function getBasePlaylist() {
       rating: 5,
       likedBy: [
         user[0].toString()
-      ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
       ],
       followedBy: [
         user[0].toString(),
@@ -178,18 +127,6 @@ async function getBasePlaylist() {
       likedBy: [
         user[0].toString()
       ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
-      ],
       followedBy: [
         user[0].toString(),
         user[1].toString(),
@@ -215,18 +152,6 @@ async function getBasePlaylist() {
       rating: 5,
       likedBy: [
         user[0].toString()
-      ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
       ],
       followedBy: [
         user[0].toString(),
@@ -254,18 +179,6 @@ async function getBasePlaylist() {
       likedBy: [
         user[0].toString()
       ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
-      ],
       followedBy: [
         user[0].toString(),
         user[1].toString(),
@@ -291,18 +204,6 @@ async function getBasePlaylist() {
       rating: 5,
       likedBy: [
         user[0].toString()
-      ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
       ],
       followedBy: [
         user[0].toString(),
@@ -330,18 +231,6 @@ async function getBasePlaylist() {
       likedBy: [
         user[0].toString()
       ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
-      ],
       followedBy: [
         user[0].toString(),
         user[1].toString(),
@@ -368,18 +257,6 @@ async function getBasePlaylist() {
       likedBy: [
         user[0].toString()
       ],
-      tracks: [
-        track[0].toString(),
-        track[1].toString(),
-        track[2].toString(),
-        track[3].toString(),
-        track[4].toString(),
-        track[5].toString(),
-        track[6].toString(),
-        track[7].toString(),
-        track[8].toString(),
-        track[9].toString(),
-      ],
       followedBy: [
         user[0].toString(),
         user[1].toString(),
@@ -394,6 +271,31 @@ async function getBasePlaylist() {
       ]
     }
   ]
+
+  playlists.forEach(playlist => {
+    playlist.genres.forEach(async genreId => {
+      await db.Genre.findOneAndUpdate(
+        { _id: genreId },
+        { $push: { playlists: playlist._id } }
+      ).lean().exec()
+    });
+
+    playlist.artists.forEach(async artistId => {
+      await db.Artist.findOneAndUpdate(
+        { _id: artistId },
+        { $push: { playlists: playlist._id } }
+      ).lean().exec()
+    });
+
+    playlist.likedBy.forEach(async likeId => {
+      await db.User.findOneAndUpdate(
+        { _id: likeId },
+        { $push: { 'likesTo.playlists': playlist._id } }
+      ).lean().exec()
+    });
+  });
+
+  return playlists
 }
 
 module.exports = {

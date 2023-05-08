@@ -1,11 +1,12 @@
 const express = require('express')
-const { postTrack, getTracks, getTrackById } = require('../controllers/track.controllers')
+const track = require('../controllers/track.controllers')
 const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
-api.get('/tracks', getTracks)
-api.get('/track/:trackId', getTrackById)
-api.post('/track', md_auth.checkJwt, postTrack)
+api.get('/tracks', track.getTracks)
+api.get('/track/:trackId', track.getTrackById)
+api.post('/track', md_auth.checkJwt, track.postTrack)
+api.get('/search-track/:query', track.searchTrack)
 
 // api.get('/track/:id', md_auth.checkJwt, getTrackesById)
 // api.put('/genre/:id', md_auth.checkJwt, Genre.putGenre)
