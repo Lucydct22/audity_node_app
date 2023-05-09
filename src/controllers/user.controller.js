@@ -1,13 +1,13 @@
-const User = require('../models/user.model')
+const db = require('../models')
 // const ManagementClient = require('auth0').ManagementClient
 
 async function registerLoginUser(req, res) {
 	const { user } = req.body
 	try {
-		const userStored = await User.findOne({ userId: user.sub.toString() }).lean().exec()
+		const userStored = await db.User.findOne({ userId: user.sub.toString() }).lean().exec()
 
 		if (!userStored) {
-			const newUser = new User({
+			const newUser = new db.User({
 				userId: user.sub,
 				name: user.given_name || user.nickname,
 				lastname: user.family_name || '',
@@ -42,7 +42,7 @@ async function updateUserSettings(req, res) {
 	const { name, lastname, nickname, dateOfBirth } = req.body
 
 	try {
-		const userToUpdated = await User.findOneAndUpdate(
+		const userToUpdated = await db.User.findOneAndUpdate(
 			{ userId: user.payload.sub.toString() },
 			{ name, lastname, nickname, dateOfBirth }
 		).lean().exec()
@@ -62,7 +62,7 @@ async function updateUserLanguage(req, res) {
 	const { language } = req.body
 
 	try {
-		const userToUpdated = await User.findOneAndUpdate(
+		const userToUpdated = await db.User.findOneAndUpdate(
 			{ userId: user.payload.sub.toString() },
 			{ language }
 		).lean().exec()
@@ -84,7 +84,7 @@ async function updateUserCountry(req, res) {
 	console.log(user.payload.sub);
 
 	try {
-		const userToUpdated = await User.findOneAndUpdate(
+		const userToUpdated = await db.User.findOneAndUpdate(
 			{ userId: user.payload.sub.toString() },
 			{ country }
 		).lean().exec()
@@ -105,16 +105,21 @@ async function updateUserCountry(req, res) {
 async function deleteUser(req, res) {
 	const { userId } = req.auth
 	//const { user_id } = req.auth0
-
+	if (!id) {
+		return res.status(404).send({ status: 404 })
+	}
 	try {
-		const userToDelete = await User.findOneAndDelete(
+		await deleteCascadeArray(userId.toString(), db.Artist, 'likedBy')
+		await deleteCascadeArray(userId.toString(), db.Album, 'likedBy')
+		await deleteCascadeArray(userId.toString(), db.Playlist, 'likedBy')
+		await deleteCascadeArray(userId.toString(), db.Track, 'likedBy')
+		const userToDelete = await db.User.findOneAndDelete(
 			{ _id: userId.toString() }
 		).lean().exec()
 
 		if (!userToDelete) {
 			return res.status(400).send({ status: 400, error: 'User not found' })
 		}
-
 		/*const auth0 = new ManagementClient({
       domain: process.env.AUTH0_DOMAIN,
       clientId: process.env.DEVELOPMENT_AUTH0_CLIENT_ID,
@@ -122,9 +127,7 @@ async function deleteUser(req, res) {
       scope: 'delete:users',
     });
     await auth0.deleteUser({ user_id: user_id });*/
-
 		return res.status(200).send({ status: 200, user: userToDelete })
-
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	}
@@ -136,5 +139,4 @@ module.exports = {
 	updateUserLanguage,
 	updateUserCountry,
 	deleteUser,
-
 }
