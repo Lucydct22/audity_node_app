@@ -5,6 +5,7 @@ const AlbumSchema = new Schema({
 	year: Number,
 	totalTracks: Number,
   imageUrl: String,
+	imagePublicId: String,
 	genres: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Genre'

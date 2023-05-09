@@ -58,8 +58,8 @@ async function getTrackById(req, res) {
   try {
     const tracksStored =
       await Track.findOne({ _id: trackId })
-        .populate('genre')
-        .populate('artist')
+        .populate('genres')
+        .populate('artists')
         .populate('likedBy').exec()
 
     if (!tracksStored) {

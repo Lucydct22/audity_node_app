@@ -3,6 +3,7 @@ const { Schema, model } = require('mongoose')
 const ArtistSchema = new Schema({
   name: String,
   imageUrl: String,
+  imagePublicId: String,
   genres: [{
     type: Schema.Types.ObjectId,
     ref: 'Genre'
