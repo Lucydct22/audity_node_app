@@ -8,31 +8,20 @@ const PlaylistSchema = new Schema({
 	name: String,
 	description: String,
 	imageUrl: String,
-	publicAccessible: Boolean, //
+	imagePublicId: String,
+	publicAccessible: Boolean,
 	totalTracks: Number,
-	followers: Number, //
+	followers: Number,
 	rating: Number,
 	likedBy: [{
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}],
-	tracks: [{ //
+	tracks: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Track',
 		order: Number
-	}],
-	followedBy: [{
-		type: Schema.Types.ObjectId,
-		ref: 'User'
-	}],
-	artists: [{
-		type: Schema.Types.ObjectId,
-		ref: 'Artist'
-	}],
-	genres: [{
-		type: Schema.Types.ObjectId,
-		ref: 'Genre'
-	}],
+	}]
 	// collaborative: Boolean, //
 	// thumbnail: String,
 }, {

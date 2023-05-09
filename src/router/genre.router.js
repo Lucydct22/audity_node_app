@@ -1,13 +1,13 @@
 const express = require('express')
-const Genre = require('../controllers/genre.controllers')
+const controller = require('../controllers/genre.controllers')
 const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
-api.get('/genres', Genre.getGenres)
-api.get('/genre/:id', md_auth.checkJwt, Genre.getGenreById)
-api.post('/genre', md_auth.checkJwt, Genre.postGenre)
-api.delete('/delete-genre/:id', md_auth.checkJwt, Genre.deleteGenre)
-api.put('/update-genre/:id', md_auth.checkJwt, Genre.updateGenre)
-// 
+api
+  .get('/genres', controller.getGenres)
+  .get('/genre/:id', md_auth.checkJwt, controller.getGenreById)
+  .post('/genre', md_auth.checkJwt, controller.postGenre)
+  .put('/update-genre/:id', md_auth.checkJwt, controller.updateGenre)
+  .delete('/delete-genre/:id', md_auth.checkJwt, controller.deleteGenre)
 
 module.exports = api;

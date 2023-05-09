@@ -9,9 +9,9 @@ try {
     // await seeder.seedUsers()
     // await seeder.seedGenres()
     // await seeder.seedArtists()
-    // await seeder.seedTracks()
     // await seeder.seedAlbums()
     // await seeder.seedPlaylists()
+    // await seeder.seedTracks()
     console.log(`Running on ${config.db.URL}...`);
   });
 } catch (error) {
