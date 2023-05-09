@@ -12,6 +12,7 @@ const PlaylistSchema = new Schema({
 	totalTracks: Number,
 	followers: Number, //
 	rating: Number,
+	imagePublicId: String,
 	likedBy: [{
 		type: Schema.Types.ObjectId,
 		ref: 'User'
@@ -20,10 +21,6 @@ const PlaylistSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Track',
 		order: Number
-	}],
-	followedBy: [{
-		type: Schema.Types.ObjectId,
-		ref: 'User'
 	}],
 	artists: [{
 		type: Schema.Types.ObjectId,

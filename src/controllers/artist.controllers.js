@@ -10,6 +10,7 @@ async function postArtist(req, res) {
 	try {
 		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/artistImage`, 250, 250)
 		artist.imageUrl = imageUploaded.url
+		artist.imagePublicId = imageUploaded.public_id
 		const artistSaved = await artist.save()
 		if (!artistSaved) {
 			return res.status(400).send({ status: 400 })

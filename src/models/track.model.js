@@ -1,36 +1,42 @@
 const { Schema, model } = require('mongoose')
 
 const TrackSchema = new Schema({
+	userId: String,
 	name: String,
-	artist : [{
+	artists: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Artist'
 	}],
-  imageUrl: String,
-  audioUrl: String,
-  genre: {
+	imageUrl: String,
+	audioUrl: String,
+	imagePublicId: String,
+	audioPublicId: String,
+	genres: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Genre'
-	},
+	}],
 	likedBy: [{
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}],
-  album: {
+	album: {
 		type: Schema.Types.ObjectId,
 		ref: 'Album'
 	},
-  rating: Number,
+	playlists: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Playlist'
+	}],
+	rating: Number,
 	popularity: Number,
-  duration: Number,
-	released: Date,                                                 
-	// userId: String,
-	// color: String,	
+	duration: Number,
+	released: Date,
 }, {
-  timestamps: true
+	timestamps: true
 }
 )
 
+TrackSchema.index({ name: 'text' });
 const TrackModel = model('Track', TrackSchema)
 
 module.exports = TrackModel

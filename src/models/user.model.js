@@ -11,20 +11,24 @@ const UserSchema = new Schema({
   country: String,
   language: String,
   role: String,
-  following: [
-    {
+  likesTo: {
+    artists: [{
       type: Schema.Types.ObjectId,
       ref: 'Artist'
-    },
-    {
+    }],
+    albums: [{
       type: Schema.Types.ObjectId,
       ref: 'Album'
-    },
-    {
+    }],
+    playlists: [{
       type: Schema.Types.ObjectId,
       ref: 'Playlist'
-    }
-  ]
+    }],
+    tracks: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Track'
+    }]
+  }
 }, {
   timestamps: true
 })
