@@ -99,8 +99,20 @@ async function updateUserCountry(req, res) {
 	}
 }
 
+async function getUserRole(req, res) {
+	try {
+		const userStored = await db.User.findOne(
+			{ userId: req.auth.payload.sub }
+		).lean().exec()
 
-
+		if (!userStored) {
+			return res.status(400).send({ status: 400, error: 'User not found' })
+		}
+		return res.status(200).send({ status: 200, userRole: userStored.role })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
 
 async function deleteUser(req, res) {
 	const { userId } = req.auth
@@ -138,5 +150,6 @@ module.exports = {
 	updateUserSettings,
 	updateUserLanguage,
 	updateUserCountry,
+	getUserRole,
 	deleteUser,
 }

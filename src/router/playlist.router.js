@@ -4,11 +4,10 @@ const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
 api
-	.post('/playlist', md_auth.checkJwt, controller.postPlaylist)
+	.post('/playlist', md_auth.ensureAuth, controller.postPlaylist)
 	.get('/playlists', controller.getPlaylists)
-	.get('/playlist/:id', md_auth.checkJwt, controller.getPlaylistById)
-	.put('/update-playlist/:id', md_auth.checkJwt, controller.updatePlaylist)
-	.get('/playlist/:playlistId', controller.getPlaylistById)
-	.delete('/playlist/:playlistId', md_auth.checkJwt, controller.deletePlaylist)
+	.get('/playlist/:id', controller.getPlaylistById)
+	.put('/update-playlist/:id', md_auth.ensureAuth, controller.updatePlaylist)
+	.delete('/playlist/:playlistId', md_auth.ensureAuth, controller.deletePlaylist)
 
 module.exports = api;
