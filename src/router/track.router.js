@@ -10,5 +10,7 @@ api
 	.get('/search-track/:query', controller.searchTrack)
 	.delete('/track/:trackId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteTrack)
 	.get('/random-track', controller.getRandomTrack)
+	.get('/tracks-liked-user/:userId', [md_auth.ensureAuth], controller.getTracksLikedByUserId)
+	.get('/like-dislike-track/:trackId/:userId', [md_auth.ensureAuth], controller.likeDislikeTrack)
 
 module.exports = api;

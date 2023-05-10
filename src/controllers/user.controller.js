@@ -80,7 +80,7 @@ async function updateUserLanguage(req, res) {
 async function updateUserCountry(req, res) {
 	const user = req.auth
 	const { country } = req.body
-	
+
 	console.log(user.payload.sub);
 
 	try {
@@ -133,13 +133,37 @@ async function deleteUser(req, res) {
 			return res.status(400).send({ status: 400, error: 'User not found' })
 		}
 		/*const auth0 = new ManagementClient({
-      domain: process.env.AUTH0_DOMAIN,
-      clientId: process.env.DEVELOPMENT_AUTH0_CLIENT_ID,
-      clientSecret: process.env.AUTH0_CLIENT_SECRET,
-      scope: 'delete:users',
-    });
-    await auth0.deleteUser({ user_id: user_id });*/
+			domain: process.env.AUTH0_DOMAIN,
+			clientId: process.env.DEVELOPMENT_AUTH0_CLIENT_ID,
+			clientSecret: process.env.AUTH0_CLIENT_SECRET,
+			scope: 'delete:users',
+		});
+		await auth0.deleteUser({ user_id: user_id });*/
 		return res.status(200).send({ status: 200, user: userToDelete })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function updateUserInfo(req, res) {
+	const { sub } = req.auth.payload
+	const { currentTrackList, currentTrack, trackTime, volume } = req.body
+	try {
+		const userToUpdated = await db.User.findOneAndUpdate(
+			{ userId: sub.toString() },
+			{
+				userInfo: {
+					currentTrackList,
+					currentTrack,
+					trackTime,
+					volume
+				}
+			}
+		).lean().exec()
+		if (!userToUpdated) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: userToUpdated })
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	}
@@ -152,4 +176,5 @@ module.exports = {
 	updateUserCountry,
 	getUserRole,
 	deleteUser,
+	updateUserInfo
 }

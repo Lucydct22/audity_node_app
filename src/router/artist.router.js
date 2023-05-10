@@ -9,5 +9,6 @@ api
   .get('/artist/:artistId', controller.getArtistById)
   .delete('/artist/:artistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteArtist)
   .get('/artists-liked-user/:userId', [md_auth.ensureAuth], controller.getArtistsLikedByUserId)
+  .get('/like-dislike-artist/:artistId/:userId', [md_auth.ensureAuth], controller.likeDislikeArtist)
 
 module.exports = api;

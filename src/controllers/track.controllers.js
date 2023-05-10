@@ -1,9 +1,10 @@
-const Track = require('../models/track.model')
+const db = require('../models')
 const fs = require('fs-extra')
 const { uploadImage, uploadAudio, removeMedia } = require('../utils/cloudinary')
-const db = require('../models')
 const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray } = require('../utils/dbCascade')
 const { getRandomItem } = require('../utils/getRamdomItem')
+const { getContentLiked } = require('./utils/getContentLiked')
+const { likeDislike } = require('./utils/likeDislike')
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postTrack(req, res) {
@@ -12,8 +13,7 @@ async function postTrack(req, res) {
     return res.status(400).send({ status: 400 })
   }
   try {
-    const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/trackImage`, 250, 250)
-    const track = new Track({
+    const track = new db.Track({
       name,
       genres,
       album,
@@ -21,6 +21,7 @@ async function postTrack(req, res) {
       playlists,
       duration
     })
+    const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/trackImage`, 250, 250)
     track.imageUrl = imageUploaded.url
     track.imagePublicId = imageUploaded.public_id
     const audioUploaded = await uploadAudio(req.files.audio.tempFilePath, `${cloudinaryConfig.folder}/trackAudio`)
@@ -50,8 +51,6 @@ async function getTracks(req, res) {
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
-    // const x = getRandomItem(tracksStored)
-    // console.log(x);
     return res.status(200).send({ status: 200, tracks: tracksStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
@@ -138,11 +137,20 @@ async function getRandomTrack(req, res) {
       return res.status(400).send({ status: 400 })
     }
     const randomTrack = getRandomItem(tracksStored)
-    console.log(randomTrack);
     return res.status(200).send({ status: 200, track: randomTrack })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
   }
+}
+
+async function getTracksLikedByUserId(req, res) {
+  const { userId } = req.params
+  await getContentLiked(res, userId, db.Track)
+}
+
+async function likeDislikeTrack(req, res) {
+  const { trackId, userId } = req.params
+  await likeDislike(res, db.Track, trackId, userId)
 }
 
 module.exports = {
@@ -151,5 +159,7 @@ module.exports = {
   getTracks,
   searchTrack,
   deleteTrack,
-  getRandomTrack
+  getRandomTrack,
+  getTracksLikedByUserId,
+  likeDislikeTrack
 }

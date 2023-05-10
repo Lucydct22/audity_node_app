@@ -10,5 +10,6 @@ api
   .put('/update-user-country', md_auth.ensureAuth, controller.updateUserCountry)
   .get('/user-role', md_auth.ensureAuth, controller.getUserRole)
   .delete('/delete-user', md_auth.ensureAuth, controller.deleteUser)
+  .put('/update-user-info', md_auth.ensureAuth, controller.updateUserInfo)
 
 module.exports = api;

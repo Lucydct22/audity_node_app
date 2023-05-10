@@ -2,6 +2,8 @@ const db = require("../models")
 const fs = require('fs-extra')
 const { uploadImage, removeMedia } = require("../utils/cloudinary")
 const { migrateCascadeArray, deleteCascadeUser, deleteCascadeObject, deleteCascadeArray } = require("../utils/dbCascade")
+const { likeDislike } = require("./utils/likeDislike")
+const { getContentLiked } = require("./utils/getContentLiked")
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postAlbum(req, res) {
@@ -88,19 +90,12 @@ async function deleteAlbum(req, res) {
 
 async function getAlbumsLikedByUserId(req, res) {
 	const { userId } = req.params
-	if (!userId) {
-		return res.status(404).send({ status: 404 })
-	}
-	try {
-		const albumsStored =
-			await db.Album.find({ likedBy: { $in: [userId] } }).lean().exec()
-		if (!albumsStored) {
-			return res.status(400).send({ status: 400 })
-		}
-		return res.status(200).send({ status: 200, albums: albumsStored })
-	} catch (err) {
-		return res.status(500).send({ status: 500, error: err })
-	}
+	await getContentLiked(res, userId, db.Album)
+}
+
+async function likeDislikeAlbum(req, res) {
+	const { albumId, userId } = req.params
+	await likeDislike(res, db.Album, albumId, userId)
 }
 
 module.exports = {
@@ -108,6 +103,7 @@ module.exports = {
 	getAlbums,
 	getAlbumById,
 	deleteAlbum,
-	getAlbumsLikedByUserId
+	getAlbumsLikedByUserId,
+	likeDislikeAlbum
 }
 
