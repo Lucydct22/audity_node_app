@@ -107,10 +107,28 @@ async function deletePlaylist(req, res) {
 	}
 }
 
+async function getPlaylistsLikedByUserId(req, res) {
+	const { userId } = req.params
+	if (!userId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const playlistsStored =
+			await db.Playlist.find({ likedBy: { $in: [userId] } }).lean().exec()
+		if (!playlistsStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, artists: playlistsStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
 	getPlaylists,
 	getPlaylistById,
 	deletePlaylist,
 	updatePlaylist,
-	postPlaylist
+	postPlaylist,
+	getPlaylistsLikedByUserId
 }

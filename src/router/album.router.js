@@ -8,5 +8,6 @@ api
   .get('/albums', controller.getAlbums)
   .get('/album/:albumId', controller.getAlbumById)
   .delete('/album/:albumId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteAlbum)
+  .get('/albums-liked-user/:userId', [md_auth.ensureAuth], controller.getAlbumsLikedByUserId)
 
 module.exports = api;

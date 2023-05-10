@@ -9,5 +9,6 @@ api
 	.get('/playlist/:id', controller.getPlaylistById)
 	.put('/update-playlist/:id', md_auth.ensureAuth, controller.updatePlaylist)
 	.delete('/playlist/:playlistId', md_auth.ensureAuth, controller.deletePlaylist)
+	.get('/playlists-liked-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsLikedByUserId)
 
 module.exports = api;

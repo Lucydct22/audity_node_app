@@ -79,9 +79,27 @@ async function deleteArtist(req, res) {
 	}
 }
 
+async function getArtistsLikedByUserId(req, res) {
+	const { userId } = req.params
+	if (!userId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const artistsStored =
+			await db.Artist.find({ likedBy: { $in: [userId] } }).lean().exec()
+		if (!artistsStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, artists: artistsStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
 	postArtist,
 	getArtists,
 	getArtistById,
-	deleteArtist
+	deleteArtist,
+	getArtistsLikedByUserId
 }
