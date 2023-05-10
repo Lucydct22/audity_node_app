@@ -50,7 +50,7 @@ function getBaseGenre() {
     {
       _id: new ObjectId(),
       name: "Electronic",
-      nimageUrl: 'https://res.cloudinary.com/di3kpwpjx/image/upload/v1683213094/development/genreImage/fifasnf3enxwfhw8hppn.webp'
+      imageUrl: 'https://res.cloudinary.com/di3kpwpjx/image/upload/v1683213094/development/genreImage/fifasnf3enxwfhw8hppn.webp'
     },
     {
       _id: new ObjectId(),
