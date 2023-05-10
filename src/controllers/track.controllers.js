@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const { uploadImage, uploadAudio, removeMedia } = require('../utils/cloudinary')
 const db = require('../models')
 const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray } = require('../utils/dbCascade')
+const { getRandomItem } = require('../utils/getRamdomItem')
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postTrack(req, res) {
@@ -49,6 +50,8 @@ async function getTracks(req, res) {
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
+    // const x = getRandomItem(tracksStored)
+    // console.log(x);
     return res.status(200).send({ status: 200, tracks: tracksStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
@@ -127,10 +130,26 @@ async function deleteTrack(req, res) {
   }
 }
 
+async function getRandomTrack(req, res) {
+  try {
+    const tracksStored = await db.Track.find().populate('artists').lean().exec()
+
+    if (!tracksStored) {
+      return res.status(400).send({ status: 400 })
+    }
+    const randomTrack = getRandomItem(tracksStored)
+    console.log(randomTrack);
+    return res.status(200).send({ status: 200, track: randomTrack })
+  } catch (err) {
+    return res.status(500).send({ status: 500, error: err })
+  }
+}
+
 module.exports = {
   postTrack,
   getTrackById,
   getTracks,
   searchTrack,
-  deleteTrack
+  deleteTrack,
+  getRandomTrack
 }
