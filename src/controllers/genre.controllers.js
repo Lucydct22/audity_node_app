@@ -53,6 +53,57 @@ async function getGenreById(req, res) {
 	}
 }
 
+async function getGenrePlaylistById(req, res) {
+	const { id } = req.params
+	if (!id) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const genreStored = await db.Genre.findById({ _id: id }).populate('playlists').lean().exec();
+		if (!genreStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, playlists: genreStored.playlists })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+
+async function getGenreAlbumsById(req, res) {
+	const { id } = req.params
+	if (!id) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const genreStored = await db.Genre.findById({ _id: id }).populate('albums').lean().exec();
+		if (!genreStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, albums: genreStored.albums })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function getGenreArtistsById(req, res) {
+	const { id } = req.params
+	if (!id) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const genreStored = await db.Genre.findById({ _id: id }).populate('artists').lean().exec();
+		if (!genreStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, artists: genreStored.artists })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+
+
 async function updateGenre(req, res) {
 	const { id } = req.params
 	const { name } = req.body
@@ -96,7 +147,10 @@ async function deleteGenre(req, res) {
 module.exports = {
 	getGenres,
 	getGenreById,
+	getGenrePlaylistById,
+	getGenreAlbumsById,
+	getGenreArtistsById,
 	postGenre,
 	deleteGenre,
-	updateGenre
+	updateGenre,
 }
