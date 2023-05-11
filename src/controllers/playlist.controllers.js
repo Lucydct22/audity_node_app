@@ -119,6 +119,23 @@ async function likeDislikePlaylist(req, res) {
 	await likeDislike(res, db.Playlist, playlistId, userId)
 }
 
+
+async function getPlaylistsByUser(req, res) {
+	const { userId } = req.params
+	if (!userId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const myPlaylists = await db.Playlist.find({ userId }).lean().exec()
+		if (!myPlaylists) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, content: myPlaylists })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
 	getPlaylists,
 	getPlaylistById,
@@ -126,5 +143,6 @@ module.exports = {
 	updatePlaylist,
 	postPlaylist,
 	getPlaylistsLikedByUserId,
-	likeDislikePlaylist
+	likeDislikePlaylist,
+	getPlaylistsByUser
 }
