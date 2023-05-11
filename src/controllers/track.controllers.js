@@ -78,32 +78,6 @@ async function getTrackById(req, res) {
   }
 }
 
-async function searchTrack(req, res) {
-  const { query } = req.params
-  if (!query) {
-    return res.status(404).send({ status: 404 })
-  }
-  try {
-    const tracks = await db.Track.find(
-      { $text: { $search: query } },
-      { score: { $meta: 'textScore' } }
-    ).lean().exec();
-    const artists = await db.Artist.find(
-      { $text: { $search: query } },
-      { score: { $meta: 'textScore' } },
-    ).lean().exec()
-    if (!tracks) {
-      return res.status(400).send({ status: 400 })
-    }
-    let tracksArray = []
-    tracks.forEach(track => tracksArray.push({ _id: track._id, name: track.name }));
-    console.log(tracks[0].name)
-    return res.status(200).send({ status: 200, tracks: tracksArray })
-  } catch (err) {
-    return res.status(500).send({ status: 500, error: err })
-  }
-}
-
 async function deleteTrack(req, res) {
   const { trackId } = req.params
   const { imagePublicId, audioPublicId } = req.body
@@ -157,7 +131,6 @@ module.exports = {
   postTrack,
   getTrackById,
   getTracks,
-  searchTrack,
   deleteTrack,
   getRandomTrack,
   getTracksLikedByUserId,
