@@ -6,8 +6,8 @@ const api = express.Router()
 api
   .get('/genres', controller.getGenres)
   .get('/genre/:id', controller.getGenreById)
-  .post('/genre', md_auth.checkJwt, controller.postGenre)
-  .put('/update-genre/:id', md_auth.checkJwt, controller.updateGenre)
-  .delete('/delete-genre/:id', md_auth.checkJwt, controller.deleteGenre)
+  .post('/genre', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postGenre)
+  .put('/update-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updateGenre)
+  .delete('/delete-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteGenre)
 
 module.exports = api;

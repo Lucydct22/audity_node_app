@@ -6,8 +6,11 @@ const api = express.Router()
 api
 	.get('/tracks', controller.getTracks)
 	.get('/track/:trackId', controller.getTrackById)
-	.post('/track', md_auth.checkJwt, controller.postTrack)
+	.post('/track', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postTrack)
 	.get('/search-track/:query', controller.searchTrack)
-	.delete('/track/:trackId', md_auth.checkJwt, controller.deleteTrack)
+	.delete('/track/:trackId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteTrack)
+	.get('/random-track', controller.getRandomTrack)
+	.get('/tracks-liked-user/:userId', [md_auth.ensureAuth], controller.getTracksLikedByUserId)
+	.get('/like-dislike-track/:trackId/:userId', [md_auth.ensureAuth], controller.likeDislikeTrack)
 
 module.exports = api;

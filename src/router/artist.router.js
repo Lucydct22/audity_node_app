@@ -4,9 +4,11 @@ const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
 api
-  .post('/artist', md_auth.checkJwt, controller.postArtist)
+  .post('/artist', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postArtist)
   .get('/artists', controller.getArtists)
   .get('/artist/:artistId', controller.getArtistById)
-  .delete('/artist/:artistId', controller.deleteArtist)
+  .delete('/artist/:artistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteArtist)
+  .get('/artists-liked-user/:userId', [md_auth.ensureAuth], controller.getArtistsLikedByUserId)
+  .get('/like-dislike-artist/:artistId/:userId', [md_auth.ensureAuth], controller.likeDislikeArtist)
 
 module.exports = api;
