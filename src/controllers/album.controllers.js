@@ -1,7 +1,7 @@
 const db = require("../models")
 const fs = require('fs-extra')
 const { uploadImage, removeMedia } = require("../utils/cloudinary")
-const { migrateCascadeArray, deleteCascadeUser, deleteCascadeObject, deleteCascadeArray } = require("../utils/dbCascade")
+const { migrateCascadeArray, deleteCascadeLikedByUser, deleteCascadeObject, deleteCascadeArray } = require("../utils/dbCascade")
 const { likeDislike } = require("./utils/likeDislike")
 const { getContentLiked } = require("./utils/getContentLiked")
 const cloudinaryConfig = require('../config/config').cloudinary
@@ -75,7 +75,7 @@ async function deleteAlbum(req, res) {
 		await deleteCascadeArray(albumId, db.Genre, 'albums')
 		await deleteCascadeArray(albumId, db.Artist, 'albums')
 		await deleteCascadeObject(albumId, db.Track, 'album')
-		await deleteCascadeUser(albumId, db.User, 'albums')
+		await deleteCascadeLikedByUser(albumId, db.User, 'albums')
 		if (imagePublicId) await removeMedia(imagePublicId, 'image')
 		const albumDelete = await db.Album.findOneAndDelete({ _id: albumId }).lean()
 
