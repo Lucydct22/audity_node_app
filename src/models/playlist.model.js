@@ -22,8 +22,6 @@ const PlaylistSchema = new Schema({
 		ref: 'Track',
 		order: Number
 	}]
-	// collaborative: Boolean, //
-	// thumbnail: String,
 }, {
 	timestamps: true
 }

@@ -1,15 +1,18 @@
 const db = require("../models")
 const { uploadImage, removeMedia } = require('../utils/cloudinary')
 const fs = require('fs-extra')
-const { migrateCascadeArray, deleteCascadeArray } = require("../utils/dbCascade")
+const { migrateCascadeArray, deleteCascadeArray, migrateMyLibraryUser, deleteMyLibraryUser } = require("../utils/dbCascade")
+const { likeDislike } = require("./utils/likeDislike")
+const { getContentLiked } = require("./utils/getContentLiked")
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postPlaylist(req, res) {
-	const { name, description, tracks } = req.body
-	if (!req.files || !name || !description || !tracks) {
+	const { userId, name, description, tracks } = req.body
+	if (!userId || !name || !description) {
 		return res.status(404).send({ status: 404 })
 	}
 	const playlist = new db.Playlist({
+		userId,
 		name,
 		description,
 		publicAccessible: false,
@@ -20,15 +23,18 @@ async function postPlaylist(req, res) {
 	})
 
 	try {
-		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/playlistImages`, 250, 250)
-		playlist.cover = imageUploaded.url
-		playlist.imagePublicId = imageUploaded.public_id
+		if (req.files?.image.tempFilePath) {
+			const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/playlistImages`, 250, 250)
+			playlist.cover = imageUploaded.url
+			playlist.imagePublicId = imageUploaded.public_id
+			await fs.unlink(req.files.image.tempFilePath)
+		}
 		const playlistSaved = await playlist.save()
 		if (!playlistSaved) {
 			return res.status(400).send({ status: 400 })
 		}
-		await fs.unlink(req.files.image.tempFilePath)
-		await migrateCascadeArray(tracks, db.Track, 'playlists', playlistSaved._id)
+		tracks && await migrateCascadeArray(tracks, db.Track, 'playlists', playlistSaved._id)
+		await migrateMyLibraryUser(userId, playlistSaved._id, 'playlists')
 		return res.status(200).send({ status: 200, playlist: playlistSaved })
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
@@ -88,14 +94,14 @@ async function updatePlaylist(req, res) {
 
 async function deletePlaylist(req, res) {
 	const { playlistId } = req.params
-	const { imagePublicId } = req.body
-	if (!playlistId || !imagePublicId) {
+	const { userId, imagePublicId } = req.body
+	if (!userId || !playlistId) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
 		await deleteCascadeArray(playlistId, db.Track, 'playlists')
-		await deleteCascadeUser(playlistId, db.User, 'playlists')
-		if (imagePublicId) await removeMedia(imagePublicId, 'image')
+		await deleteMyLibraryUser(userId, playlistId, 'playlists')
+		imagePublicId && await removeMedia(imagePublicId, 'image')
 		const playlistToDelete = await db.Playlist.findOneAndDelete({ _id: playlistId }).lean()
 
 		if (!playlistToDelete) {
@@ -107,10 +113,40 @@ async function deletePlaylist(req, res) {
 	}
 }
 
+async function getPlaylistsLikedByUserId(req, res) {
+	const { userId } = req.params
+	await getContentLiked(res, userId, db.Playlist)
+}
+
+async function likeDislikePlaylist(req, res) {
+	const { playlistId, userId } = req.params
+	await likeDislike(res, db.Playlist, playlistId, userId)
+}
+
+
+async function getPlaylistsByUser(req, res) {
+	const { userId } = req.params
+	if (!userId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const myPlaylists = await db.Playlist.find({ userId }).lean().exec()
+		if (!myPlaylists) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, content: myPlaylists })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
 	getPlaylists,
 	getPlaylistById,
 	deletePlaylist,
 	updatePlaylist,
-	postPlaylist
+	postPlaylist,
+	getPlaylistsLikedByUserId,
+	likeDislikePlaylist,
+	getPlaylistsByUser
 }

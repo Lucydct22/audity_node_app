@@ -1,8 +1,10 @@
-const Track = require('../models/track.model')
+const db = require('../models')
 const fs = require('fs-extra')
 const { uploadImage, uploadAudio, removeMedia } = require('../utils/cloudinary')
-const db = require('../models')
 const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray } = require('../utils/dbCascade')
+const { getRandomItem } = require('../utils/getRamdomItem')
+const { getContentLiked } = require('./utils/getContentLiked')
+const { likeDislike } = require('./utils/likeDislike')
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postTrack(req, res) {
@@ -11,8 +13,7 @@ async function postTrack(req, res) {
     return res.status(400).send({ status: 400 })
   }
   try {
-    const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/trackImage`, 250, 250)
-    const track = new Track({
+    const track = new db.Track({
       name,
       genres,
       album,
@@ -20,6 +21,7 @@ async function postTrack(req, res) {
       playlists,
       duration
     })
+    const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/trackImage`, 250, 250)
     track.imageUrl = imageUploaded.url
     track.imagePublicId = imageUploaded.public_id
     const audioUploaded = await uploadAudio(req.files.audio.tempFilePath, `${cloudinaryConfig.folder}/trackAudio`)
@@ -76,32 +78,6 @@ async function getTrackById(req, res) {
   }
 }
 
-async function searchTrack(req, res) {
-  const { query } = req.params
-  if (!query) {
-    return res.status(404).send({ status: 404 })
-  }
-  try {
-    const tracks = await db.Track.find(
-      { $text: { $search: query } },
-      { score: { $meta: 'textScore' } }
-    ).lean().exec();
-    const artists = await db.Artist.find(
-      { $text: { $search: query } },
-      { score: { $meta: 'textScore' } },
-    ).lean().exec()
-    if (!tracks) {
-      return res.status(400).send({ status: 400 })
-    }
-    let tracksArray = []
-    tracks.forEach(track => tracksArray.push({ _id: track._id, name: track.name }));
-    console.log(tracks[0].name)
-    return res.status(200).send({ status: 200, tracks: tracksArray })
-  } catch (err) {
-    return res.status(500).send({ status: 500, error: err })
-  }
-}
-
 async function deleteTrack(req, res) {
   const { trackId } = req.params
   const { imagePublicId, audioPublicId } = req.body
@@ -127,10 +103,36 @@ async function deleteTrack(req, res) {
   }
 }
 
+async function getRandomTrack(req, res) {
+  try {
+    const tracksStored = await db.Track.find().populate('artists').lean().exec()
+
+    if (!tracksStored) {
+      return res.status(400).send({ status: 400 })
+    }
+    const randomTrack = getRandomItem(tracksStored)
+    return res.status(200).send({ status: 200, track: randomTrack })
+  } catch (err) {
+    return res.status(500).send({ status: 500, error: err })
+  }
+}
+
+async function getTracksLikedByUserId(req, res) {
+  const { userId } = req.params
+  await getContentLiked(res, userId, db.Track)
+}
+
+async function likeDislikeTrack(req, res) {
+  const { trackId, userId } = req.params
+  await likeDislike(res, db.Track, trackId, userId)
+}
+
 module.exports = {
   postTrack,
   getTrackById,
   getTracks,
-  searchTrack,
-  deleteTrack
+  deleteTrack,
+  getRandomTrack,
+  getTracksLikedByUserId,
+  likeDislikeTrack
 }

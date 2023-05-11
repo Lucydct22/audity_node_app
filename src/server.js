@@ -13,6 +13,7 @@ const playlistRoutes = require('./router/playlist.router')
 const albumRoutes = require('./router/album.router')
 const artistRoutes = require('./router/artist.router')
 const trackRoutes = require('./router/track.router')
+const musicRoutes = require('./router/music.router')
 
 app.use(express.json())
 app.use(cors({
@@ -57,6 +58,7 @@ app.use(`/api/${config.app.API_VERSION}`, playlistRoutes)
 app.use(`/api/${config.app.API_VERSION}`, albumRoutes)
 app.use(`/api/${config.app.API_VERSION}`, artistRoutes)
 app.use(`/api/${config.app.API_VERSION}`, trackRoutes)
+app.use(`/api/${config.app.API_VERSION}`, musicRoutes)
 app.use(errorMiddleware)
 
 module.exports = app;
