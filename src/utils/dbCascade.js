@@ -9,10 +9,17 @@ async function migrateCascadeArray(items, Model, dbFieldName, documentId) {
 	});
 }
 
-async function migrateCascadeObject(item, Model, dbFieldName, documentId) {
+async function migrateCascadeObject(itemId, Model, dbFieldName, documentId) {
 	await Model.findOneAndUpdate(
-		{ _id: item },
+		{ _id: itemId },
 		{ $push: { [dbFieldName]: documentId } }
+	).lean().exec()
+}
+
+async function migrateMyLibraryUser(userId, paramsId, dbFieldName) {
+	await db.User.findByIdAndUpdate(
+		{ _id: userId.toString() },
+		{ $push: { [`myLibrary.${dbFieldName}`]: [paramsId.toString()] } }
 	).lean().exec()
 }
 
@@ -42,7 +49,7 @@ async function deleteCascadeObject(paramsId, Model, dbFieldName) {
 	});
 }
 
-async function deleteCascadeUser(paramsId, Model, dbFieldName) {
+async function deleteCascadeLikedByUser(paramsId, Model, dbFieldName) {
 	const modelStored = await Model.find().lean().exec()
 	modelStored.forEach(model => {
 		model.likesTo[dbFieldName].forEach(async dbField => {
@@ -56,10 +63,19 @@ async function deleteCascadeUser(paramsId, Model, dbFieldName) {
 	});
 }
 
+async function deleteMyLibraryUser(userId, paramsId, dbFieldName) {
+	await db.User.findByIdAndUpdate(
+		{ _id: userId.toString() },
+		{ $pullAll: { [`myLibrary.${dbFieldName}`]: [paramsId.toString()] } }
+	).lean().exec()
+}
+
 module.exports = {
 	migrateCascadeArray,
 	migrateCascadeObject,
 	deleteCascadeArray,
-	deleteCascadeUser,
-	deleteCascadeObject
+	deleteCascadeLikedByUser,
+	deleteCascadeObject,
+	migrateMyLibraryUser,
+	deleteMyLibraryUser
 }
