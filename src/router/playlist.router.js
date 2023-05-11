@@ -9,7 +9,8 @@ api
 	.get('/playlist/:id', controller.getPlaylistById)
 	.put('/update-playlist/:id', md_auth.ensureAuth, controller.updatePlaylist)
 	.delete('/playlist/:playlistId', md_auth.ensureAuth, controller.deletePlaylist)
-	.get('/playlists-liked-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsLikedByUserId)
+	.get('/playlists-liked-by-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsLikedByUserId)
 	.get('/like-dislike-playlist/:playlistId/:userId', [md_auth.ensureAuth], controller.likeDislikePlaylist)
+	.get('/playlists-by-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsByUser)
 
 module.exports = api;
