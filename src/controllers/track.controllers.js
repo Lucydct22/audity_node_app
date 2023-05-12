@@ -1,10 +1,17 @@
 const db = require('../models')
 const fs = require('fs-extra')
+<<<<<<< Updated upstream
 const { uploadImage, uploadAudio, removeMedia } = require('../utils/cloudinary')
 const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray } = require('../utils/dbCascade')
 const { getRandomItem } = require('../utils/getRamdomItem')
 const { getContentLiked } = require('./utils/getContentLiked')
 const { likeDislike } = require('./utils/likeDislike')
+=======
+const { uploadImage } = require('../utils/cloudinary')
+const { uploadAudio } = require('../utils/cloudinary')
+const { Artist } = require('../models')
+const { populate } = require('../models/user.model')
+>>>>>>> Stashed changes
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postTrack(req, res) {
@@ -46,7 +53,11 @@ async function postTrack(req, res) {
 
 async function getTracks(req, res) {
   try {
-    const tracksStored = await db.Track.find().lean().exec()
+    const tracksStored = await Track.find()
+    .populate('artists')
+    .populate('album')
+    .populate('likedBy')
+    .lean().exec()
 
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
