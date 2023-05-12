@@ -1,14 +1,19 @@
-const Artist = require('../models/artist.model')
+const db = require('../models')
 const fs = require('fs-extra')
-const { uploadImage } = require('../utils/cloudinary')
+const { uploadImage, removeMedia } = require('../utils/cloudinary')
+const { migrateCascadeArray, deleteCascadeLikedByUser, deleteCascadeArray } = require('../utils/dbCascade')
+const { likeDislike } = require('./utils/likeDislike')
+const { getContentLiked } = require('./utils/getContentLiked')
 const cloudinaryConfig = require('../config/config').cloudinary
 
 async function postArtist(req, res) {
 	const { name, genres } = req.body
-	const artist = new Artist({ name, genres })
-
+	if (!req.files || !name || !genres) {
+		return res.status(404).send({ status: 404 })
+	}
 	try {
 		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/artistImage`, 250, 250)
+		const artist = new db.Artist({ name, genres })
 		artist.imageUrl = imageUploaded.url
 		artist.imagePublicId = imageUploaded.public_id
 		const artistSaved = await artist.save()
@@ -16,6 +21,7 @@ async function postArtist(req, res) {
 			return res.status(400).send({ status: 400 })
 		}
 		await fs.unlink(req.files.image.tempFilePath)
+		await migrateCascadeArray(genres, db.Genre, 'artists', artistSaved._id)
 		return res.status(200).send({ status: 200, artist: artistSaved })
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
@@ -24,7 +30,7 @@ async function postArtist(req, res) {
 
 async function getArtists(req, res) {
 	try {
-		const artistsStored = await Artist.find().lean().exec()
+		const artistsStored = await db.Artist.find().lean().exec()
 
 		if (!artistsStored) {
 			return res.status(400).send({ status: 400 })
@@ -37,8 +43,11 @@ async function getArtists(req, res) {
 
 async function getArtistById(req, res) {
 	const { artistId } = req.params
+	if (!artistId) {
+		return res.status(404).send({ status: 404 })
+	}
 	try {
-		const artistStored = await Artist.findOne({ _id: artistId }).lean().exec()
+		const artistStored = await db.Artist.findOne({ _id: artistId }).lean().exec()
 		if (!artistStored) {
 			return res.status(400).send({ status: 400 })
 		}
@@ -48,8 +57,45 @@ async function getArtistById(req, res) {
 	}
 }
 
+async function deleteArtist(req, res) {
+	const { artistId } = req.params
+	const { imagePublicId } = req.body
+	if (!artistId || !imagePublicId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		await deleteCascadeArray(artistId, db.Genre, 'artists')
+		await deleteCascadeArray(artistId, db.Album, 'artists')
+		await deleteCascadeArray(artistId, db.Playlist, 'artists')
+		await deleteCascadeArray(artistId, db.Track, 'artists')
+		await deleteCascadeLikedByUser(artistId, db.User, 'artists')
+		if (imagePublicId) await removeMedia(imagePublicId, 'image')
+		const artistToDelete = await db.Artist.findOneAndDelete({ _id: artistId }).lean()
+
+		if (!artistToDelete) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200 })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function getArtistsLikedByUserId(req, res) {
+	const { userId } = req.params
+	await getContentLiked(res, userId, db.Artist)
+}
+
+async function likeDislikeArtist(req, res) {
+	const { artistId, userId } = req.params
+	await likeDislike(res, db.Artist, artistId, userId)
+}
+
 module.exports = {
-  postArtist,
+	postArtist,
 	getArtists,
-	getArtistById
+	getArtistById,
+	deleteArtist,
+	getArtistsLikedByUserId,
+	likeDislikeArtist
 }

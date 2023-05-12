@@ -1,13 +1,16 @@
 const express = require('express')
-const Playlist = require('../controllers/playlist.controllers')
+const controller = require('../controllers/playlist.controllers')
 const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
-api.get('/playlists', Playlist.getPlaylists)
-api.get('/playlist/:id', md_auth.checkJwt, Playlist.getPlaylistById)
-api.delete('/delete-playlist/:id', md_auth.checkJwt, Playlist.deletePlaylist)
-api.put('/update-playlist/:id', md_auth.checkJwt, Playlist.updatePlaylist)
-api.post('/create-playlist', md_auth.checkJwt, Playlist.postPlaylist)
-api.get('/playlist/:playlistId', Playlist.getPlaylistById)
+api
+	.post('/playlist', md_auth.ensureAuth, controller.postPlaylist)
+	.get('/playlists', controller.getPlaylists)
+	.get('/playlist/:id', controller.getPlaylistById)
+	.put('/update-playlist/:id', md_auth.ensureAuth, controller.updatePlaylist)
+	.delete('/playlist/:playlistId', md_auth.ensureAuth, controller.deletePlaylist)
+	.get('/playlists-liked-by-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsLikedByUserId)
+	.get('/like-dislike-playlist/:playlistId/:userId', [md_auth.ensureAuth], controller.likeDislikePlaylist)
+	.get('/playlists-by-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsByUser)
 
 module.exports = api;

@@ -1,11 +1,14 @@
 const express = require('express')
-const album = require('../controllers/album.controllers')
+const controller = require('../controllers/album.controllers')
 const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
-api.get('/albums', album.getAlbums)
-api.get('/album/:albumId', album.getAlbumById)
-// api.post('/album', md_auth.ensureAuth, album.postAlbum)
-
+api
+  .post('/album', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postAlbum)
+  .get('/albums', controller.getAlbums)
+  .get('/album/:albumId', controller.getAlbumById)
+  .delete('/album/:albumId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteAlbum)
+  .get('/albums-liked-by-user/:userId', [md_auth.ensureAuth], controller.getAlbumsLikedByUserId)
+  .get('/like-dislike-album/:albumId/:userId', [md_auth.ensureAuth], controller.likeDislikeAlbum)
 
 module.exports = api;

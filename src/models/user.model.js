@@ -11,6 +11,31 @@ const UserSchema = new Schema({
   country: String,
   language: String,
   role: String,
+  userInfo: {
+    currentTrackList: {
+      type: Schema.Types.ObjectId,
+      ref: 'Album',
+      ref: 'Artist',
+      ref: 'Playlist',
+      ref: 'Genre',
+    },
+    currentTrack: {
+      type: Schema.Types.ObjectId,
+      ref: 'Track'
+    },
+    trackTime: Number,
+    volume: Number
+  },
+  myLibrary: {
+    playlists: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Playlist'
+    }],
+    tracks: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Track'
+    }]
+  },
   likesTo: {
     artists: [{
       type: Schema.Types.ObjectId,

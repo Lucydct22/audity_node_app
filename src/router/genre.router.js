@@ -1,13 +1,16 @@
 const express = require('express')
-const Genre = require('../controllers/genre.controllers')
+const controller = require('../controllers/genre.controllers')
 const md_auth = require('../middlewares/auth.middleware')
 const api = express.Router()
 
-api.get('/genres', Genre.getGenres)
-api.get('/genre/:id', md_auth.checkJwt, Genre.getGenreById)
-api.post('/genre', md_auth.checkJwt, Genre.postGenre)
-api.delete('/delete-genre/:id', md_auth.checkJwt, Genre.deleteGenre)
-api.put('/update-genre/:id', md_auth.checkJwt, Genre.updateGenre)
-// 
+api
+  .get('/genres', controller.getGenres)
+  .get('/genre/:id', controller.getGenreById)
+  .get('/genre/:id/playlists', controller.getGenrePlaylistById)
+  .get('/genre/:id/albums', controller.getGenreAlbumsById)
+  .get('/genre/:id/artists', controller.getGenreArtistsById)
+  .post('/genre', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postGenre)
+  .put('/update-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updateGenre)
+  .delete('/delete-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteGenre)
 
 module.exports = api;
