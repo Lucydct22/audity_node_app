@@ -96,7 +96,6 @@ async function getGenrePlaylistById(req, res) {
 	}
 }
 
-
 async function getGenreAlbumsById(req, res) {
 	const { id } = req.params
 	if (!id) {
@@ -129,8 +128,6 @@ async function getGenreArtistsById(req, res) {
 	}
 }
 
-
-
 async function updateGenre(req, res) {
 	const { id } = req.params
 	const { name, imagePublicId } = req.body
@@ -158,7 +155,6 @@ async function deleteGenre(req, res) {
 		await deleteGenresCascade(id, db.Track)
 		const genreToDelete = await db.Genre.findOneAndDelete({ _id: id }).lean().exec()
 		if (imagePublicId) await removeMedia(imagePublicId, 'image')
-
 		if (!genreToDelete) {
 			return res.status(400).send({ status: 400 })
 		}
