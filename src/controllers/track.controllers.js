@@ -6,6 +6,7 @@ const { getRandomItem } = require('../utils/getRamdomItem')
 const { getContentLiked } = require('./utils/getContentLiked')
 const { likeDislike } = require('./utils/likeDislike')
 const cloudinaryConfig = require('../config/config').cloudinary
+const {getPlaylistsByUser} = require('../controllers/playlist.controllers')
 
 async function postTrack(req, res) {
   const { name, artists, genres, album, playlists, duration } = req.body
@@ -127,6 +128,40 @@ async function likeDislikeTrack(req, res) {
   await likeDislike(res, db.Track, trackId, userId)
 }
 
+
+
+
+
+
+
+async function putTrackToPlaylist(req, res) {
+	const { playlistId, trackId } = req.params
+	if (!playlistId || !trackId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+    const playlist = await db.Playlist.findById(playlistId)
+    if (!playlist) {
+			return res.status(400).send({ status: 400, error: 'Playlist not found' })
+		}
+    const track = await db.Track.findById(trackId)
+    if (!track) {
+			return res.status(400).send({ status: 400, error: 'Track not found' })
+		}
+
+    playlist.tracks.push(trackId)
+    track.playlists.push(playlistId)
+
+    await playlist.save
+    await track.save
+
+		return res.status(200).send({ status: 200, message: "The track was added to playlist" })
+
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
   postTrack,
   getTrackById,
@@ -134,5 +169,6 @@ module.exports = {
   deleteTrack,
   getRandomTrack,
   getTracksLikedByUserId,
-  likeDislikeTrack
+  likeDislikeTrack,
+  putTrackToPlaylist
 }

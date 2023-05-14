@@ -11,5 +11,6 @@ api
 	.get('/random-track', controller.getRandomTrack)
 	.get('/tracks-liked-by-user/:userId', [md_auth.ensureAuth], controller.getTracksLikedByUserId)
 	.get('/like-dislike-track/:trackId/:userId', [md_auth.ensureAuth], controller.likeDislikeTrack)
+	.put('/users/:userId/playlists/:playlistId/tracks/:trackId', [md_auth.ensureAuth], controller.putTrackToPlaylist)
 
 module.exports = api;
