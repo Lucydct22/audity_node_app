@@ -10,6 +10,7 @@ api
   .get('/genre/:id/albums', controller.getGenreAlbumsById)
   .get('/genre/:id/artists', controller.getGenreArtistsById)
   .post('/genre', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postGenre)
+  .put('/genre-image/:genreId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.putGenreImage)
   .put('/update-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updateGenre)
   .delete('/delete-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteGenre)
 
