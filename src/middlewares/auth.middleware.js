@@ -10,7 +10,7 @@ exports.ensureAuth = auth({
 
 exports.ensureAdminAuth = async function (req, res, next) {
   const user = await db.User.findOne({ userId: req.auth.payload.sub }).lean().exec()
-  if (user.role !== 'admin') {
+  if (!user?.role || user.role !== 'admin') {
     return res.status(401).send({ message: "You have no admin permissions." });
   }
   next();
