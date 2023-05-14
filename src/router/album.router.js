@@ -10,5 +10,7 @@ api
   .delete('/album/:albumId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteAlbum)
   .get('/albums-liked-by-user/:userId', [md_auth.ensureAuth], controller.getAlbumsLikedByUserId)
   .get('/like-dislike-album/:albumId/:userId', [md_auth.ensureAuth], controller.likeDislikeAlbum)
+  .put('/album-image/:albumId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.putAlbumImage)
+  .put('/album/:albumId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updateAlbum)
 
 module.exports = api;
