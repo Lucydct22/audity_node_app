@@ -29,10 +29,6 @@ async function putGenreImage(req, res) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
-		const findGenre = await db.Genre.findById({ _id: genreId })
-		if (findGenre.imagePublicId) {
-			await removeMedia(findGenre.imagePublicId, 'image')
-		}
 		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/genreImage`, 264, 134)
 		const genreStored = await db.Genre.findOneAndUpdate(
 			{ _id: genreId },

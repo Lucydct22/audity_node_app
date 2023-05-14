@@ -97,10 +97,6 @@ async function putAlbumImage(req, res) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
-		const findAlbum = await db.Album.findById({ _id: albumId })
-		if (findAlbum.imagePublicId) {
-			await removeMedia(findAlbum.imagePublicId, 'image')
-		}
 		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/albumImage`, 250, 250)
 		const albumStored = await db.Album.findOneAndUpdate(
 			{ _id: albumId },
