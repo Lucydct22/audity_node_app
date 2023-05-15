@@ -1,7 +1,7 @@
 const db = require("../models")
 const { uploadImage, removeMedia } = require('../utils/cloudinary')
 const fs = require('fs-extra')
-const { migrateCascadeArray, deleteCascadeArray, migrateMyLibraryUser, deleteMyLibraryUser } = require("../utils/dbCascade")
+const { migrateCascadeArray, deleteCascadeArray, migrateMyLibraryUser, deleteMyLibraryUser, migrateCascadeObject, deleteCascadeObject } = require("../utils/dbCascade")
 const { likeDislike } = require("./utils/likeDislike")
 const { getContentLiked } = require("./utils/getContentLiked")
 const cloudinaryConfig = require('../config/config').cloudinary
@@ -16,7 +16,6 @@ async function postPlaylist(req, res) {
 		name,
 		description,
 		publicAccessible: false,
-		totalTracks: 0,
 		followers: 0,
 		rating: 5,
 		tracks
@@ -140,6 +139,53 @@ async function getPlaylistsByUser(req, res) {
 	}
 }
 
+async function putTrackToPlaylist(req, res) {
+	const { trackId, playlistId } = req.params
+	if (!playlistId || !trackId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const playtlistUpdated = await db.Playlist.findByIdAndUpdate(
+			{ _id: playlistId },
+			{
+				$addToSet: { tracks: trackId }
+			},
+			{ new: true }).lean().exec()
+
+		if (!playtlistUpdated) {
+			return res.status(400).send({ status: 400, error: 'Track not found' })
+		}
+			await migrateCascadeObject(trackId, db.Track, 'playlists', playlistId)
+
+		return res.status(200).send({ status: 200, message: "The track was added to playlist" })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function deleteTrackFromPlaylist(req, res) {
+	const { trackId, playlistId } = req.params
+	if (!playlistId || !trackId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const playtlistUpdated = await db.Playlist.findByIdAndUpdate(
+			{ _id: playlistId },
+			{
+				$pull: { tracks: trackId }
+			}).lean().exec()
+
+		if (!playtlistUpdated) {
+			return res.status(400).send({ status: 400, error: 'Track not found' })
+		}
+			await deleteCascadeObject(trackId, db.Track, 'playlists', playlistId)
+
+		return res.status(200).send({ status: 200, message: "The track was added to playlist" })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
 	getPlaylists,
 	getPlaylistById,
@@ -148,5 +194,7 @@ module.exports = {
 	postPlaylist,
 	getPlaylistsLikedByUserId,
 	likeDislikePlaylist,
-	getPlaylistsByUser
+	getPlaylistsByUser,
+	putTrackToPlaylist,
+	deleteTrackFromPlaylist
 }

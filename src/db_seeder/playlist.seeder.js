@@ -16,7 +16,6 @@ async function getBasePlaylist() {
       description: "Get your mic on with this beats. You are going to sing all the way down",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625060/tracks-thumbnails-dev/car_yx6ld1.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -42,7 +41,6 @@ async function getBasePlaylist() {
       description: "Take it easy on the wheels with this hits",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625058/tracks-thumbnails-dev/driving_g56eyw.jpg",
       publicAccessible: true,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -69,7 +67,6 @@ async function getBasePlaylist() {
       description: "Stressed? Don´t worry the final project will soon be over. Relax in the meantime with this hits.",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625056/tracks-thumbnails-dev/relax_coqdlx.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -95,7 +92,6 @@ async function getBasePlaylist() {
       description: "Take the dance floor and try to get your groove on with this beats",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644625049/tracks-thumbnails-dev/boogie_rcl1zd.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -121,7 +117,6 @@ async function getBasePlaylist() {
       description: "For those times when you are feeling down.",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644624690/tracks-thumbnails-dev/smile_kpfzj8.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -147,7 +142,6 @@ async function getBasePlaylist() {
       description: "Feeling homey. Let´s keep it warm.",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644626587/tracks-thumbnails-dev/brennan-ehrhardt-HALe2SmkWAI-unsplash_c1yhnz.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -173,7 +167,6 @@ async function getBasePlaylist() {
       description: "Have no money for a space trip but you can have a space hit!",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644626067/tracks-thumbnails-dev/fly_hx4xyp.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -199,7 +192,6 @@ async function getBasePlaylist() {
       description: "Have no plans but will be happy to hear you are happy.",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644626096/tracks-thumbnails-dev/hits_nuk3qf.webp",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -225,7 +217,6 @@ async function getBasePlaylist() {
       description: "Have you finished your master project? Let´s party!",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644626587/tracks-thumbnails-dev/amy-shamblen-lJt-3NUFng4-unsplash_z4icus.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
@@ -251,7 +242,6 @@ async function getBasePlaylist() {
       description: "Let´s get glittering.",
       cover: "https://res.cloudinary.com/dmkdsujzh/image/upload/v1644627361/tracks-thumbnails-dev/glitter_ru5qsp.jpg",
       publicAccessible: false,
-      totalTracks: 10,
       followers: 100,
       rating: 5,
       likedBy: [
