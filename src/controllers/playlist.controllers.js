@@ -40,6 +40,31 @@ async function postPlaylist(req, res) {
 	}
 }
 
+async function postPlaylistAdmin(req, res) {
+	const { userId, name, description, tracks } = req.body
+	if (!userId || !name) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const playlist = new db.Playlist({
+			userId,
+			name,
+			description,
+			publicAccessible: true,
+			followers: 0,
+			rating: 5,
+		})
+		if (tracks) { playlist.tracks = tracks }
+		const playlistSaved = await playlist.save()
+		if (!playlistSaved) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, playlist: playlistSaved })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 async function getPlaylists(req, res) {
 	try {
 		const playlistStored = await db.Playlist.find().lean().exec()
@@ -99,6 +124,8 @@ async function deletePlaylist(req, res) {
 	}
 	try {
 		await deleteCascadeArray(playlistId, db.Track, 'playlists')
+		await deleteCascadeArray(playlistId, db.Artist, 'playlists')
+		await deleteCascadeArray(playlistId, db.Genre, 'playlists')
 		await deleteMyLibraryUser(userId, playlistId, 'playlists')
 		imagePublicId && await removeMedia(imagePublicId, 'image')
 		const playlistToDelete = await db.Playlist.findOneAndDelete({ _id: playlistId }).lean()
@@ -186,15 +213,63 @@ async function deleteTrackFromPlaylist(req, res) {
 	}
 }
 
+async function updatePlaylistAdmin(req, res) {
+	const { playlistId } = req.params
+	const { name, description, tracks, imagePublicId } = req.body
+	try {
+		if (imagePublicId) await removeMedia(imagePublicId, 'image')
+		const playlistToUpdate = await db.Playlist.findByIdAndUpdate({ _id: playlistId }, {
+			name, description, tracks
+		}).lean().exec()
+		if (!playlistToUpdate) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200 })
+	} catch (err) {
+		return res.status(500).send({ status: 500 })
+	}
+}
+
+async function updatePlaylistImage(req, res) {
+	const { playlistId } = req.params
+	if (!req.files) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		if (req.files.image) {
+			const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/playlistImage`, 250, 250)
+			const playlistStored = await db.Playlist.findOneAndUpdate(
+				{ _id: playlistId },
+				{
+					imageUrl: imageUploaded.url,
+					imagePublicId: imageUploaded.public_id
+				},
+				{ returnOriginal: false }
+			).lean().exec()
+			if (!playlistStored) {
+				return res.status(400).send({ status: 400 })
+			}
+			await fs.unlink(req.files.image.tempFilePath)
+			return res.status(200).send({ status: 200, playlist: playlistStored })
+		}
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+
 module.exports = {
 	getPlaylists,
 	getPlaylistById,
 	deletePlaylist,
 	updatePlaylist,
 	postPlaylist,
+	postPlaylistAdmin,
 	getPlaylistsLikedByUserId,
 	likeDislikePlaylist,
 	getPlaylistsByUser,
+	updatePlaylistImage,
+	updatePlaylistAdmin,
 	putTrackToPlaylist,
 	deleteTrackFromPlaylist
 }
