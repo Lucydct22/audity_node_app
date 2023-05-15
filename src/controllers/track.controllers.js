@@ -191,39 +191,6 @@ async function putTrackAudio(req, res) {
 }
 
 
-
-
-
-
-
-async function putTrackToPlaylist(req, res) {
-	const { playlistId, trackId } = req.params
-	if (!playlistId || !trackId) {
-		return res.status(404).send({ status: 404 })
-	}
-	try {
-    const playlist = await db.Playlist.findById(playlistId)
-    if (!playlist) {
-			return res.status(400).send({ status: 400, error: 'Playlist not found' })
-		}
-    const track = await db.Track.findById(trackId)
-    if (!track) {
-			return res.status(400).send({ status: 400, error: 'Track not found' })
-		}
-
-    playlist.tracks.push(trackId)
-    track.playlists.push(playlistId)
-
-    await playlist.save
-    await track.save
-
-		return res.status(200).send({ status: 200, message: "The track was added to playlist" })
-
-	} catch (err) {
-		return res.status(500).send({ status: 500, error: err })
-	}
-}
-
 module.exports = {
   postTrack,
   getTrackById,
@@ -235,5 +202,4 @@ module.exports = {
   putTrackImage,
   putTrackAudio,
   updateTrack,
-  putTrackToPlaylist
 }

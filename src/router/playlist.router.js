@@ -12,5 +12,7 @@ api
 	.get('/playlists-liked-by-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsLikedByUserId)
 	.get('/like-dislike-playlist/:playlistId/:userId', [md_auth.ensureAuth], controller.likeDislikePlaylist)
 	.get('/playlists-by-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsByUser)
+	.put('/playlist-add-track/playlists/:playlistId/tracks/:trackId', [md_auth.ensureAuth], controller.putTrackToPlaylist)
+	.delete('/delete-track-from-playlist/playlists/:playlistId/tracks/:trackId', [md_auth.ensureAuth], controller.deleteTrackFromPlaylist)
 
 module.exports = api;

@@ -10,7 +10,6 @@ const PlaylistSchema = new Schema({
 	imageUrl: String,
 	imagePublicId: String,
 	publicAccessible: Boolean,
-	totalTracks: Number,
 	followers: Number,
 	rating: Number,
 	likedBy: [{
