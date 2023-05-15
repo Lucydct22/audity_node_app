@@ -36,7 +36,10 @@ async function postTrack(req, res) {
 
 async function getTracks(req, res) {
   try {
-    const tracksStored = await db.Track.find().lean().exec()
+    const tracksStored = await db.Track.find()
+    .populate('artists')
+    .populate('album')
+    .lean().exec()
 
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
