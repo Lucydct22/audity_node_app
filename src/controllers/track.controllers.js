@@ -16,6 +16,7 @@ async function postTrack(req, res) {
   try {
     const track = new db.Track()
     track.name = name
+    track.publicAccessible = true
     if (genres) { track.genres = genres }
     if (artists) { track.artists = artists }
     if (album) { track.album = album }
@@ -34,6 +35,27 @@ async function postTrack(req, res) {
   }
 }
 
+async function postPrivateTrack(req, res) {
+  const { userId, name, artists } = req.body
+  if (!name) {
+    return res.status(404).send({ status: 404 })
+  }
+  try {
+    const track = new db.Track()
+    track.userId = userId
+    track.uploadByUser.name = name
+    track.publicAccessible = false
+    if (artists) { track.uploadByUser.artists = artists }
+    const trackSaved = await track.save()
+    if (!trackSaved) {
+      return res.status(400).send({ status: 400 })
+    }
+    return res.status(200).send({ status: 200, track: trackSaved })
+  } catch (err) {
+    return res.status(500).send({ status: 500, error: err })
+  }
+}
+
 async function getTracks(req, res) {
   try {
     const tracksStored = await db.Track.find()
@@ -41,6 +63,19 @@ async function getTracks(req, res) {
     .populate('album')
     .lean().exec()
 
+    if (!tracksStored) {
+      return res.status(400).send({ status: 400 })
+    }
+    return res.status(200).send({ status: 200, tracks: tracksStored })
+  } catch (err) {
+    return res.status(500).send({ status: 500, error: err })
+  }
+}
+
+async function getPrivateTracks(req, res) {
+  const { userId } = req.params
+  try {
+    const tracksStored = await db.Track.find({ userId: userId }).lean().exec()
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
@@ -165,7 +200,6 @@ async function putTrackImage(req, res) {
   }
 }
 
-
 async function putTrackAudio(req, res) {
   const { trackId } = req.params
   if (!req.files) {
@@ -205,4 +239,6 @@ module.exports = {
   putTrackImage,
   putTrackAudio,
   updateTrack,
+  postPrivateTrack,
+  getPrivateTracks
 }

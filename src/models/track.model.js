@@ -31,6 +31,11 @@ const TrackSchema = new Schema({
 	popularity: Number,
 	duration: Number,
 	released: Date,
+	publicAccessible: Boolean,
+	uploadByUser: {
+		name: String,
+		artists: String
+	}
 }, {
 	timestamps: true
 }
