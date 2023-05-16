@@ -9,7 +9,9 @@ api
   .put('/update-user-language', md_auth.ensureAuth, controller.updateUserLanguage)
   .put('/update-user-country', md_auth.ensureAuth, controller.updateUserCountry)
   .get('/user-role', md_auth.ensureAuth, controller.getUserRole)
-  .delete('/delete-user', md_auth.ensureAuth, controller.deleteUser)
+  .put('/user-role/:userId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updateUserRole)
+  .delete('/delete-user/:userId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteUser)
   .put('/update-user-info', md_auth.ensureAuth, controller.updateUserInfo)
+  .get('/users', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.getUsers)
 
 module.exports = api;
