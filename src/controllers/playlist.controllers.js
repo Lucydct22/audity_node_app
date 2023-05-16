@@ -67,7 +67,7 @@ async function postPlaylistAdmin(req, res) {
 
 async function getPlaylists(req, res) {
 	try {
-		const playlistStored = await db.Playlist.find().lean().exec()
+		const playlistStored = await db.Playlist.find({ publicAccessible: true }).lean().exec()
 
 		if (!playlistStored) {
 			return res.status(400).send({ status: 400 })
@@ -77,7 +77,6 @@ async function getPlaylists(req, res) {
 		return res.status(500).send({ status: 500, error: err })
 	}
 }
-
 
 async function getPlaylistById(req, res) {
 	const { id } = req.params
@@ -141,12 +140,12 @@ async function deletePlaylist(req, res) {
 
 async function getPlaylistsLikedByUserId(req, res) {
 	const { userId } = req.params
-	await getContentLiked(res, userId, db.Playlist)
+	return await getContentLiked(res, userId, db.Playlist)
 }
 
 async function likeDislikePlaylist(req, res) {
 	const { playlistId, userId } = req.params
-	await likeDislike(res, db.Playlist, playlistId, userId, 'playlists')
+	return await likeDislike(res, db.Playlist, playlistId, userId, 'playlists')
 }
 
 
@@ -182,7 +181,7 @@ async function putTrackToPlaylist(req, res) {
 		if (!playtlistUpdated) {
 			return res.status(400).send({ status: 400, error: 'Track not found' })
 		}
-			await migrateCascadeObject(trackId, db.Track, 'playlists', playlistId)
+		await migrateCascadeObject(trackId, db.Track, 'playlists', playlistId)
 
 		return res.status(200).send({ status: 200, message: "The track was added to playlist" })
 	} catch (err) {
@@ -205,7 +204,7 @@ async function deleteTrackFromPlaylist(req, res) {
 		if (!playtlistUpdated) {
 			return res.status(400).send({ status: 400, error: 'Track not found' })
 		}
-			await deleteCascadeObject(trackId, db.Track, 'playlists', playlistId)
+		await deleteCascadeObject(trackId, db.Track, 'playlists', playlistId)
 
 		return res.status(200).send({ status: 200, message: "The track was added to playlist" })
 	} catch (err) {
@@ -257,6 +256,35 @@ async function updatePlaylistImage(req, res) {
 	}
 }
 
+async function updatePublicAccessible(req, res) {
+	const { playlistId } = req.params
+	const { publicAccessible } = req.body
+	try {
+		const playlistStored = await db.Playlist.findOneAndUpdate(
+			{ _id: playlistId },
+			{ publicAccessible: publicAccessible },
+			{ returnOriginal: false }
+		).lean().exec()
+		if (!playlistStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, publicAccessible })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function getAllPlaylists(req, res) {
+	try {
+		const playlistStored = await db.Playlist.find().lean().exec()
+		if (!playlistStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, playlists: playlistStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
 
 module.exports = {
 	getPlaylists,
@@ -271,5 +299,7 @@ module.exports = {
 	updatePlaylistImage,
 	updatePlaylistAdmin,
 	putTrackToPlaylist,
-	deleteTrackFromPlaylist
+	deleteTrackFromPlaylist,
+	updatePublicAccessible,
+	getAllPlaylists
 }

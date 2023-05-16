@@ -17,5 +17,7 @@ api
 	.post('/playlist-admin', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postPlaylistAdmin)
 	.put('/playlist-image/:playlistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updatePlaylistImage)
 	.put('/playlist-admin/:playlistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updatePlaylistAdmin)
+	.put('/update-public-accessible/:playlistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updatePublicAccessible)
+	.get('/all-playlists', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.getAllPlaylists)
 
 module.exports = api;

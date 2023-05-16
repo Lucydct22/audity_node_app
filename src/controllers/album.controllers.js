@@ -83,12 +83,12 @@ async function deleteAlbum(req, res) {
 
 async function getAlbumsLikedByUserId(req, res) {
 	const { userId } = req.params
-	await getContentLiked(res, userId, db.Album)
+	return await getContentLiked(res, userId, db.Album)
 }
 
 async function likeDislikeAlbum(req, res) {
 	const { albumId, userId } = req.params
-	await likeDislike(res, db.Album, albumId, userId, 'albums')
+	return await likeDislike(res, db.Album, albumId, userId, 'albums')
 }
 
 async function putAlbumImage(req, res) {

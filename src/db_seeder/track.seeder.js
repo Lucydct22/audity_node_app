@@ -34,7 +34,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 5,
-      duration: 158
+      duration: 158,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -57,7 +58,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 5,
-      duration: 229
+      duration: 229,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -80,7 +82,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 188
+      duration: 188,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -102,7 +105,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 231
+      duration: 231,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -124,7 +128,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 176
+      duration: 176,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -146,7 +151,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 245
+      duration: 245,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -168,7 +174,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 194
+      duration: 194,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -190,7 +197,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 207
+      duration: 207,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -212,7 +220,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 197
+      duration: 197,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -234,7 +243,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 210
+      duration: 210,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -256,7 +266,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 217
+      duration: 217,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -278,7 +289,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 218
+      duration: 218,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -300,7 +312,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -322,7 +335,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -344,7 +358,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -366,7 +381,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -388,7 +404,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -410,7 +427,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -432,7 +450,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     },
     {
       _id: new ObjectId(),
@@ -454,7 +473,8 @@ async function getBaseTrack() {
       ],
       rating: 5,
       popularity: 500,
-      duration: 240
+      duration: 240,
+      publicAccessible: true
     }
   ]
 

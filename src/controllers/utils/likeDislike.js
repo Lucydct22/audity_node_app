@@ -28,18 +28,20 @@ async function likeDislike(res, Model, contentId, userId, dbFieldName) {
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	} finally {
-		if (!haveLike) {
-			await deleteLikesToIntoUser(userId, contentId, dbFieldName)
-		} else {
+		if (haveLike) {
 			newModel.likedBy.push(new ObjectId(userId))
 			await migrateLikesToIntoUser(userId, contentId, dbFieldName)
+		} else {
+			await deleteLikesToIntoUser(userId, contentId, dbFieldName)
 		}
-		await Model.findOneAndUpdate(
-			{ _id: contentId },
-			{ likedBy: newModel.likedBy },
-			{ returnOriginal: false }
-		).lean().exec()
-		return res.status(200).send({ status: 201, haveLike })
+		if (newModel) {
+			await Model.findOneAndUpdate(
+				{ _id: contentId },
+				{ likedBy: newModel.likedBy },
+				{ returnOriginal: false }
+			).lean().exec()
+			return res.status(200).send({ status: 200, haveLike })
+		}
 	}
 }
 

@@ -6,7 +6,7 @@ const { getRandomItem } = require('../utils/getRamdomItem')
 const { getContentLiked } = require('./utils/getContentLiked')
 const { likeDislike } = require('./utils/likeDislike')
 const cloudinaryConfig = require('../config/config').cloudinary
-const {getPlaylistsByUser} = require('../controllers/playlist.controllers')
+const { getPlaylistsByUser } = require('../controllers/playlist.controllers')
 
 async function postTrack(req, res) {
   const { name, genres, artists, album, playlists } = req.body
@@ -58,14 +58,15 @@ async function postPrivateTrack(req, res) {
 
 async function getTracks(req, res) {
   try {
-    const tracksStored = await db.Track.find()
-    .populate('artists')
-    .populate('album')
-    .lean().exec()
+    const tracksStored = await db.Track.find({ publicAccessible: true })
+      .populate('artists')
+      .populate('album')
+      .lean().exec()
 
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
+    // const filteredTracks = tracksStored.filter(track => track.publicAccessible === true)
     return res.status(200).send({ status: 200, tracks: tracksStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
@@ -94,8 +95,7 @@ async function getTrackById(req, res) {
     const tracksStored =
       await db.Track.findOne({ _id: trackId })
         .populate('genres')
-        .populate('artists')
-        .populate('likedBy').exec()
+        .populate('artists').exec()
 
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
@@ -143,12 +143,12 @@ async function getRandomTrack(req, res) {
 
 async function getTracksLikedByUserId(req, res) {
   const { userId } = req.params
-  await getContentLiked(res, userId, db.Track)
+  return await getContentLiked(res, userId, db.Track)
 }
 
 async function likeDislikeTrack(req, res) {
   const { trackId, userId } = req.params
-  await likeDislike(res, db.Track, trackId, userId, 'tracks')
+  return await likeDislike(res, db.Track, trackId, userId, 'tracks')
 }
 
 async function updateTrack(req, res) {
