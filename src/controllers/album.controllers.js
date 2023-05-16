@@ -39,7 +39,9 @@ async function postAlbum(req, res) {
 
 async function getAlbums(req, res) {
 	try {
-		const albumsStored = await db.Album.find().lean().exec()
+		const albumsStored = await db.Album.find()
+    .populate('tracks')
+    .lean().exec()
 		if (!albumsStored) {
 			return res.status(400).send({ status: 400 })
 		}
@@ -55,7 +57,9 @@ async function getAlbumById(req, res) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
-		const albumStored = await db.Album.findOne({ _id: albumId }).populate('tracks').lean().exec()
+		const albumStored = await db.Album.findOne({ _id: albumId })
+    .populate('tracks')
+    .lean().exec()
 		if (!albumStored) {
 			return res.status(400).send({ status: 400 })
 		}
