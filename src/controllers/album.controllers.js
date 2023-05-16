@@ -127,6 +127,12 @@ async function updateAlbum(req, res) {
 		if (!albumToUpdate) {
 			return res.status(400).send({ status: 400 })
 		}
+		await tracks?.forEach(async track => {
+			await db.Track.findOneAndUpdate(
+				{ _id: track },
+				{ album: albumId }
+			).lean().exec()
+		});
 		genres && await migrateCascadeArray(genres, db.Genre, 'albums', albumToUpdate._id)
 		artists && await migrateCascadeArray(artists, db.Artist, 'albums', albumToUpdate._id)
 		return res.status(200).send({ status: 200 })
