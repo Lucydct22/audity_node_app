@@ -23,6 +23,13 @@ async function migrateMyLibraryUser(userId, paramsId, dbFieldName) {
 	).lean().exec()
 }
 
+async function migrateLikesToIntoUser(userId, paramsId, dbFieldName) {
+	await db.User.findByIdAndUpdate(
+		{ _id: userId.toString() },
+		{ $addToSet: { [`likesTo.${dbFieldName}`]: [paramsId.toString()] } }
+	).lean().exec()
+}
+
 async function deleteCascadeArray(paramsId, Model, dbFieldName) {
 	const modelStored = await Model.find().lean().exec()
 	modelStored.forEach(model => {
@@ -84,6 +91,13 @@ async function deleteMyLibraryUser(userId, paramsId, dbFieldName) {
 	).lean().exec()
 }
 
+async function deleteLikesToIntoUser(userId, paramsId, dbFieldName) {
+	await db.User.findByIdAndUpdate(
+		{ _id: userId.toString() },
+		{ $pullAll: { [`likesTo.${dbFieldName}`]: [paramsId.toString()] } }
+	).lean().exec()
+}
+
 module.exports = {
 	migrateCascadeArray,
 	migrateCascadeObject,
@@ -91,5 +105,7 @@ module.exports = {
 	deleteCascadeLikedByUser,
 	deleteCascadeObject,
 	migrateMyLibraryUser,
-	deleteMyLibraryUser
+	deleteMyLibraryUser,
+	migrateLikesToIntoUser,
+	deleteLikesToIntoUser
 }
