@@ -70,6 +70,26 @@ async function getTrackById(req, res) {
   }
 }
 
+async function getTracksArtistsById(req, res) {
+	const { trackId } = req.params
+	if (!trackId) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const artistStored = await db.Artist.findById({ _id: trackId })
+    .populate('tracks')
+    .populate('artist')
+    .populate('album')
+    .lean().exec();
+		if (!trackStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, artists: trackStored.artists })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 async function deleteTrack(req, res) {
   const { trackId } = req.params
   const { imagePublicId, audioPublicId } = req.body
@@ -202,5 +222,6 @@ module.exports = {
   likeDislikeTrack,
   putTrackImage,
   putTrackAudio,
-  updateTrack
+  updateTrack,
+  getTracksArtistsById
 }

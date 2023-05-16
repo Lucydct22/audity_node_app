@@ -90,26 +90,6 @@ async function getArtistsLikedByUserId(req, res) {
 	await getContentLiked(res, userId, db.Artist)
 }
 
-async function getTracksArtistsById(req, res) {
-	const { artistId } = req.params
-	if (!artistId) {
-		return res.status(404).send({ status: 404 })
-	}
-	try {
-		const artistStored = await db.Artist.findById({ _id: artistId })
-    .populate('tracks')
-    .populate('artist')
-    .populate('album')
-    .lean().exec();
-		if (!artistStored) {
-			return res.status(400).send({ status: 400 })
-		}
-		return res.status(200).send({ status: 200, tracks: artistStored.tracks })
-	} catch (err) {
-		return res.status(500).send({ status: 500, error: err })
-	}
-}
-
 async function likeDislikeArtist(req, res) {
 	const { artistId, userId } = req.params
 	await likeDislike(res, db.Artist, artistId, userId)
@@ -170,7 +150,6 @@ module.exports = {
 	likeDislikeArtist,
 	putArtistImage,
 	updateArtist,
-  getTracksArtistsById,
 	putArtistImage,
 	updateArtist
 }
