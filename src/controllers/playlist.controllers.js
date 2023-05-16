@@ -146,7 +146,7 @@ async function getPlaylistsLikedByUserId(req, res) {
 
 async function likeDislikePlaylist(req, res) {
 	const { playlistId, userId } = req.params
-	await likeDislike(res, db.Playlist, playlistId, userId)
+	await likeDislike(res, db.Playlist, playlistId, userId, 'playlists')
 }
 
 

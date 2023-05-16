@@ -90,7 +90,7 @@ async function getArtistsLikedByUserId(req, res) {
 
 async function likeDislikeArtist(req, res) {
 	const { artistId, userId } = req.params
-	await likeDislike(res, db.Artist, artistId, userId)
+	await likeDislike(res, db.Artist, artistId, userId, 'artists')
 }
 
 async function putArtistImage(req, res) {

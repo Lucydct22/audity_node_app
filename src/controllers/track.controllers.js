@@ -148,7 +148,7 @@ async function getTracksLikedByUserId(req, res) {
 
 async function likeDislikeTrack(req, res) {
   const { trackId, userId } = req.params
-  await likeDislike(res, db.Track, trackId, userId)
+  await likeDislike(res, db.Track, trackId, userId, 'tracks')
 }
 
 async function updateTrack(req, res) {
