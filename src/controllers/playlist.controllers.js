@@ -85,7 +85,7 @@ async function getPlaylistById(req, res) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
-		const playlistStored = await db.Playlist.findById({ _id: id }).lean().exec()
+		const playlistStored = await db.Playlist.findById({ _id: id }).populate('tracks').lean().exec()
 
 		if (!playlistStored) {
 			return res.status(400).send({ status: 400 })
