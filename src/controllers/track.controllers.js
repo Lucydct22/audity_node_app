@@ -94,7 +94,9 @@ async function getTrackById(req, res) {
     const tracksStored =
       await db.Track.findOne({ _id: trackId })
         .populate('genres')
-        .populate('artists').exec()
+        .populate('artists')
+        .populate('album')
+        .populate('likedBy').exec()
 
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
