@@ -32,7 +32,7 @@ async function migrateLikesToIntoUser(userId, paramsId, dbFieldName) {
 
 async function deleteCascadeArray(paramsId, Model, dbFieldName) {
 	const modelStored = await Model.find().lean().exec()
-	modelStored.forEach(model => {
+	await modelStored.forEach(model => {
 		model[dbFieldName].forEach(async dbField => {
 			if (dbField.toString() == paramsId.toString()) {
 				await Model.findOneAndUpdate(
@@ -43,18 +43,6 @@ async function deleteCascadeArray(paramsId, Model, dbFieldName) {
 		});
 	});
 }
-
-// async function deleteCascadeObject(paramsId, Model, dbFieldName) {
-// 	const modelStored = await Model.find().lean().exec()
-// 	modelStored.forEach(async model => {
-// 		if (model._id.toString() == paramsId.toString()) {
-// 			await Model.findOneAndUpdate(
-// 				{ _id: model._id },
-// 				{ $pullAll: { [dbFieldName]: [dbField] } }
-// 			).lean().exec()
-// 		}
-// 	});
-// }
 
 async function deleteCascadeObject(paramsId, Model, dbFieldName, dbField) {
   const modelStored = await Model.find().lean().exec();

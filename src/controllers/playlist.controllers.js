@@ -24,7 +24,7 @@ async function postPlaylist(req, res) {
 	try {
 		if (req.files?.image.tempFilePath) {
 			const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/playlistImages`, 250, 250)
-			playlist.cover = imageUploaded.url
+			playlist.cover = imageUploaded.secure_url
 			playlist.imagePublicId = imageUploaded.public_id
 			await fs.unlink(req.files.image.tempFilePath)
 		}
@@ -54,6 +54,7 @@ async function postPlaylistAdmin(req, res) {
 			followers: 0,
 			rating: 5,
 		})
+
 		if (tracks) { playlist.tracks = tracks }
 		const playlistSaved = await playlist.save()
 		if (!playlistSaved) {
@@ -98,18 +99,15 @@ async function getPlaylistById(req, res) {
 async function updatePlaylist(req, res) {
 	const { id } = req.params
 	const { name, description } = req.body
-	if (!id || !name || !description) {
-		return res.status(404).send({ status: 404 })
-	}
 	try {
-		const playlistToUpdate = await db.Playlist.findByIdAndUpdate({ _id: id }, { name, description }).lean().exec()
-
+		const playlistToUpdate = await db.Playlist.findByIdAndUpdate(
+			{ _id: id },
+			{ name, description }
+		).lean().exec()
 		if (!playlistToUpdate) {
 			return res.status(400).send({ status: 400, error: 'Playlist not found' })
 		}
-
-		return res.status(200).send({ status: 200, message: "The playlist was updated" })
-
+		return res.status(200).send({ status: 200, playlist: playlistToUpdate, message: "The playlist was updated" })
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	}
@@ -117,18 +115,21 @@ async function updatePlaylist(req, res) {
 
 async function deletePlaylist(req, res) {
 	const { playlistId } = req.params
-	const { userId, imagePublicId } = req.body
-	if (!userId || !playlistId) {
+	const { userId } = req.body
+	if (!userId) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
+		const findPlaylist = await db.Playlist.findOne({ _id: playlistId }).lean().exec()
+		if (!findPlaylist) {
+			return res.status(404).send({ status: 404 })
+		}
+		if (findPlaylist.imagePublicId) await removeMedia(findPlaylist.imagePublicId, 'image')
 		await deleteCascadeArray(playlistId, db.Track, 'playlists')
 		await deleteCascadeArray(playlistId, db.Artist, 'playlists')
 		await deleteCascadeArray(playlistId, db.Genre, 'playlists')
 		await deleteMyLibraryUser(userId, playlistId, 'playlists')
-		imagePublicId && await removeMedia(imagePublicId, 'image')
 		const playlistToDelete = await db.Playlist.findOneAndDelete({ _id: playlistId }).lean()
-
 		if (!playlistToDelete) {
 			return res.status(400).send({ status: 400 })
 		}
@@ -214,16 +215,17 @@ async function deleteTrackFromPlaylist(req, res) {
 
 async function updatePlaylistAdmin(req, res) {
 	const { playlistId } = req.params
-	const { name, description, tracks, imagePublicId } = req.body
+	const { name, description, tracks } = req.body
 	try {
-		if (imagePublicId) await removeMedia(imagePublicId, 'image')
-		const playlistToUpdate = await db.Playlist.findByIdAndUpdate({ _id: playlistId }, {
-			name, description, tracks
-		}).lean().exec()
+		const playlistToUpdate = await db.Playlist.findByIdAndUpdate(
+			{ _id: playlistId }, 
+			{	name, description, tracks	},
+			{ returnOriginal: false }
+			).lean().exec()
 		if (!playlistToUpdate) {
 			return res.status(400).send({ status: 400 })
 		}
-		return res.status(200).send({ status: 200 })
+		return res.status(200).send({ status: 200, playlist: playlistToUpdate })
 	} catch (err) {
 		return res.status(500).send({ status: 500 })
 	}
@@ -240,7 +242,7 @@ async function updatePlaylistImage(req, res) {
 			const playlistStored = await db.Playlist.findOneAndUpdate(
 				{ _id: playlistId },
 				{
-					imageUrl: imageUploaded.url,
+					imageUrl: imageUploaded.secure_url,
 					imagePublicId: imageUploaded.public_id
 				},
 				{ returnOriginal: false }
@@ -253,6 +255,40 @@ async function updatePlaylistImage(req, res) {
 		}
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function updatePlaylistImage(req, res) {
+	const { playlistId } = req.params
+	if (!req.files) {
+		return res.status(404).send({ status: 404 })
+	}
+	try {
+		const findPlaylist = await db.Playlist.findOne({ _id: playlistId }).lean().exec()
+		if (!findPlaylist) {
+			return res.status(404).send({ status: 404 })
+		}
+		if (findPlaylist.imagePublicId) await removeMedia(findPlaylist.imagePublicId, 'image')
+		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/playlistImage`, 250, 250)
+		if (!imageUploaded) {
+			return res.status(402).send({ status: 402 })
+		}
+		const playlistStored = await db.Playlist.findOneAndUpdate(
+			{ _id: playlistId },
+			{
+				imageUrl: imageUploaded.secure_url,
+				imagePublicId: imageUploaded.public_id
+			},
+			{ returnOriginal: false }
+		).lean()
+		if (!playlistStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, playlist: playlistStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	} finally {
+		await fs.unlink(req.files?.image.tempFilePath)
 	}
 }
 

@@ -7,6 +7,7 @@ const { getContentLiked } = require('./utils/getContentLiked')
 const { likeDislike } = require('./utils/likeDislike')
 const cloudinaryConfig = require('../config/config').cloudinary
 const { getPlaylistsByUser } = require('../controllers/playlist.controllers')
+const { deleteCascadeLikedByUser } = require('../utils/dbCascade')
 
 async function postTrack(req, res) {
   const { name, genres, artists, album, playlists } = req.body
@@ -62,11 +63,9 @@ async function getTracks(req, res) {
       .populate('artists')
       .populate('album')
       .lean().exec()
-
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
-    // const filteredTracks = tracksStored.filter(track => track.publicAccessible === true)
     return res.status(200).send({ status: 200, tracks: tracksStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
@@ -108,15 +107,18 @@ async function getTrackById(req, res) {
 
 async function deleteTrack(req, res) {
   const { trackId } = req.params
-  const { imagePublicId, audioPublicId } = req.body
   try {
+    const findTrack = await db.Track.findOne({ _id: trackId }).lean().exec()
+    if (!findTrack) {
+      return res.status(404).send({ status: 404 })
+    }
+    if (findTrack.imagePublicId) await removeMedia(findTrack.imagePublicId, 'image')
+    if (findTrack.audioPublicId) await removeMedia(findTrack.audioPublicId, 'video')
     await deleteCascadeArray(trackId, db.Genre, 'tracks')
     await deleteCascadeArray(trackId, db.Artist, 'tracks')
     await deleteCascadeArray(trackId, db.Album, 'tracks')
     await deleteCascadeArray(trackId, db.Playlist, 'tracks')
-    await deleteCascadeUser(trackId, db.User, 'tracks')
-    if (imagePublicId) await removeMedia(imagePublicId, 'image')
-    if (audioPublicId) await removeMedia(audioPublicId, 'video')
+    await deleteCascadeLikedByUser(trackId, db.User, 'tracks')
     const trackToDelete = await db.Track.findOneAndDelete({ _id: trackId }).lean()
     if (!trackToDelete) {
       return res.status(400).send({ status: 400 })
@@ -153,13 +155,13 @@ async function likeDislikeTrack(req, res) {
 
 async function updateTrack(req, res) {
   const { trackId } = req.params
-  const { name, genres, album, artists, playlists, imagePublicId, audioPublicId } = req.body
+  const { name, genres, album, artists, playlists } = req.body
   try {
-    if (imagePublicId) await removeMedia(imagePublicId, 'image')
-    if (audioPublicId) await removeMedia(audioPublicId, 'video')
-    const trackToUpdate = await db.Track.findByIdAndUpdate({ _id: trackId }, {
-      name, genres, album, artists, playlists
-    }).lean().exec()
+    const trackToUpdate = await db.Track.findByIdAndUpdate(
+      { _id: trackId }, 
+      { name, genres, album, artists, playlists },
+      { returnOriginal: false }
+      ).lean().exec()
     if (!trackToUpdate) {
       return res.status(400).send({ status: 400 })
     }
@@ -167,7 +169,7 @@ async function updateTrack(req, res) {
     album && await migrateCascadeObject(album, db.Album, 'tracks', trackToUpdate._id)
     artists && await migrateCascadeArray(artists, db.Artist, 'tracks', trackToUpdate._id)
     playlists && await migrateCascadeArray(playlists, db.Playlist, 'tracks', trackToUpdate._id)
-    return res.status(200).send({ status: 200 })
+    return res.status(200).send({ status: 200, track: trackToUpdate })
   } catch (err) {
     return res.status(500).send({ status: 500 })
   }
@@ -179,24 +181,31 @@ async function putTrackImage(req, res) {
     return res.status(404).send({ status: 404 })
   }
   try {
-    if (req.files.image) {
-      const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/trackImage`, 250, 250)
-      const trackStored = await db.Track.findOneAndUpdate(
-        { _id: trackId },
-        {
-          imageUrl: imageUploaded.url,
-          imagePublicId: imageUploaded.public_id
-        },
-        { returnOriginal: false }
-      ).lean().exec()
-      if (!trackStored) {
-        return res.status(400).send({ status: 400 })
-      }
-      await fs.unlink(req.files.image.tempFilePath)
-      return res.status(200).send({ status: 200, track: trackStored })
+    const findTrack = await db.Track.findOne({ _id: trackId }).lean().exec()
+    if (!findTrack) {
+      return res.status(404).send({ status: 404 })
     }
+    if (findTrack.imagePublicId) await removeMedia(findTrack.imagePublicId, 'image')
+    const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/trackImage`, 250, 250)
+    if (!imageUploaded) {
+      return res.status(402).send({ status: 402 })
+    }
+    const trackStored = await db.Track.findOneAndUpdate(
+      { _id: trackId },
+      {
+        imageUrl: imageUploaded.secure_url,
+        imagePublicId: imageUploaded.public_id
+      },
+      { returnOriginal: false }
+    ).lean().exec()
+    if (!trackStored) {
+      return res.status(400).send({ status: 400 })
+    }
+    return res.status(200).send({ status: 200, track: trackStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
+  } finally {
+    await fs.unlink(req.files.image.tempFilePath)
   }
 }
 
@@ -206,27 +215,33 @@ async function putTrackAudio(req, res) {
     return res.status(404).send({ status: 404 })
   }
   try {
-    if (req.files.audio) {
-      const audioUploaded = await uploadAudio(req.files.audio.tempFilePath, `${cloudinaryConfig.folder}/trackAudio`)
-      const trackStored = await db.Track.findOneAndUpdate(
-        { _id: trackId },
-        {
-          audioUrl: audioUploaded.url,
-          audioPublicId: audioUploaded.public_id
-        },
-        { returnOriginal: false }
-      ).lean().exec()
-      if (!trackStored) {
-        return res.status(400).send({ status: 400 })
-      }
-      await fs.unlink(req.files.audio.tempFilePath)
-      return res.status(200).send({ status: 200, track: trackStored })
+    const findTrack = await db.Track.findOne({ _id: trackId }).lean().exec()
+    if (!findTrack) {
+      return res.status(404).send({ status: 404 })
     }
+    if (findTrack.audioPublicId) await removeMedia(findTrack.audioPublicId, 'video')
+    const audioUploaded = await uploadAudio(req.files.audio.tempFilePath, `${cloudinaryConfig.folder}/trackAudio`)
+    if (!audioUploaded) {
+      return res.status(402).send({ status: 402 })
+    }
+    const trackStored = await db.Track.findOneAndUpdate(
+      { _id: trackId },
+      {
+        audioUrl: audioUploaded.secure_url,
+        audioPublicId: audioUploaded.public_id
+      },
+      { returnOriginal: false }
+    ).lean().exec()
+    if (!trackStored) {
+      return res.status(400).send({ status: 400 })
+    }
+    return res.status(200).send({ status: 200, track: trackStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
+  } finally {
+    await fs.unlink(req.files.audio.tempFilePath)
   }
 }
-
 
 module.exports = {
   postTrack,

@@ -62,18 +62,17 @@ async function getArtistById(req, res) {
 
 async function deleteArtist(req, res) {
 	const { artistId } = req.params
-	const { imagePublicId } = req.body
-	if (!artistId || !imagePublicId) {
-		return res.status(404).send({ status: 404 })
-	}
 	try {
+		const findArtist = await db.Artist.findOne({ _id: artistId }).lean().exec()
+		if (!findArtist) {
+			return res.status(404).send({ status: 404 })
+		}
+		if (findArtist.imagePublicId) await removeMedia(findArtist.imagePublicId, 'image')
 		await deleteCascadeArray(artistId, db.Genre, 'artists')
 		await deleteCascadeArray(artistId, db.Album, 'artists')
 		await deleteCascadeArray(artistId, db.Track, 'artists')
 		await deleteCascadeLikedByUser(artistId, db.User, 'artists')
-		if (imagePublicId) await removeMedia(imagePublicId, 'image')
 		const artistToDelete = await db.Artist.findOneAndDelete({ _id: artistId }).lean()
-
 		if (!artistToDelete) {
 			return res.status(400).send({ status: 400 })
 		}
@@ -99,30 +98,38 @@ async function putArtistImage(req, res) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
+		const findArtist = await db.Artist.findOne({ _id: artistId }).lean().exec()
+		if (!findArtist) {
+			return res.status(404).send({ status: 404 })
+		}
+		if (findArtist.imagePublicId) await removeMedia(findArtist.imagePublicId, 'image')
 		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/artistImage`, 250, 250)
+		if (!imageUploaded) {
+			return res.status(402).send({ status: 402 })
+		}
 		const artistStored = await db.Artist.findOneAndUpdate(
 			{ _id: artistId },
 			{
-				imageUrl: imageUploaded.url,
+				imageUrl: imageUploaded.secure_url,
 				imagePublicId: imageUploaded.public_id
 			},
 			{ returnOriginal: false }
-		).lean().exec()
+		).lean()
 		if (!artistStored) {
 			return res.status(400).send({ status: 400 })
 		}
-		await fs.unlink(req.files.image.tempFilePath)
 		return res.status(200).send({ status: 200, artist: artistStored })
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
+	} finally {
+		await fs.unlink(req.files?.image.tempFilePath)
 	}
 }
 
 async function updateArtist(req, res) {
 	const { artistId } = req.params
-	const { name, genres, albums, playlists, tracks, imagePublicId } = req.body
+	const { name, genres, albums, playlists, tracks } = req.body
 	try {
-		if (imagePublicId) await removeMedia(imagePublicId, 'image')
 		const artistToUpdate = await db.Artist.findByIdAndUpdate({ _id: artistId }, {
 			name, genres, tracks, albums, playlists
 		}).lean().exec()
@@ -132,7 +139,7 @@ async function updateArtist(req, res) {
 		genres && await migrateCascadeArray(genres, db.Genre, 'artists', artistToUpdate._id)
 		albums && await migrateCascadeArray(albums, db.Album, 'artists', artistToUpdate._id)
 		tracks && await migrateCascadeArray(tracks, db.Track, 'artists', artistToUpdate._id)
-		return res.status(200).send({ status: 200 })
+		return res.status(200).send({ status: 200, artist: artistToUpdate })
 	} catch (err) {
 		return res.status(500).send({ status: 500 })
 	}
