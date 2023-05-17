@@ -59,6 +59,7 @@ async function getTrackById(req, res) {
       await db.Track.findOne({ _id: trackId })
         .populate('genres')
         .populate('artists')
+        .populate('album')
         .populate('likedBy').exec()
 
     if (!tracksStored) {
@@ -68,26 +69,6 @@ async function getTrackById(req, res) {
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
   }
-}
-
-async function getTracksArtistsById(req, res) {
-	const { trackId } = req.params
-	if (!trackId) {
-		return res.status(404).send({ status: 404 })
-	}
-	try {
-		const artistStored = await db.Artist.findById({ _id: trackId })
-    .populate('tracks')
-    .populate('artist')
-    .populate('album')
-    .lean().exec();
-		if (!trackStored) {
-			return res.status(400).send({ status: 400 })
-		}
-		return res.status(200).send({ status: 200, artists: trackStored.artists })
-	} catch (err) {
-		return res.status(500).send({ status: 500, error: err })
-	}
 }
 
 async function deleteTrack(req, res) {
@@ -222,6 +203,5 @@ module.exports = {
   likeDislikeTrack,
   putTrackImage,
   putTrackAudio,
-  updateTrack,
-  getTracksArtistsById
+  updateTrack
 }
