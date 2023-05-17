@@ -50,7 +50,7 @@ async function getArtistById(req, res) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
-		const artistStored = await db.Artist.findOne({ _id: artistId }).lean().exec()
+		const artistStored = await db.Artist.findOne({ _id: artistId }).populate('tracks').lean().exec()
 		if (!artistStored) {
 			return res.status(400).send({ status: 400 })
 		}
