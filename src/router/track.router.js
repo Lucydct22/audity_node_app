@@ -14,7 +14,7 @@ api
 	.get('/tracks-liked-by-user/:userId', [md_auth.ensureAuth], controller.getTracksLikedByUserId)
 	.get('/like-dislike-track/:trackId/:userId', [md_auth.ensureAuth], controller.likeDislikeTrack)
 	.put('/track-image/:trackId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.putTrackImage)
-	.put('/track-audio/:trackId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.putTrackAudio)
+	.put('/track-audio/:trackId', md_auth.ensureAuth, controller.putTrackAudio) // md_auth.ensureAdminAuth
 	.get('/tracks-private/:userId', md_auth.ensureAuth, controller.getPrivateTracks)
 
 module.exports = api;
