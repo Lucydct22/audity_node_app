@@ -10,6 +10,7 @@ async function searchContent(req, res) {
 		const tracks = await db.Track.find({ name: queryRegex }).lean().exec();
 		const artists = await db.Artist.find({ name: queryRegex }).lean().exec();
 		const albums = await db.Album.find({ name: queryRegex }).lean().exec();
+		const playlists = await db.Playlist.find({ name: queryRegex }).lean().exec();
 
 		if (!tracks) {
 			return res.status(400).send({ status: 400 })
@@ -17,6 +18,7 @@ async function searchContent(req, res) {
 		let tracksArray = []
 		let artistsArray = []
 		let albumsArray = []
+		let playlistsArray = []
 
 		tracks.forEach(track => tracksArray.push({
 			_id: track._id,
@@ -36,13 +38,20 @@ async function searchContent(req, res) {
 			name: album.name,
 			imageUrl: album.imageUrl
 		}));
+		playlists.forEach(playlist => playlistsArray.push({
+			_id: playlist._id,
+			type: 'playlist',
+			name: playlist.name,
+			imageUrl: playlist.imageUrl
+		}));
 
 		return res.status(200).send({
 			status: 200,
 			content: {
 				tracks: tracksArray,
 				artists: artistsArray,
-				albums: albumsArray
+				albums: albumsArray,
+				playlists: playlistsArray,
 			}
 		})
 	} catch (err) {
