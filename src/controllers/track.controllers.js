@@ -95,6 +95,7 @@ async function getTrackById(req, res) {
       await db.Track.findOne({ _id: trackId })
         .populate('genres')
         .populate('artists')
+        .populate('album')
         .populate('likedBy').exec()
 
     if (!tracksStored) {
