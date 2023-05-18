@@ -29,7 +29,6 @@ const ArtistSchema = new Schema({
 }
 )
 
-ArtistSchema.index({ name: 'text' });
 const ArtistModel = model('Artist', ArtistSchema)
 
 module.exports = ArtistModel

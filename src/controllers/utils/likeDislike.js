@@ -1,8 +1,10 @@
 const { ObjectId } = require("bson");
+const { migrateLikesToIntoUser, deleteLikesToIntoUser } = require("../../utils/dbCascade");
+const db = require('../../models')
 
-async function likeDislike(res, Model, contentId, userId) {
+async function likeDislike(res, Model, contentId, userId, dbFieldName) {
 	let newModel;
-	let haveLike = false
+	let haveLike = true
 	if (!contentId || !userId) {
 		return res.status(404).send({ status: 404 })
 	}
@@ -19,21 +21,27 @@ async function likeDislike(res, Model, contentId, userId) {
 		modelStored.likedBy.forEach(async (likeId, index) => {
 			if (likeId.toString() === userId.toString()) {
 				newModel.likedBy.splice(index, 1)
-				haveLike = true
+				haveLike = false
 				return
 			}
 		});
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
 	} finally {
-		if (!haveLike) {
+		if (haveLike) {
 			newModel.likedBy.push(new ObjectId(userId))
+			await migrateLikesToIntoUser(userId, contentId, dbFieldName)
+		} else {
+			await deleteLikesToIntoUser(userId, contentId, dbFieldName)
 		}
-		await Model.findOneAndUpdate(
-			{ _id: contentId },
-			{ likedBy: newModel.likedBy }
-		).lean().exec()
-		return res.status(200).send({ status: 201, haveLike })
+		if (newModel) {
+			await Model.findOneAndUpdate(
+				{ _id: contentId },
+				{ likedBy: newModel.likedBy },
+				{ returnOriginal: false }
+			).lean().exec()
+			return res.status(200).send({ status: 200, haveLike })
+		}
 	}
 }
 

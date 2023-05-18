@@ -26,8 +26,7 @@ const uploadAudio = async (audioFile, folder) => {
 }
 
 const removeMedia = async (publicId, type) => {
-  const imageUploaded = await cloudinary.uploader.destroy(publicId, { resource_type: type })
-  return imageUploaded
+  return await cloudinary.uploader.destroy(publicId, { resource_type: type })
 }
 
 module.exports = { cloudinary, uploadImage, uploadAudio, removeMedia }

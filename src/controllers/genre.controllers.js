@@ -29,11 +29,19 @@ async function putGenreImage(req, res) {
 		return res.status(404).send({ status: 404 })
 	}
 	try {
+		const findGenre = await db.Genre.findOne({ _id: genreId }).lean().exec()
+		if (!findGenre) {
+			return res.status(404).send({ status: 404 })
+		}
+		if (findGenre.imagePublicId) await removeMedia(findGenre.imagePublicId, 'image')
 		const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/genreImage`, 264, 134)
+		if (!imageUploaded) {
+			return res.status(402).send({ status: 402 })
+		}
 		const genreStored = await db.Genre.findOneAndUpdate(
 			{ _id: genreId },
 			{
-				imageUrl: imageUploaded.url,
+				imageUrl: imageUploaded.secure_url,
 				imagePublicId: imageUploaded.public_id
 			},
 			{ returnOriginal: false }
@@ -41,10 +49,11 @@ async function putGenreImage(req, res) {
 		if (!genreStored) {
 			return res.status(400).send({ status: 400 })
 		}
-		await fs.unlink(req.files.image.tempFilePath)
 		return res.status(200).send({ status: 200, genre: genreStored })
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
+	} finally {
+		await fs.unlink(req.files?.image.tempFilePath)
 	}
 }
 
@@ -126,17 +135,17 @@ async function getGenreArtistsById(req, res) {
 
 async function updateGenre(req, res) {
 	const { id } = req.params
-	const { name, imagePublicId } = req.body
-	if (!name) {
-		return res.status(404).send({ status: 404 })
-	}
+	const { name } = req.body
 	try {
-		if (imagePublicId) await removeMedia(imagePublicId, 'image')
-		const genreToUpdate = await db.Genre.findByIdAndUpdate({ _id: id }, { name }).lean().exec()
+		const genreToUpdate = await db.Genre.findByIdAndUpdate(
+			{ _id: id }, 
+			{ name },
+			{ returnOriginal: false }
+			).lean().exec()
 		if (!genreToUpdate) {
 			return res.status(400).send({ status: 400 })
 		}
-		return res.status(200).send({ status: 200 })
+		return res.status(200).send({ status: 200, genre: genreToUpdate })
 	} catch (err) {
 		return res.status(500).send({ status: 500 })
 	}
@@ -144,13 +153,16 @@ async function updateGenre(req, res) {
 
 async function deleteGenre(req, res) {
 	const { id } = req.params
-	const { imagePublicId } = req.body
 	try {
+		const findGenre = await db.Genre.findOne({ _id: id }).lean().exec()
+		if (!findGenre) {
+			return res.status(404).send({ status: 404 })
+		}
+		if (findGenre.imagePublicId) await removeMedia(findGenre.imagePublicId, 'image')
 		await deleteGenresCascade(id, db.Album)
 		await deleteGenresCascade(id, db.Artist)
 		await deleteGenresCascade(id, db.Track)
 		const genreToDelete = await db.Genre.findOneAndDelete({ _id: id }).lean().exec()
-		if (imagePublicId) await removeMedia(imagePublicId, 'image')
 		if (!genreToDelete) {
 			return res.status(400).send({ status: 400 })
 		}

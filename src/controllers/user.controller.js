@@ -1,4 +1,5 @@
 const db = require('../models')
+const { deleteCascadeArray } = require('../utils/dbCascade')
 // const ManagementClient = require('auth0').ManagementClient
 
 async function registerLoginUser(req, res) {
@@ -80,9 +81,6 @@ async function updateUserLanguage(req, res) {
 async function updateUserCountry(req, res) {
 	const user = req.auth
 	const { country } = req.body
-
-	console.log(user.payload.sub);
-
 	try {
 		const userToUpdated = await db.User.findOneAndUpdate(
 			{ userId: user.payload.sub.toString() },
@@ -115,11 +113,7 @@ async function getUserRole(req, res) {
 }
 
 async function deleteUser(req, res) {
-	const { userId } = req.auth
-	//const { user_id } = req.auth0
-	if (!id) {
-		return res.status(404).send({ status: 404 })
-	}
+	const { userId } = req.params
 	try {
 		await deleteCascadeArray(userId.toString(), db.Artist, 'likedBy')
 		await deleteCascadeArray(userId.toString(), db.Album, 'likedBy')
@@ -132,13 +126,6 @@ async function deleteUser(req, res) {
 		if (!userToDelete) {
 			return res.status(400).send({ status: 400, error: 'User not found' })
 		}
-		/*const auth0 = new ManagementClient({
-			domain: process.env.AUTH0_DOMAIN,
-			clientId: process.env.DEVELOPMENT_AUTH0_CLIENT_ID,
-			clientSecret: process.env.AUTH0_CLIENT_SECRET,
-			scope: 'delete:users',
-		});
-		await auth0.deleteUser({ user_id: user_id });*/
 		return res.status(200).send({ status: 200, user: userToDelete })
 	} catch (err) {
 		return res.status(500).send({ status: 500, error: err })
@@ -169,6 +156,36 @@ async function updateUserInfo(req, res) {
 	}
 }
 
+async function getUsers(req, res) {
+	try {
+		const usersStored = await db.User.find().lean().exec()
+
+		if (!usersStored) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200, users: usersStored })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
+async function updateUserRole(req, res) {
+	const { userId } = req.params
+	const { role } = req.body
+	try {
+		const userToUpdated = await db.User.findOneAndUpdate(
+			{ _id: userId },
+			{ role: role }
+		).lean().exec()
+		if (!userToUpdated) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200 })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
+}
+
 module.exports = {
 	registerLoginUser,
 	updateUserSettings,
@@ -176,5 +193,7 @@ module.exports = {
 	updateUserCountry,
 	getUserRole,
 	deleteUser,
-	updateUserInfo
+	updateUserInfo,
+	getUsers,
+	updateUserRole
 }

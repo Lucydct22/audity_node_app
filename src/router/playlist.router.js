@@ -14,5 +14,10 @@ api
 	.get('/playlists-by-user/:userId', [md_auth.ensureAuth], controller.getPlaylistsByUser)
 	.put('/playlist-add-track/playlists/:playlistId/tracks/:trackId', [md_auth.ensureAuth], controller.putTrackToPlaylist)
 	.delete('/delete-track-from-playlist/playlists/:playlistId/tracks/:trackId', [md_auth.ensureAuth], controller.deleteTrackFromPlaylist)
+	.post('/playlist-admin', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postPlaylistAdmin)
+	.put('/playlist-image/:playlistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updatePlaylistImage)
+	.put('/playlist-admin/:playlistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updatePlaylistAdmin)
+	.put('/update-public-accessible/:playlistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updatePublicAccessible)
+	.get('/all-playlists', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.getAllPlaylists)
 
 module.exports = api;
