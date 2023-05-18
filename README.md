@@ -95,7 +95,7 @@ The list of folders:
 
 ![Screenshot of postman](assets/img/list_folders.png)
 
-Exapmle *getAlbums*:
+Example *getAlbums*:
 
 ![Screenshot of postman](assets/img/getAlbums.png)
 
