@@ -7,6 +7,7 @@ Desktop:
 ![Screenshot of postman](assets/img/music_page.png)
 
 Mobile:
+
 ![Screenshot of postman](assets/img/music_mob.png) 
 
 
