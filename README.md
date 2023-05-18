@@ -201,9 +201,7 @@ This project was done by:
 - FULLSTACK DEVELOPOR [Lucia Tena](https://github.com/Lucydct22)
 
 
-## Authors ✨
-
-Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks go to these wonderful people (✨](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
