@@ -1,6 +1,7 @@
 const { ObjectId } = require("bson");
 const { migrateLikesToIntoUser, deleteLikesToIntoUser } = require("../../utils/dbCascade");
-const db = require('../../models')
+const db = require('../../models');
+const { updateTotalLikes } = require("../statistic.controller");
 
 async function likeDislike(res, Model, contentId, userId, dbFieldName) {
 	let newModel;
@@ -30,6 +31,7 @@ async function likeDislike(res, Model, contentId, userId, dbFieldName) {
 		if (haveLike) {
 			newModel.likedBy.push(new ObjectId(userId))
 			await migrateLikesToIntoUser(userId, contentId, dbFieldName)
+			await updateTotalLikes('global')
 		} else {
 			await deleteLikesToIntoUser(userId, contentId, dbFieldName)
 		}

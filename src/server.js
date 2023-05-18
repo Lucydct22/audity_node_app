@@ -5,7 +5,6 @@ const cors = require('cors')
 const app = express()
 const errorMiddleware = require('./middlewares/error.middleware')
 const fileUpload = require('express-fileupload')
-
 // Routes
 const userRoutes = require('./router/user.router')
 const genreRoutes = require('./router/genre.router')
@@ -14,6 +13,7 @@ const albumRoutes = require('./router/album.router')
 const artistRoutes = require('./router/artist.router')
 const trackRoutes = require('./router/track.router')
 const musicRoutes = require('./router/music.router')
+const statisticRoutes = require('./router/statistic.router')
 
 app.use(express.json())
 app.use(cors({
@@ -59,6 +59,7 @@ app.use(`/api/${config.app.API_VERSION}`, albumRoutes)
 app.use(`/api/${config.app.API_VERSION}`, artistRoutes)
 app.use(`/api/${config.app.API_VERSION}`, trackRoutes)
 app.use(`/api/${config.app.API_VERSION}`, musicRoutes)
+app.use(`/api/${config.app.API_VERSION}`, statisticRoutes)
 app.use(errorMiddleware)
 
 module.exports = app;

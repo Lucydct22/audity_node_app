@@ -4,6 +4,7 @@ const Artist = require('./artist.model')
 const Track = require('./track.model')
 const Album = require('./album.model')
 const Playlist = require('./playlist.model')
+const Statistic = require('./statistic.model')
 
 module.exports = {
   User,
@@ -11,5 +12,6 @@ module.exports = {
 	Artist,
 	Track,
 	Album,
-	Playlist
+	Playlist,
+	Statistic
 }
