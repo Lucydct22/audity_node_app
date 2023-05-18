@@ -156,7 +156,7 @@ async function likeDislikeTrack(req, res) {
 
 async function updateTrack(req, res) {
   const { trackId } = req.params
-  const { name, genres, album, artists, playlists } = req.body
+  const { name, genres, album, artists, playlists, duration } = req.body
   let tracksToRemoveIntoGenres = []
   let tracksToRemoveIntoArtists = []
   let tracksToRemoveIntoPlaylists = []
@@ -186,7 +186,7 @@ async function updateTrack(req, res) {
     });
     const trackToUpdate = await db.Track.findByIdAndUpdate(
       { _id: trackId },
-      { name, genres, album, artists, playlists },
+      { name, genres, album, artists, playlists, duration },
       { returnOriginal: false }
     ).lean().exec()
     if (!trackToUpdate) {
