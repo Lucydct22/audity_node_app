@@ -92,9 +92,11 @@ Almost all routes in the application are protected using ensureAuth. Users need 
 
 ## Postman
 The list of folders:
+
 ![Screenshot of postman](assets/img/list_folders.png)
 
 getAlbums controller:
+
 ![Screenshot of postman](assets/img/getAlbums.png)
 
 ## Endpoints
