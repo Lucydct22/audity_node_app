@@ -50,12 +50,14 @@ CLOUDINARY_API_SECRET={CLOUDINARY_API_SECRET}
 ## Development
 To run the application in development mode, use the following command:
 >npm run dev
+
 This will start the development server and provide hot-reloading for any changes made to the code.
 
 ## Production
 To build and run the application in production mode, use the following commands:
 >npm run build
 >npm start
+
 This will build the production-ready code and start the server.
 
 ## Controllers
