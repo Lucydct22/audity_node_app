@@ -12,17 +12,8 @@ const UserSchema = new Schema({
   language: String,
   role: String,
   userInfo: {
-    currentTrackList: {
-      type: Schema.Types.ObjectId,
-      ref: 'Album',
-      ref: 'Artist',
-      ref: 'Playlist',
-      ref: 'Genre',
-    },
-    currentTrack: {
-      type: Schema.Types.ObjectId,
-      ref: 'Track'
-    },
+    currentTrackList: String,
+    currentTrack: String,
     trackTime: Number,
     volume: Number
   },

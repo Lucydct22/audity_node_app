@@ -22,7 +22,6 @@ async function likeDislike(res, Model, contentId, userId, dbFieldName) {
 			if (likeId.toString() === userId.toString()) {
 				newModel.likedBy.splice(index, 1)
 				haveLike = false
-				return
 			}
 		});
 	} catch (err) {

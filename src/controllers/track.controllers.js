@@ -201,16 +201,16 @@ async function updateTrack(req, res) {
     return res.status(500).send({ status: 500 })
   } finally {
     if (album) {
-      await deleteCascade(db.Album, trackToRemoveIntoAlbum, 'tracks', trackId)
+      return await deleteCascade(db.Album, trackToRemoveIntoAlbum, 'tracks', trackId)
     }
     tracksToRemoveIntoGenres?.forEach(async genreId => {
-      await deleteCascade(db.Genre, genreId, 'tracks', trackId)
+      return await deleteCascade(db.Genre, genreId, 'tracks', trackId)
     });
     tracksToRemoveIntoArtists?.forEach(async artistId => {
-      await deleteCascade(db.Artist, artistId, 'tracks', trackId)
+      return await deleteCascade(db.Artist, artistId, 'tracks', trackId)
     });
     tracksToRemoveIntoPlaylists?.forEach(async playlistId => {
-      await deleteCascade(db.Playlist, playlistId, 'tracks', trackId)
+      return await deleteCascade(db.Playlist, playlistId, 'tracks', trackId)
     });
   }
 }

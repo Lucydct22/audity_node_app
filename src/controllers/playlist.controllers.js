@@ -241,7 +241,7 @@ async function updatePlaylistAdmin(req, res) {
 		return res.status(500).send({ status: 500 })
 	} finally {
 		playlistsToRemoveIntoTracks?.forEach(async trackId => {
-			await deleteCascade(db.Track, trackId, 'playlists', playlistId)
+			return await deleteCascade(db.Track, trackId, 'playlists', playlistId)
 		});
 	}
 }

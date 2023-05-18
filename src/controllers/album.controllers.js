@@ -174,10 +174,10 @@ async function updateAlbum(req, res) {
 		return res.status(500).send({ status: 500 })
 	} finally {
 		albumsToRemoveIntoGenres?.forEach(async genreId => {
-			await deleteCascade(db.Genre, genreId, 'albums', albumId)
+			return await deleteCascade(db.Genre, genreId, 'albums', albumId)
 		});
 		albumsToRemoveIntoArtists?.forEach(async artistId => {
-			await deleteCascade(db.Artist, artistId, 'albums', albumId)
+			return await deleteCascade(db.Artist, artistId, 'albums', albumId)
 		});
 		albumsToRemoveIntoTracks?.forEach(async trackId => {
 			return await db.Track.findOneAndUpdate(

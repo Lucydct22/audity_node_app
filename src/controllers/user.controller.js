@@ -1,6 +1,5 @@
 const db = require('../models')
 const { deleteCascadeArray } = require('../utils/dbCascade')
-// const ManagementClient = require('auth0').ManagementClient
 
 async function registerLoginUser(req, res) {
 	const { user } = req.body
