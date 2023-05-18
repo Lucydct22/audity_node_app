@@ -64,13 +64,13 @@ This will build the production-ready code and start the server.
 ## Controllers
 The project includes the following controllers:
 
-User.controller: Manages user - CRUD.
-Album.controller: Manages album - CRUD.
-Artist.controller: Manages artist - CRUD.
-Genre.controller: Manages genre - CRUD.
-Music.controller: Manages music - CRUD.
-Playlist.controller: Manages playlist - CRUD.
-Track.controller: Manages track - CRUD.
+* User.controller: Manages user - CRUD.
+* Album.controller: Manages album - CRUD.
+* Artist.controller: Manages artist - CRUD.
+* Genre.controller: Manages genre - CRUD.
+* Music.controller: Manages music - CRUD.
+* Playlist.controller: Manages playlist - CRUD.
+* Track.controller: Manages track - CRUD.
 
 ## Seeders
 Seeders are provided for development purposes. They allow you to populate the database with sample data. To run the seeders, use the following command:
