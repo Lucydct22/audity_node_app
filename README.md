@@ -194,14 +194,14 @@ Example *getAlbums*:
 ## Authors :brain:
 This project was done by:
 
-- FULLSTACK DEVELOPOR and Scrum master[David T. Pizarro](https://github.com/DTPF)
+- FULLSTACK DEVELOPOR and Scrum master [David T. Pizarro](https://github.com/DTPF)
 - FULLSTACK DEVELOPOR [Joe Joy](https://github.com/joejoyjoy)
 - FULLSTACK DEVELOPOR [Iuliia Shikhanova](https://github.com/IuliiaNova)
 - FULLSTACK DEVELOPOR [Javier Pascual](https://github.com/Javier-jpt)
 - FULLSTACK DEVELOPOR [Lucia Tena](https://github.com/Lucydct22)
 
 
-Thanks go to these wonderful people (✨](https://allcontributors.org/docs/en/emoji-key)):
+Thanks go to these wonderful people ✨
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
