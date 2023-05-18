@@ -1,7 +1,7 @@
 const db = require('../models')
 
 async function migrateCascadeArray(items, Model, dbFieldName, documentId) {
-	items.forEach(async modelId => {
+	await items.forEach(async modelId => {
 		await Model.findOneAndUpdate(
 			{ _id: modelId },
 			{ $addToSet: { [dbFieldName]: documentId } }
@@ -27,6 +27,13 @@ async function migrateLikesToIntoUser(userId, paramsId, dbFieldName) {
 	await db.User.findByIdAndUpdate(
 		{ _id: userId.toString() },
 		{ $addToSet: { [`likesTo.${dbFieldName}`]: [paramsId.toString()] } }
+	).lean().exec()
+}
+
+async function deleteCascade(Model, modelToUpdate, dbFieldName, idToDelete) {
+	return await Model.findOneAndUpdate(
+		{ _id: modelToUpdate },
+		{ $pullAll: { [dbFieldName]: [idToDelete] } }
 	).lean().exec()
 }
 
@@ -95,5 +102,6 @@ module.exports = {
 	migrateMyLibraryUser,
 	deleteMyLibraryUser,
 	migrateLikesToIntoUser,
-	deleteLikesToIntoUser
+	deleteLikesToIntoUser,
+	deleteCascade
 }

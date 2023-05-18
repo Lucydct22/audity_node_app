@@ -1,7 +1,7 @@
 const db = require('../models')
 const fs = require('fs-extra')
 const { uploadImage, removeMedia } = require('../utils/cloudinary')
-const { migrateCascadeArray, deleteCascadeLikedByUser, deleteCascadeArray } = require('../utils/dbCascade')
+const { migrateCascadeArray, deleteCascadeLikedByUser, deleteCascadeArray, deleteCascade } = require('../utils/dbCascade')
 const { likeDislike } = require('./utils/likeDislike')
 const { getContentLiked } = require('./utils/getContentLiked')
 const cloudinaryConfig = require('../config/config').cloudinary
@@ -129,7 +129,29 @@ async function putArtistImage(req, res) {
 async function updateArtist(req, res) {
 	const { artistId } = req.params
 	const { name, genres, albums, playlists, tracks } = req.body
+	let artistsToRemoveIntoGenres = []
+	let artistsToRemoveIntoAlbums = []
+	let artistsToRemoveIntoTracks = []
 	try {
+		const findArtist = await db.Artist.findOne({ _id: artistId }).lean().exec()
+		if (!findArtist) {
+			return res.status(404).send({ status: 404 })
+		}
+		findArtist.genres?.forEach(genre => {
+			if (genres && !genres.includes(genre.toString())) {
+				artistsToRemoveIntoGenres.push(genre)
+			}
+		});
+		findArtist.albums?.forEach(album => {
+			if (albums && !albums.includes(album.toString())) {
+				artistsToRemoveIntoAlbums.push(album)
+			}
+		});
+		findArtist.tracks?.forEach(track => {
+			if (tracks && !tracks.includes(track.toString())) {
+				artistsToRemoveIntoTracks.push(track)
+			}
+		});
 		const artistToUpdate = await db.Artist.findByIdAndUpdate({ _id: artistId }, {
 			name, genres, tracks, albums, playlists
 		}).lean().exec()
@@ -142,6 +164,16 @@ async function updateArtist(req, res) {
 		return res.status(200).send({ status: 200, artist: artistToUpdate })
 	} catch (err) {
 		return res.status(500).send({ status: 500 })
+	} finally {
+		artistsToRemoveIntoGenres?.forEach(async genreId => {
+			await deleteCascade(db.Genre, genreId, 'artists', artistId)
+		});
+		artistsToRemoveIntoAlbums?.forEach(async albumId => {
+			await deleteCascade(db.Album, albumId, 'artists', artistId)
+		});
+		artistsToRemoveIntoTracks?.forEach(async trackId => {
+			await deleteCascade(db.Track, trackId, 'artists', artistId)
+		});
 	}
 }
 

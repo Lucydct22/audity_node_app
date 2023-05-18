@@ -1,12 +1,11 @@
 const db = require('../models')
 const fs = require('fs-extra')
 const { uploadImage, uploadAudio, removeMedia } = require('../utils/cloudinary')
-const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray } = require('../utils/dbCascade')
+const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray, deleteCascadeObject, deleteCascade } = require('../utils/dbCascade')
 const { getRandomItem } = require('../utils/getRamdomItem')
 const { getContentLiked } = require('./utils/getContentLiked')
 const { likeDislike } = require('./utils/likeDislike')
 const cloudinaryConfig = require('../config/config').cloudinary
-const { getPlaylistsByUser } = require('../controllers/playlist.controllers')
 const { deleteCascadeLikedByUser } = require('../utils/dbCascade')
 
 async function postTrack(req, res) {
@@ -29,7 +28,7 @@ async function postTrack(req, res) {
     genres && await migrateCascadeArray(genres, db.Genre, 'tracks', trackSaved._id)
     artists && await migrateCascadeArray(artists, db.Artist, 'tracks', trackSaved._id)
     album && await migrateCascadeObject(album, db.Album, 'tracks', trackSaved._id)
-    playlists && await migrateCascadeArray(playlists, db.Track, 'tracks', trackSaved._id)
+    playlists && await migrateCascadeArray(playlists, db.Playlist, 'tracks', trackSaved._id)
     return res.status(200).send({ status: 200, track: trackSaved })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
@@ -158,12 +157,38 @@ async function likeDislikeTrack(req, res) {
 async function updateTrack(req, res) {
   const { trackId } = req.params
   const { name, genres, album, artists, playlists } = req.body
+  let tracksToRemoveIntoGenres = []
+  let tracksToRemoveIntoArtists = []
+  let tracksToRemoveIntoPlaylists = []
+  let trackToRemoveIntoAlbum = ''
   try {
+    const findTrack = await db.Track.findOne({ _id: trackId }).lean().exec()
+    if (!findTrack) {
+      return res.status(404).send({ status: 404 })
+    }
+    if (album) {
+      trackToRemoveIntoAlbum = findTrack.album
+    }
+    findTrack.genres?.forEach(genre => {
+      if (genres && !genres.includes(genre.toString())) {
+        tracksToRemoveIntoGenres.push(genre)
+      }
+    });
+    findTrack.artists?.forEach(artist => {
+      if (artists && !artists.includes(artist.toString())) {
+        tracksToRemoveIntoArtists.push(artist)
+      }
+    });
+    findTrack.playlists?.forEach(playlist => {
+      if (playlists && !playlists.includes(playlist.toString())) {
+        tracksToRemoveIntoPlaylists.push(playlist)
+      }
+    });
     const trackToUpdate = await db.Track.findByIdAndUpdate(
-      { _id: trackId }, 
+      { _id: trackId },
       { name, genres, album, artists, playlists },
       { returnOriginal: false }
-      ).lean().exec()
+    ).lean().exec()
     if (!trackToUpdate) {
       return res.status(400).send({ status: 400 })
     }
@@ -174,6 +199,19 @@ async function updateTrack(req, res) {
     return res.status(200).send({ status: 200, track: trackToUpdate })
   } catch (err) {
     return res.status(500).send({ status: 500 })
+  } finally {
+    if (album) {
+      await deleteCascade(db.Album, trackToRemoveIntoAlbum, 'tracks', trackId)
+    }
+    tracksToRemoveIntoGenres?.forEach(async genreId => {
+      await deleteCascade(db.Genre, genreId, 'tracks', trackId)
+    });
+    tracksToRemoveIntoArtists?.forEach(async artistId => {
+      await deleteCascade(db.Artist, artistId, 'tracks', trackId)
+    });
+    tracksToRemoveIntoPlaylists?.forEach(async playlistId => {
+      await deleteCascade(db.Playlist, playlistId, 'tracks', trackId)
+    });
   }
 }
 

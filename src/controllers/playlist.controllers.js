@@ -1,7 +1,7 @@
 const db = require("../models")
 const { uploadImage, removeMedia } = require('../utils/cloudinary')
 const fs = require('fs-extra')
-const { migrateCascadeArray, deleteCascadeArray, migrateMyLibraryUser, deleteMyLibraryUser, migrateCascadeObject, deleteCascadeObject } = require("../utils/dbCascade")
+const { migrateCascadeArray, deleteCascadeArray, migrateMyLibraryUser, deleteMyLibraryUser, migrateCascadeObject, deleteCascadeObject, deleteCascade } = require("../utils/dbCascade")
 const { likeDislike } = require("./utils/likeDislike")
 const { getContentLiked } = require("./utils/getContentLiked")
 const cloudinaryConfig = require('../config/config').cloudinary
@@ -216,7 +216,17 @@ async function deleteTrackFromPlaylist(req, res) {
 async function updatePlaylistAdmin(req, res) {
 	const { playlistId } = req.params
 	const { name, description, tracks } = req.body
+	let playlistsToRemoveIntoTracks = []
 	try {
+		const findPlaylist = await db.Playlist.findOne({ _id: playlistId }).lean().exec()
+		if (!findPlaylist) {
+			return res.status(404).send({ status: 404 })
+		}
+		findPlaylist.tracks?.forEach(track => {
+			if (tracks && !tracks.includes(track.toString())) {
+				playlistsToRemoveIntoTracks.push(track)
+			}
+		});
 		const playlistToUpdate = await db.Playlist.findByIdAndUpdate(
 			{ _id: playlistId }, 
 			{	name, description, tracks	},
@@ -225,36 +235,14 @@ async function updatePlaylistAdmin(req, res) {
 		if (!playlistToUpdate) {
 			return res.status(400).send({ status: 400 })
 		}
+		await migrateCascadeArray(tracks, db.Track, 'playlists', playlistId)
 		return res.status(200).send({ status: 200, playlist: playlistToUpdate })
 	} catch (err) {
 		return res.status(500).send({ status: 500 })
-	}
-}
-
-async function updatePlaylistImage(req, res) {
-	const { playlistId } = req.params
-	if (!req.files) {
-		return res.status(404).send({ status: 404 })
-	}
-	try {
-		if (req.files.image) {
-			const imageUploaded = await uploadImage(req.files.image.tempFilePath, `${cloudinaryConfig.folder}/playlistImage`, 250, 250)
-			const playlistStored = await db.Playlist.findOneAndUpdate(
-				{ _id: playlistId },
-				{
-					imageUrl: imageUploaded.secure_url,
-					imagePublicId: imageUploaded.public_id
-				},
-				{ returnOriginal: false }
-			).lean().exec()
-			if (!playlistStored) {
-				return res.status(400).send({ status: 400 })
-			}
-			await fs.unlink(req.files.image.tempFilePath)
-			return res.status(200).send({ status: 200, playlist: playlistStored })
-		}
-	} catch (err) {
-		return res.status(500).send({ status: 500, error: err })
+	} finally {
+		playlistsToRemoveIntoTracks?.forEach(async trackId => {
+			await deleteCascade(db.Track, trackId, 'playlists', playlistId)
+		});
 	}
 }
 

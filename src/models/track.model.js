@@ -41,7 +41,6 @@ const TrackSchema = new Schema({
 }
 )
 
-TrackSchema.index({ name: 'text' });
 const TrackModel = model('Track', TrackSchema)
 
 module.exports = TrackModel
