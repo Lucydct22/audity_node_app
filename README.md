@@ -194,11 +194,11 @@ Example *getAlbums*:
 ## Authors :brain:
 This project was done by:
 
-- FULLSTACK DEVELOPOR and Scrum master [David T. Pizarro](https://github.com/DTPF)
-- FULLSTACK DEVELOPOR [Joe Joy](https://github.com/joejoyjoy)
-- FULLSTACK DEVELOPOR [Iuliia Shikhanova](https://github.com/IuliiaNova)
-- FULLSTACK DEVELOPOR [Javier Pascual](https://github.com/Javier-jpt)
-- FULLSTACK DEVELOPOR [Lucia Tena](https://github.com/Lucydct22)
+- FULLSTACK DEVELOPER and Scrum master [David T. Pizarro](https://github.com/DTPF)
+- FULLSTACK DEVELOPER [Joe Joy](https://github.com/joejoyjoy)
+- FULLSTACK DEVELOPER [Iuliia Shikhanova](https://github.com/IuliiaNova)
+- FULLSTACK DEVELOPER [Javier Pascual](https://github.com/Javier-jpt)
+- FULLSTACK DEVELOPER [Lucia Tena](https://github.com/Lucydct22)
 
 
 Thanks go to these wonderful people ✨
