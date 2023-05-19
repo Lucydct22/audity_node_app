@@ -64,11 +64,20 @@ async function removeReportErroredTrack(req, res) {
 	}
 }
 
-async function updateTotalTracksPlayed(name) {
-	await db.Statistic.findOneAndUpdate(
-		{ name },
-		{ $inc: { totalTracksPlayed: 1 } }
-	).lean().exec()
+async function updateTotalTracksPlayed(req, res) {
+	const { name } = req.body
+	try {
+		const updateTracksPlayed = await db.Statistic.findOneAndUpdate(
+			{ name },
+			{ $inc: { totalTracksPlayed: 1 } }
+		).lean().exec()
+		if (!updateTracksPlayed) {
+			return res.status(400).send({ status: 400 })
+		}
+		return res.status(200).send({ status: 200 })
+	} catch (err) {
+		return res.status(500).send({ status: 500, error: err })
+	}
 }
 
 async function updateTotalLikes(name) {
