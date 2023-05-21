@@ -7,7 +7,6 @@ const { getContentLiked } = require('./utils/getContentLiked')
 const { likeDislike } = require('./utils/likeDislike')
 const cloudinaryConfig = require('../config/config').cloudinary
 const { deleteCascadeLikedByUser } = require('../utils/dbCascade')
-const { updateTotalTracksPlayed } = require('./statistic.controller')
 
 async function postTrack(req, res) {
   const { name, genres, artists, album, playlists } = req.body
@@ -104,8 +103,6 @@ async function getTrackById(req, res) {
     return res.status(200).send({ status: 200, track: tracksStored })
   } catch (err) {
     return res.status(500).send({ status: 500, error: err })
-  } finally {
-    return await updateTotalTracksPlayed('global') 
   }
 }
 
@@ -135,8 +132,7 @@ async function deleteTrack(req, res) {
 
 async function getRandomTrack(req, res) {
   try {
-    const tracksStored = await db.Track.find().populate('artists').lean().exec()
-
+    const tracksStored = await db.Track.find({ publicAccessible: true }).populate('artists').lean().exec()
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
