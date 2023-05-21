@@ -132,8 +132,7 @@ async function deleteTrack(req, res) {
 
 async function getRandomTrack(req, res) {
   try {
-    const tracksStored = await db.Track.find().populate('artists').lean().exec()
-
+    const tracksStored = await db.Track.find({ publicAccessible: true }).populate('artists').lean().exec()
     if (!tracksStored) {
       return res.status(400).send({ status: 400 })
     }
