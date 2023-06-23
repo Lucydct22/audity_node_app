@@ -1,7 +1,7 @@
 const db = require('../models')
 const fs = require('fs-extra')
 const { uploadImage, uploadAudio, removeMedia } = require('../utils/cloudinary')
-const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray, deleteCascadeObject, deleteCascade } = require('../utils/dbCascade')
+const { migrateCascadeArray, migrateCascadeObject, deleteCascadeArray, deleteCascade } = require('../utils/dbCascade')
 const { getRandomItem } = require('../utils/getRamdomItem')
 const { getContentLiked } = require('./utils/getContentLiked')
 const { likeDislike } = require('./utils/likeDislike')
