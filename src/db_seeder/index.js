@@ -1,4 +1,4 @@
-const { getBaseUser } = require('./user.seeder')
+const { getBaseUser } = require('./user.seeder');
 const { getBaseGenre } = require('./genre.seeder');
 const { getBaseArtist } = require('./artist.seeder');
 const { getBaseTrack } = require('./track.seeder');
@@ -7,9 +7,9 @@ const { getBasePlaylist } = require('./playlist.seeder');
 
 module.exports = {
   getBaseUser,
-	getBaseGenre,
-	getBaseArtist,
-	getBaseTrack,
-	getBaseAlbum,
-	getBasePlaylist
-}
+  getBaseGenre,
+  getBaseArtist,
+  getBaseTrack,
+  getBaseAlbum,
+  getBasePlaylist,
+};

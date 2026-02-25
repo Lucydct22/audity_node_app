@@ -1,7 +1,7 @@
-const express = require('express')
-const controller = require('../controllers/user.controller')
-const md_auth = require('../middlewares/auth.middleware')
-const api = express.Router()
+const express = require('express');
+const controller = require('../controllers/user.controller');
+const md_auth = require('../middlewares/auth.middleware');
+const api = express.Router();
 
 api
   .post('/register-login-user', md_auth.ensureAuth, controller.registerLoginUser)
@@ -12,6 +12,6 @@ api
   .put('/user-role/:userId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updateUserRole)
   .delete('/delete-user/:userId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteUser)
   .put('/update-user-info', md_auth.ensureAuth, controller.updateUserInfo)
-  .get('/users', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.getUsers)
+  .get('/users', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.getUsers);
 
 module.exports = api;

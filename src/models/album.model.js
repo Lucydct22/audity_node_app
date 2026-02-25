@@ -1,32 +1,42 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require('mongoose');
 
-const AlbumSchema = new Schema({
-	name: String,
-	year: Number,
-	totalTracks: Number,
-  imageUrl: String,
-	imagePublicId: String,
-	genres: [{
-		type: Schema.Types.ObjectId,
-		ref: 'Genre'
-	}],
-	tracks: [{
-		type: Schema.Types.ObjectId,
-		ref: 'Track'
-	}],
-	artists: [{
-		type: Schema.Types.ObjectId,
-		ref: 'Artist'
-	}],
-	likedBy: [{
-		type: Schema.Types.ObjectId,
-		ref: 'User'
-	}],
-}, {
-	timestamps: true
-}
-)
+const AlbumSchema = new Schema(
+  {
+    name: String,
+    year: Number,
+    totalTracks: Number,
+    imageUrl: String,
+    imagePublicId: String,
+    genres: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Genre',
+      },
+    ],
+    tracks: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Track',
+      },
+    ],
+    artists: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Artist',
+      },
+    ],
+    likedBy: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const AlbumModel = model('Album', AlbumSchema)
+const AlbumModel = model('Album', AlbumSchema);
 
-module.exports = AlbumModel
+module.exports = AlbumModel;

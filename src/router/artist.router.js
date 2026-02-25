@@ -1,7 +1,7 @@
-const express = require('express')
-const controller = require('../controllers/artist.controllers')
-const md_auth = require('../middlewares/auth.middleware')
-const api = express.Router()
+const express = require('express');
+const controller = require('../controllers/artist.controllers');
+const md_auth = require('../middlewares/auth.middleware');
+const api = express.Router();
 
 api
   .post('/artist', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postArtist)
@@ -11,6 +11,6 @@ api
   .get('/artists', controller.getArtists)
   .get('/artists-liked-by-user/:userId', [md_auth.ensureAuth], controller.getArtistsLikedByUserId)
   .get('/like-dislike-artist/:artistId/:userId', [md_auth.ensureAuth], controller.likeDislikeArtist)
-  .put('/artist-image/:artistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.putArtistImage)
+  .put('/artist-image/:artistId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.putArtistImage);
 
 module.exports = api;

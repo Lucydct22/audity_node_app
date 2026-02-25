@@ -1,7 +1,7 @@
-const express = require('express')
-const controller = require('../controllers/genre.controllers')
-const md_auth = require('../middlewares/auth.middleware')
-const api = express.Router()
+const express = require('express');
+const controller = require('../controllers/genre.controllers');
+const md_auth = require('../middlewares/auth.middleware');
+const api = express.Router();
 
 api
   .get('/genres', controller.getGenres)
@@ -12,6 +12,6 @@ api
   .post('/genre', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.postGenre)
   .put('/genre-image/:genreId', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.putGenreImage)
   .put('/update-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.updateGenre)
-  .delete('/delete-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteGenre)
+  .delete('/delete-genre/:id', [md_auth.ensureAuth, md_auth.ensureAdminAuth], controller.deleteGenre);
 
 module.exports = api;

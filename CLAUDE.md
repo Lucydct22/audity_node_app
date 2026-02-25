@@ -13,6 +13,7 @@ Audity is a music streaming backend API (Node.js/Express/MongoDB). It handles us
 ```bash
 npm run dev       # Start dev server with nodemon (port 4000)
 npm start         # Start production server
+npm run format    # Prettier
 ```
 
 No test runner, linter, or build step is configured. The backend is plain JavaScript (CommonJS), so no compilation is needed.

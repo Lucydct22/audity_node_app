@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const server = require("./server");
+const mongoose = require('mongoose');
+const server = require('./server');
 const config = require('./config/config');
 const seeder = require('./db_seeder/seeder');
 

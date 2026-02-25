@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,scss,json,md}\""
   },
   "repository": {
     "type": "git",
@@ -33,5 +34,15 @@
     "helmet": "^6.1.5",
     "mongoose": "^7.0.5",
     "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  },
+  "prettier": {
+    "printWidth": 110,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2
   }
 }
