@@ -1,272 +1,222 @@
-# :headphones: AUDITY Music App
-This project proposes the creation of a music web platform based on Spotify/Dreezer. Our team has developed a client-server system, using **NodeJS, Express, MongoDB, Auth0** and **Cloudinary** for the backend implementation. **ReactJS, TypeScript** and **Server-worker** for the frontend. 
+# Audity - Backend API
 
-*The project is deployed on*: https://audity.dtpf.es/
+REST API backend for **Audity**, a music streaming web platform. Built with Node.js, Express, and MongoDB.
 
-Desktop:
-![Screenshot of postman](assets/img/music_page.png)
+**Live**: https://audity.dtpf.es/
 
-Mobile:
+## Tech Stack
 
-![Screenshot of postman](assets/img/music_mob.png) 
+- **Runtime**: Node.js (JavaScript, CommonJS)
+- **Framework**: Express 4
+- **Database**: MongoDB with Mongoose 7
+- **Authentication**: Auth0 JWT via `express-oauth2-jwt-bearer`
+- **Media Storage**: Cloudinary (images and audio)
+- **File Uploads**: express-fileupload (15MB limit)
+- **Security**: Helmet with custom CSP
 
+## Prerequisites
 
-## Technologies :hammer_and_wrench:
+- Node.js (v16+)
+- MongoDB instance running locally (default port 27017)
+- Auth0 tenant configured
+- Cloudinary account
 
-- **Node.js**: Node.js is a JavaScript runtime environment that allows developers to run JavaScript code on the server-side. It provides an event-driven architecture and a non-blocking I/O model, making it highly efficient for building scalable and real-time applications.
+## Installation
 
-- **Express**: Express is a fast and minimalist web application framework for Node.js. It provides a set of robust features and utilities for building web applications and APIs. Express simplifies the process of handling HTTP requests, routing, middleware implementation, and serving static files.
-
-- **MongoDB**: MongoDB is a popular NoSQL document-oriented database. It offers a flexible and scalable data model, allowing developers to store and retrieve data in JSON-like documents. MongoDB is known for its high performance, horizontal scalability, and ease of use.
-
-- **Cloudinary**: Cloudinary is a cloud-based media management platform. It provides developers with tools and APIs to upload, store, manipulate, and deliver media assets, such as images, videos, and audio files. Cloudinary offers features like image optimization, resizing, and transformation, making it suitable for handling multimedia storage and delivery in applications.
-
-- **Auth0**: Auth0 is an authentication and authorization platform. It provides developers with pre-built authentication solutions, including user registration, login, and password recovery. Auth0 supports various authentication methods, such as social logins (Google, Facebook, etc.), single sign-on (SSO), and multi-factor authentication (MFA). It also offers role-based access control (RBAC) and user management features, making it easy to implement secure user authentication in applications.
-
-## Installation :computer:
-1. Clone the repository: `git clone https://github.com/Lucydct22/audity_node_app.git`
-2. Navigate to the project directory: `cd project-directory`
-3. Install the dependencies: `npm install`
-
-## Settings
-1. Create **.env.development** and **.env.production** (don't forgot create .gitignor for these files)
-2. You can see examples on **.env.development.example or see below: 
-```
-API_VERSION={API_VERSION}
-IP_SERVER={IP_SERVER}
-PORT_MONGO_DB={PORT_MONGO_DB}
-DB_NAME={DB_NAME}
-PORT_SERVER={PORT_SERVER}
-
-- Auth0
-AUTH0_AUDIENCE={AUTH0_AUDIENCE}
-AUTH0_ISSUER={AUTH0_ISSUER}
-
-- Cloudinary
-CLOUDINARY_CLOUD_NAME={CLOUDINARY_CLOUD_NAME}
-CLOUDINARY_API_KEY={CLOUDINARY_API_KEY}
-CLOUDINARY_API_SECRET={CLOUDINARY_API_SECRET}
+```bash
+git clone https://github.com/Lucydct22/audity_node_app.git
+cd audity_node_app
+npm install
 ```
 
-## Development
-To run the application in development mode, use the following command:
->npm run dev
+## Environment Setup
 
-This will start the development server and provide hot-reloading for any changes made to the code.
+Create `.env.development` and `.env.production` files based on the provided examples:
 
-## Production
-To build and run the application in production mode, use the following commands:
->npm run build
->npm start
+```bash
+cp .env.development.example .env.development
+cp .env.production.example .env.production
+```
 
-This will build the production-ready code and start the server.
+### Development Environment Variables
 
-## Controllers
-The project includes the following controllers:
+| Variable | Description | Example |
+|---|---|---|
+| `API_VERSION` | API version prefix | `v1` |
+| `IP_SERVER` | Server hostname | `localhost` |
+| `PORT_MONGO_DB` | MongoDB port | `27017` |
+| `DB_NAME` | MongoDB database name | `audity-development` |
+| `PORT_SERVER` | Express server port | `4000` |
+| `AUTH0_AUDIENCE` | Auth0 API audience | `http://localhost:4000` |
+| `AUTH0_ISSUER` | Auth0 issuer URL | `https://your-tenant.us.auth0.com/` |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name | |
+| `CLOUDINARY_API_KEY` | Cloudinary API key | |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret | |
 
-* User.controller: Manages user - CRUD.
-* Album.controller: Manages album - CRUD.
-* Artist.controller: Manages artist - CRUD.
-* Genre.controller: Manages genre - CRUD.
-* Music.controller: Manages music - CRUD.
-* Playlist.controller: Manages playlist - CRUD.
-* Track.controller: Manages track - CRUD.
+Production additionally requires `DB_USER_PASSWORD` for authenticated MongoDB connections.
 
-## Seeders
-Seeders are provided for development purposes. They allow you to populate the database with sample data. To run the seeders, use the following command:
-1. Connect your MongoDB Compass
-2. Go index.js
-3. Uncomment all *await seeder.seedXXX()*
-4. Raise the server with *npm run dev*
-5. Comment all *await seeder.seedXXX()* again
-6. Upload MongoDB Compass
+## Available Scripts
 
-## Middlewares
-The project includes the following middlewares:
-- **ensureAuth**: Verifies if a user is logged in,
-- **ensureAdminAuth**: Checks if a user has admin privileges,
-- **error**: To get errors messages
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server with nodemon (port 4000) |
+| `npm start` | Start production server |
 
-## Routes
-Almost all routes in the application are protected using ensureAuth. Users need to authenticate to access some of actions (like a give like/dislike).
+## API Endpoints
 
-## Postman
-The list of folders:
+All endpoints are prefixed with `/api/v1/`.
 
-![Screenshot of postman](assets/img/list_folders.png)
+### Albums
 
-Example *getAlbums*:
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/albums` | - | Get all albums |
+| GET | `/album/:albumId` | - | Get album by ID |
+| POST | `/album` | Admin | Create album |
+| PUT | `/album/:albumId` | Admin | Update album |
+| DELETE | `/album/:albumId` | Admin | Delete album |
+| PUT | `/album-image/:albumId` | Admin | Update album cover image |
+| GET | `/albums-liked-by-user/:userId` | User | Get albums liked by user |
+| GET | `/like-dislike-album/:albumId/:userId` | User | Toggle like/dislike on album |
 
-![Screenshot of postman](assets/img/getAlbums.png)
+### Artists
 
-## Endpoints
-   **ALBUMS**
-| ENDPOINT                               | METHOD |RESULT                          |
-|----------------------------------------|--------|---------------------------------|
-| '/album'                               | POST   | Create album (just admin)       |
-| '/albums'                              | GET    | Get all albums                  |
-| '/album/:albumId'                      | GET    | Get album by id                 |
-| '/album/:albumId'                      | DELETE | Delete album by id (just admin) |
-| '/albums-liked-by-user/:userId'        | GET    | Get all albums liked by user    |
-| '/like-dislike-album/:albumId/:userId' | GET    | Put like/dislike to album       |
-| '/album-image/:albumId'                | PUT    | Change album cover img          |
-| '/album/:albumId'                      | PUT    | Update Album                    |
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/artists` | - | Get all artists |
+| GET | `/artist/:artistId` | - | Get artist by ID |
+| POST | `/artist` | Admin | Create artist |
+| PUT | `/artist/:artistId` | Admin | Update artist |
+| DELETE | `/artist/:artistId` | Admin | Delete artist |
+| PUT | `/artist-image/:artistId` | Admin | Update artist image |
+| GET | `/artists-liked-by-user/:userId` | User | Get artists liked by user |
+| GET | `/like-dislike-artist/:artistId/:userId` | User | Toggle like/dislike on artist |
 
-   **ARTIST**
-| ENDPOINT                                 | METHOD |RESULT                           |
-|------------------------------------------|--------|---------------------------------|
-| '/artist'                                | POST   | Create artist (just admin)      |
-| '/artist/:artistId'                      | GET    | Get artist by id                |
-| '/artist/:artistId'                      | PUT    | Update artist by id             |
-| '/artist/:artistId'                      | DELETE | Delete artist by id (just admin)|
-| '/artists'                               | GET    | Get all artists                 |
-| '/artists-liked-by-user/:userId'         | GET    | Get all artists liked by user   |
-| '/like-dislike-artist/:artistId/:userId' | GET    | Put like/dislike to artist      |
-| '/artist-image/:artistId'                | PUT    | Update artist cover img         |
+### Tracks
 
-   **ARTIST**
-| ENDPOINT                                 | METHOD |RESULT                           |
-|------------------------------------------|--------|---------------------------------|
-| '/artist'                                | POST   | Create artist (just admin)      |
-| '/artist/:artistId'                      | GET    | Get artist by id                |
-| '/artist/:artistId'                      | PUT    | Update artist by id             |
-| '/artist/:artistId'                      | DELETE | Delete artist by id (just admin)|
-| '/artists'                               | GET    | Get all artists                 |
-| '/artists-liked-by-user/:userId'         | GET    | Get all artists liked by user   |
-| '/like-dislike-artist/:artistId/:userId' | GET    | Put like/dislike to artist      |
-| '/artist-image/:artistId'                | PUT    | Update artist cover img         |
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/tracks` | - | Get all tracks |
+| GET | `/track/:trackId` | - | Get track by ID |
+| GET | `/random-track` | - | Get a random track |
+| POST | `/track` | Admin | Create track (public) |
+| POST | `/track-private` | User | Upload private track |
+| PUT | `/track/:trackId` | Admin | Update track |
+| DELETE | `/track/:trackId` | Admin | Delete track |
+| PUT | `/track-image/:trackId` | Admin | Update track cover image |
+| PUT | `/track-audio/:trackId` | User | Update track audio file |
+| GET | `/tracks-liked-by-user/:userId` | User | Get tracks liked by user |
+| GET | `/like-dislike-track/:trackId/:userId` | User | Toggle like/dislike on track |
+| GET | `/tracks-private/:userId` | User | Get user's private tracks |
 
-   **GENRE**
-| ENDPOINT                | METHOD |RESULT                     |
-|-------------------------|--------|---------------------------|
-| '/genres'               | GET    | Get all genres            |
-| '/genre/:id'            | GET    | Get genre by id           |
-| '/genre/:id/playlists'  | GET    | Playlists with genre      |
-| '/genre/:id/albums'     | GET    | Albums with genre         |
-| '/genre/:id/artists'    | GET    | Artists with genre        |
-| '/genre'                | POST   | Create genre (just admin) |
-| '/genre-image/:genreId' | PUT    | Update genre cover img    |
-| '/update-genre/:id'     | PUT    | Update genre              |
-| '/delete-genre/:id'     | DELETE | Delete genre (just admin) |
+### Genres
 
-  **SEARCH**
-| ENDPOINT                 | METHOD |RESULT               |
-|--------------------------|--------|---------------------|
-| '/search-content/:query' | GET    | Search with query   |
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/genres` | - | Get all genres |
+| GET | `/genre/:id` | - | Get genre by ID |
+| GET | `/genre/:id/playlists` | - | Get playlists with genre |
+| GET | `/genre/:id/albums` | - | Get albums with genre |
+| GET | `/genre/:id/artists` | - | Get artists with genre |
+| POST | `/genre` | Admin | Create genre |
+| PUT | `/update-genre/:id` | Admin | Update genre |
+| DELETE | `/delete-genre/:id` | Admin | Delete genre |
+| PUT | `/genre-image/:genreId` | Admin | Update genre cover image |
 
-  **PLAYLIST**
-| ENDPOINT                                                            | METHOD |RESULT                           |
-|---------------------------------------------------------------------|--------|---------------------------------|
-| '/playlist'                                                         | POST   | Create plailist private         |
-| '/playlists'                                                        | GET    | Get all plailists               |
-| '/playlist/:id'                                                     | GET    | Get plailist by id              |
-| '/update-playlist/:id'                                              | PUT    | Update playlist                 |
-| '/playlist/:playlistId'                                             | DELETE | Delete playlist                 |
-| '/playlists-liked-by-user/:userId'                                  | GET    | Get playlists liked by user     |
-| '/like-dislike-playlist/:playlistId/:userId'                        | GET    | Put like/dislike                |
-| '/playlists-by-user/:userId'                                        | GET    | Get playlists of user           |
-| '/playlist-add-track/playlists/:playlistId/tracks/:trackId'         | PUT    | Put track to playlist           |
-| '/delete-track-from-playlist/playlists/:playlistId/tracks/:trackId' | DELETE | Delete track from playlist      |
-| '/playlist-admin'                                                   | POST   | Create playlist by admin public |
-| '/playlist-image/:playlistId'                                       | PUT    | Update cover img                |
-| '/playlist-admin/:playlistId'                                       | PUT    | Update playlist by admin        |
-| '/update-public-accessible/:playlistId'                             | PUT    | Make public/private             |
-| '/all-playlists'                                                    | GET    | Get all playlists               |
+### Playlists
 
-**TRACK**
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/playlists` | - | Get all public playlists |
+| GET | `/playlist/:id` | - | Get playlist by ID |
+| POST | `/playlist` | User | Create private playlist |
+| PUT | `/update-playlist/:id` | User | Update playlist |
+| DELETE | `/playlist/:playlistId` | User | Delete playlist |
+| GET | `/playlists-liked-by-user/:userId` | User | Get playlists liked by user |
+| GET | `/like-dislike-playlist/:playlistId/:userId` | User | Toggle like/dislike on playlist |
+| GET | `/playlists-by-user/:userId` | User | Get playlists owned by user |
+| PUT | `/playlist-add-track/playlists/:playlistId/tracks/:trackId` | User | Add track to playlist |
+| DELETE | `/delete-track-from-playlist/playlists/:playlistId/tracks/:trackId` | User | Remove track from playlist |
+| POST | `/playlist-admin` | Admin | Create public playlist |
+| PUT | `/playlist-admin/:playlistId` | Admin | Update playlist (admin) |
+| PUT | `/playlist-image/:playlistId` | Admin | Update playlist cover image |
+| PUT | `/update-public-accessible/:playlistId` | Admin | Toggle public/private |
+| GET | `/all-playlists` | Admin | Get all playlists (including private) |
 
-**USER**
+### Users
 
-## Dependencies
-> npm i --save:
-- Cors
-- Bson
-- express-fileupload
-- fs-extra
-- helmet
-- nodemon
-- auth0
-- cloudinary
-- dotenv
-- express
-- express-oauth2-jwt-bearer
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/register-login-user` | User | Register or login user |
+| PUT | `/update-user-settings` | User | Update user settings |
+| PUT | `/update-user-language` | User | Update user language preference |
+| PUT | `/update-user-country` | User | Update user country |
+| PUT | `/update-user-info` | User | Update user info |
+| GET | `/user-role` | User | Get current user's role |
+| PUT | `/user-role/:userId` | Admin | Update a user's role |
+| DELETE | `/delete-user/:userId` | Admin | Delete a user |
+| GET | `/users` | Admin | Get all users |
 
-## Authors :brain:
-This project was done by:
+### Statistics
 
-- FULLSTACK DEVELOPER and Scrum master [David T. Pizarro](https://github.com/DTPF)
-- FULLSTACK DEVELOPER [Joe Joy](https://github.com/joejoyjoy)
-- FULLSTACK DEVELOPER [Iuliia Shikhanova](https://github.com/IuliiaNova)
-- FULLSTACK DEVELOPER [Javier Pascual](https://github.com/Javier-jpt)
-- FULLSTACK DEVELOPER [Lucia Tena](https://github.com/Lucydct22)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/statistic` | Admin | Create statistic record |
+| GET | `/statistics` | Admin | Get all statistics |
+| PUT | `/update-total-tracks-played` | - | Increment total tracks played |
+| PUT | `/report-errored-track/:trackId` | - | Report a broken track |
+| PUT | `/remove-report-errored-track/:trackId` | Admin | Remove error report from track |
 
+### Search
 
-Thanks go to these wonderful people ✨
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| GET | `/search-content/:query` | - | Search across tracks, albums, artists, playlists |
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/DTPF">
-          <img src="https://avatars.githubusercontent.com/u/60478224" width="100px" alt="David T. Pizarro Frick"/>
-          <br />
-          <sub>
-          <b>David T. Pizarro Frick</b>
-          </sub>
-        </a>
-        <br />
-        <a href="#tools-dtpf" title="code-tools-maintenance">💻🔧🚧</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/joejoyjoy">
-          <img src="https://avatars.githubusercontent.com/u/73751755" width="100px" alt="Joe Alt"/>
-          <br />
-          <sub>
-          <b>Joe Alt</b>
-          </sub>
-        </a>
-        <br />
-        <a href="#tools-joealt" title="code-tools-maintenance">💻🔧🚧</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/IuliiaNova">
-          <img src="https://avatars.githubusercontent.com/u/115942758" width="100px" alt="Iuliia Shikhanova"/>
-          <br />
-          <sub>
-          <b>Iuliia Shikhanova</b>
-          </sub>
-        </a>
-        <br />
-        <a href="#code-luliianova" title="code-tools-maintenance">💻🔧🚧</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/Lucydct22">
-          <img src="https://avatars.githubusercontent.com/u/119544531" width="100px" alt="lucia del cacho"/>
-          <br />
-          <sub>
-          <b>lucia del cacho</b>
-          </sub>
-        </a>
-        <br />
-        <a href="#code-lucydct22" title="code-tools-maintenance">💻🔧🚧</a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/Javier-jpt">
-          <img src="https://avatars.githubusercontent.com/u/119037601" width="100px" alt="Javier Pascual Tunez"/>
-          <br />
-          <sub>
-          <b>Javier Pascual Tunez</b>
-          </sub>
-        </a>
-        <br />
-        <a href="#code-javier-jpt" title="code-tools-maintenance">💻🔧🚧</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+**Auth legend**: `-` = public, `User` = requires JWT, `Admin` = requires JWT + admin role.
 
-This project follows the [all-contributors](https://allcontributors.org) specification.
-Contributions of any kind are welcome!
+## Project Structure
+
+```
+src/
+  config/config.js         # Environment-aware configuration
+  controllers/             # Route handlers per resource
+    utils/                 # Shared controller utilities (likeDislike, getContentLiked)
+  db_seeder/               # Database seeders (manual activation)
+  middlewares/
+    auth.middleware.js      # JWT validation and admin role check
+    error.middleware.js     # Error response handler
+  models/                  # Mongoose schemas (User, Track, Album, Artist, Genre, Playlist, Statistic)
+  router/                  # Express routers per resource
+  utils/
+    cloudinary.js           # Cloudinary upload/delete helpers
+    dbCascade.js            # Bidirectional reference management
+    deleteCascade.js        # Cascade deletion logic
+    getRamdomItem.js        # Random item utility
+assets/                    # Postman screenshots (documentation)
+uploads/                   # Temp directory for file uploads (auto-cleaned)
+```
+
+## Database Seeding
+
+To populate the database with sample data:
+
+1. Ensure MongoDB is running
+2. Open `src/index.js`
+3. Uncomment the `await seeder.seedXXX()` lines
+4. Run `npm run dev`
+5. Re-comment the seeder lines after data is populated
+
+**Warning**: Seeders delete all existing documents in each collection before re-seeding.
+
+## Authors
+
+- [David T. Pizarro](https://github.com/DTPF) - Fullstack Developer, Scrum Master
+- [Joe Joy Alt](https://github.com/joejoyjoy) - Fullstack Developer
+- [Iuliia Shikhanova](https://github.com/IuliiaNova) - Fullstack Developer
+- [Javier Pascual](https://github.com/Javier-jpt) - Fullstack Developer
+- [Lucia del Cacho](https://github.com/Lucydct22) - Fullstack Developer
+
+## License
+
+MIT
