@@ -17,6 +17,9 @@
   ],
   "author": "Iuliia Shikhanova Lucia del Cacho Joe Joy Alt Javier Pascual David T. Pizarro",
   "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
   "bugs": {
     "url": "https://github.com/Lucydct22/audity_node_app/issues"
   },
